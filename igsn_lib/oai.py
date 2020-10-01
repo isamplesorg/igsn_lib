@@ -1,12 +1,12 @@
 '''
-
+Methods in support of OAI-PMH harvesting of IGSN records.
 '''
 
+import logging
 import dateparser
 import sickle
 import xmltodict
 import igsn_lib
-import json
 
 # Metadata namespaces commonly seen in IGSN OAI-PMH responses
 IGSN_OAI_NAMESPACES = {
@@ -19,40 +19,116 @@ IGSN_OAI_NAMESPACES = {
     'http://schema.igsn.org/description/1.0':'igsn_desc',
 }
 
+def _getLogger():
+    return logging.getLogger('igsn_lib.oai')
+
 def getSickle(url):
+    '''
+    Create a Sickle instance
+
+    Args:
+        url: OAI-PMH service URL
+
+    Returns:
+        sickle.Sickle instance
+    '''
     return sickle.Sickle(url, encoding='utf-8')
 
+
 def identify(url):
+    '''
+    Call the OAI-PMH Identify operation on the provided service URL.
+
+    Args:
+        url: OAI-PMH service URL
+
+    Returns:
+        sickle.Identify object
+    '''
     svc = getSickle(url)
     response = svc.Identify()
     return response
 
-def oaiRecordToDict(raw_record):
+
+def oaiRecordToDict(xml_string):
+    '''
+    Converts an OAI-PMH IGSN metadata record to a dict
+
+    The IGSN schema is at https://doidb.wdc-terra.org//igsn/schemas/igsn.org/schema/1.0/igsn.xsd
+
+    Times are returned as timezone aware python datetime, TZ=UTC.
+
+    Args:
+        raw_record: OAI-PMH record XML in IGSN format
+
+    Returns:
+        dict or None on failure
+    '''
+    _L = _getLogger()
     data = {
-        'igsn_id': None,
-        'creator': None,
-        'tstamp': None
+        'igsn_id': None,    # Value of the IGSN identifier
+        'oai_id': None,     # Internal OAI-PMH identifier of this record
+        'registrant': None, # registrant name
+        'oai_time': None,   # time stamp on the OAI record
+        'igsn_time': None,  # submitted or registered time in the log
+        'log': [],          # list of log entries
+        'related': [],      # list of related identifiers
+        '_source': {}
     }
-    data['source'] = xmltodict.parse(
-        raw_record,
-        process_namespaces=True,
-        namespaces = IGSN_OAI_NAMESPACES
-    )
-    data['igsn_id'] = None
-    data['tstamp'] = dateparser.parse(
-        data['source']['oai:record']['oai:header']['oai:datestamp'],
+    try:
+        data['_source'] = xmltodict.parse(
+            xml_string,
+            process_namespaces=True,
+            namespaces = IGSN_OAI_NAMESPACES
+        )
+    except Exception as e:
+        _L.error(e)
+        return None
+    data['oai_id'] = data['_source']['oai:record']['oai:header']['oai:identifier']
+    # Always store time in UTC
+    data['oai_time'] = dateparser.parse(
+        data['_source']['oai:record']['oai:header']['oai:datestamp'],
         settings={'TIMEZONE': '+0000'}
     )
-    creators = data['source']['oai:record']['oai:metadata']['oai_dc:dc'].get('dc:creator',None)
-    if isinstance(creators, str):
-        data['creator'] = creators
-    else:
-        data['creator'] = json.dumps(creators)
-    # multiple identifier expressions are common, though they should all be the same IGSN
-    igsn_values = data['source']['oai:record']['oai:metadata']['oai_dc:dc']['dc:identifier']
-    if isinstance(igsn_values, str):
-        data['igsn_id'] = igsn_lib.normalize(igsn_values)
-    else:
-        #TODO: should probably confirm that all values are the same igsn...
-        data['igsn_id'] = igsn_lib.normalize(igsn_values[0])
+    _sample = data['_source']['oai:record']['oai:metadata']['igsn:sample']
+    igsn_id = _sample['igsn:sampleNumber']['#text']
+    data['igsn_id'] = igsn_lib.normalize(igsn_id)
+    data['registrant'] = _sample['igsn:registrant']['igsn:registrantName']
+    # log 'events':
+    #   https://doidb.wdc-terra.org//igsn/schemas/igsn.org/schema/1.0/include/igsn-eventType-v1.0.xsd
+    igsn_log = _sample['igsn:log']['igsn:logElement']
+    if isinstance(igsn_log, dict):
+        igsn_log = [igsn_log, ]
+    data['log'] = []
+    igsn_time = None
+    for _log in igsn_log:
+        _event = _log['@event'].lower().strip()
+        _time = dateparser.parse(
+            _log['@timeStamp'],
+            settings={
+                'TIMEZONE':'+0000',
+                'RETURN_AS_TIMEZONE_AWARE': True
+            }
+        )
+        data['log'].append({'event':_event, 'time': _time.strftime(igsn_lib.JSON_TIME_FORMAT)})
+        if _event == 'submitted':
+            igsn_time = _time
+        if _event == 'registered':
+            # Use registered time if submitted not available
+            if igsn_time is None:
+                igsn_time = _time
+    data['igsn_time'] = igsn_time
+    _related_ids = []
+    try:
+        _related_ids = _sample['igsn:relatedResourceIdentifiers']['igsn:relatedIdentifier']
+        if isinstance(_related_ids, dict):
+            _related_ids = [_related_ids, ]
+    except KeyError:
+        logging.debug("No related identifiers in record")
+    for related_id in _related_ids:
+        entry = {}
+        entry['id'] = related_id.get('#text','')
+        entry['id_type'] = related_id.get('@relatedIdentifierType','')
+        entry['rel_type'] = related_id.get('@relationType','')
+        data['related'].append(entry)
     return data
