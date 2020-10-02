@@ -15,6 +15,7 @@ install:
   - wget "https://versaweb.dl.sourceforge.net/project/plantuml/plantuml.jar" -O /tmp/plantuml.jar
 script:
   - poetry install
+  - pytest
   - make -C docs/ html
   - touch docs/build/html/.nojekyll
 deploy:
