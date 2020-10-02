@@ -1,0 +1,564 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>igsn_lib.time &#8212; igsn_lib 0.1 documentation</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.d431a4ee1c1efae0e38bdfebc22debff.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.bfb7730f9caf2ec0b46a44615585038c.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/thebelab.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.30270b6e4c972e43c488.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/thebelab-helper.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <script src="../_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="igsn_lib.oai" href="igsn_lib.oai.html" />
+    <link rel="prev" title="igsn_lib Package" href="igsn_lib.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  
+  <h1 class="site-logo" id="site-title">igsn_lib 0.1 documentation</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <p class="caption">
+ <span class="caption-text">
+  Contents:
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="igsn_lib.html">
+   igsn_lib Package
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   igsn_lib.time
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="igsn_lib.oai.html">
+   igsn_lib.oai
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="igsn_lib.models.html">
+   igsn_lib.models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="igsn_lib.util.html">
+   igsn_lib.util
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/api/igsn_lib.time.rst.txt"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.rst</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/isamplesorg/igsn_lib"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/isamplesorg/igsn_lib/issues/new?title=Issue%20on%20page%20%2Fapi/igsn_lib.time.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/isamplesorg/igsn_lib/edit/master/api/igsn_lib.time.rst"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#methods">
+   Methods
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-igsn_lib.time">
+   Detail
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="igsn-lib-time">
+<h1>igsn_lib.time<a class="headerlink" href="#igsn-lib-time" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h2>
+<table class="longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.time.datetimeToJD" title="igsn_lib.time.datetimeToJD"><code class="xref py py-obj docutils literal notranslate"><span class="pre">datetimeToJD</span></code></a>(dt)</p></td>
+<td><p>Convert a python datetime to Julian date.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#igsn_lib.time.dtnow" title="igsn_lib.time.dtnow"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dtnow</span></code></a>()</p></td>
+<td><p>Get datetime for now in UTC timezone.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.time.jdFromString" title="igsn_lib.time.jdFromString"><code class="xref py py-obj docutils literal notranslate"><span class="pre">jdFromString</span></code></a>(tstr)</p></td>
+<td><p>Julian date from string representation of time.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#igsn_lib.time.jdToDateTime" title="igsn_lib.time.jdToDateTime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">jdToDateTime</span></code></a>(jd)</p></td>
+<td><p>Convert Julian date to datetime.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.time.jdToJsonString" title="igsn_lib.time.jdToJsonString"><code class="xref py py-obj docutils literal notranslate"><span class="pre">jdToJsonString</span></code></a>(jd)</p></td>
+<td><p>Convert Julian date to a JSON datetime string.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#igsn_lib.time.jdToOAIPMHString" title="igsn_lib.time.jdToOAIPMHString"><code class="xref py py-obj docutils literal notranslate"><span class="pre">jdToOAIPMHString</span></code></a>(jd)</p></td>
+<td><p>Convert Julian date to an OAI-PMH acceptable datetime string.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.time.jdToString" title="igsn_lib.time.jdToString"><code class="xref py py-obj docutils literal notranslate"><span class="pre">jdToString</span></code></a>(jd, format_str)</p></td>
+<td><p>Convert Julian date to a string representation</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#igsn_lib.time.jdnow" title="igsn_lib.time.jdnow"><code class="xref py py-obj docutils literal notranslate"><span class="pre">jdnow</span></code></a>()</p></td>
+<td><p>Current Julian date.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="module-igsn_lib.time">
+<span id="detail"></span><h2>Detail<a class="headerlink" href="#module-igsn_lib.time" title="Permalink to this headline">¶</a></h2>
+<p>Time handling routines for igsn_lib.</p>
+<dl class="py data">
+<dt id="igsn_lib.time.JSON_TIME_FORMAT">
+<code class="sig-prename descclassname">igsn_lib.time.</code><code class="sig-name descname">JSON_TIME_FORMAT</code><em class="property"> = '%Y-%m-%dT%H:%M:%S%z'</em><a class="headerlink" href="#igsn_lib.time.JSON_TIME_FORMAT" title="Permalink to this definition">¶</a></dt>
+<dd><p>datetime format string for generating JSON content</p>
+</dd></dl>
+
+<dl class="py data">
+<dt id="igsn_lib.time.OAI_TIME_FORMAT">
+<code class="sig-prename descclassname">igsn_lib.time.</code><code class="sig-name descname">OAI_TIME_FORMAT</code><em class="property"> = '%Y-%m-%dT%H:%M:%SZ'</em><a class="headerlink" href="#igsn_lib.time.OAI_TIME_FORMAT" title="Permalink to this definition">¶</a></dt>
+<dd><p>datetime format string for generating OAI-PMH requests</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="igsn_lib.time.datetimeToJD">
+<code class="sig-prename descclassname">igsn_lib.time.</code><code class="sig-name descname">datetimeToJD</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dt</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/time.html#datetimeToJD"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.time.datetimeToJD" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a python datetime to Julian date.</p>
+<p>Naive datetime is assumed to be UTC.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dt</strong> – datetime.datetime</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>float, Julian date</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">igsn_lib.time</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+
+<span class="n">dt</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">igsn_lib</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">datetimeToJD</span><span class="p">(</span><span class="n">dt</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2020-10-02 21:20:29.613995+00:00
+</pre></div>
+</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2459125.3892316436
+</pre></div>
+</div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="igsn_lib.time.dtnow">
+<code class="sig-prename descclassname">igsn_lib.time.</code><code class="sig-name descname">dtnow</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/time.html#dtnow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.time.dtnow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get datetime for now in UTC timezone.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>datetime.datetime with UTC timezone</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">igsn_lib.time</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">igsn_lib</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">dtnow</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2020-10-02 21:20:29.835749+00:00
+</pre></div>
+</div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="igsn_lib.time.jdFromString">
+<code class="sig-prename descclassname">igsn_lib.time.</code><code class="sig-name descname">jdFromString</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tstr</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/time.html#jdFromString"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.time.jdFromString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Julian date from string representation of time.</p>
+<p>Uses dateparser.parse to get date time from the string.</p>
+<p>See <a class="reference external" href="https://dateparser.readthedocs.io/en/latest/">https://dateparser.readthedocs.io/en/latest/</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tstr</strong> – string, time in text.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>float, Julian date</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">igsn_lib.time</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">igsn_lib</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">jdFromString</span><span class="p">(</span><span class="s2">&quot;now&quot;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">igsn_lib</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">jdFromString</span><span class="p">(</span><span class="s2">&quot;100 years ago&quot;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">igsn_lib</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">jdFromString</span><span class="p">(</span><span class="s2">&quot;2020-08-15 16:30:00 ET&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2459125.389234589
+2422600.389234629
+2459077.3958333335
+</pre></div>
+</div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="igsn_lib.time.jdToDateTime">
+<code class="sig-prename descclassname">igsn_lib.time.</code><code class="sig-name descname">jdToDateTime</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">jd</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/time.html#jdToDateTime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.time.jdToDateTime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert Julian date to datetime.</p>
+<p>Note that Julian date values can exceed the range supported by
+python datetime, in which case astropy or datetime will raise
+an exception, and this method will return None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>jd</strong> – float, Julian date/</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>datetime with UTC timezone or None</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">igsn_lib.time</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">igsn_lib</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">jdToDateTime</span><span class="p">(</span><span class="mf">2459125.5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2020-10-03 00:00:00+00:00
+</pre></div>
+</div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="igsn_lib.time.jdToJsonString">
+<code class="sig-prename descclassname">igsn_lib.time.</code><code class="sig-name descname">jdToJsonString</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">jd</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/time.html#jdToJsonString"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.time.jdToJsonString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert Julian date to a JSON datetime string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>jd</strong> – float, Julian date</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>string or None on error</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">igsn_lib.time</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">igsn_lib</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">jdToJsonString</span><span class="p">(</span><span class="mf">2459125.5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2020-10-03T00:00:00+0000
+</pre></div>
+</div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="igsn_lib.time.jdToOAIPMHString">
+<code class="sig-prename descclassname">igsn_lib.time.</code><code class="sig-name descname">jdToOAIPMHString</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">jd</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/time.html#jdToOAIPMHString"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.time.jdToOAIPMHString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert Julian date to an OAI-PMH acceptable datetime string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>jd</strong> – float, Julian date</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>string or None on error</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">igsn_lib.time</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">igsn_lib</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">jdToOAIPMHString</span><span class="p">(</span><span class="mf">2459125.5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2020-10-03T00:00:00Z
+</pre></div>
+</div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="igsn_lib.time.jdToString">
+<code class="sig-prename descclassname">igsn_lib.time.</code><code class="sig-name descname">jdToString</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">jd</span></em>, <em class="sig-param"><span class="n">format_str</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/time.html#jdToString"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.time.jdToString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert Julian date to a string representation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>jd</strong> – float, Julian date</p></li>
+<li><p><strong>format_str</strong> – python strftime format string</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>string</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">igsn_lib.time</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">igsn_lib</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">jdToString</span><span class="p">(</span><span class="mf">2459125.5</span><span class="p">,</span> <span class="s2">&quot;%Y%m</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>20201003
+</pre></div>
+</div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="igsn_lib.time.jdnow">
+<code class="sig-prename descclassname">igsn_lib.time.</code><code class="sig-name descname">jdnow</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/time.html#jdnow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.time.jdnow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Current Julian date.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>float, Julian date</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">igsn_lib.time</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">igsn_lib</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">jdnow</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2459125.3892351906
+</pre></div>
+</div>
+</div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="igsn_lib.html" title="previous page">igsn_lib Package</a>
+    <a class='right-next' id="next-link" href="igsn_lib.oai.html" title="next page">igsn_lib.oai</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By iSamples<br/>
+        
+            &copy; Copyright 2020, iSamples.<br/>
+          <div class="extra_footer">
+            <small>This material is based upon work supported by the 
+National Science Foundation under Grant Numbers <a href='https://nsf.gov/awardsearch/showAward?AWD_ID=2004839'>2004839</a>,
+<a href='https://nsf.gov/awardsearch/showAward?AWD_ID=2004562'>2004562</a>, 
+<a href='https://nsf.gov/awardsearch/showAward?AWD_ID=2004642'>2004642</a>,
+and <a href='https://nsf.gov/awardsearch/showAward?AWD_ID=2004815'>2004815</a>. Any opinions, findings, and conclusions 
+ or recommendations expressed in this material are those of the author(s) and do not necessarily 
+ reflect the views of the National Science Foundation.</small>
+          </div>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.30270b6e4c972e43c488.js"></script>
+
+
+    
+  </body>
+</html>

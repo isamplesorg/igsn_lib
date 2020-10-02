@@ -1,0 +1,570 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Index &#8212; igsn_lib 0.1 documentation</title>
+    
+  <link rel="stylesheet" href="_static/css/index.d431a4ee1c1efae0e38bdfebc22debff.css">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="_static/sphinx-book-theme.bfb7730f9caf2ec0b46a44615585038c.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="_static/thebelab.css" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.30270b6e4c972e43c488.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/thebelab-helper.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <script src="_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
+    <link rel="index" title="Index" href="#" />
+    <link rel="search" title="Search" href="search.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  
+  <h1 class="site-logo" id="site-title">igsn_lib 0.1 documentation</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <p class="caption">
+ <span class="caption-text">
+  Contents:
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="api/igsn_lib.html">
+   igsn_lib Package
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="api/igsn_lib.time.html">
+   igsn_lib.time
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="api/igsn_lib.oai.html">
+   igsn_lib.oai
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="api/igsn_lib.models.html">
+   igsn_lib.models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="api/igsn_lib.util.html">
+   igsn_lib.util
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+</div>
+        <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/isamplesorg/igsn_lib"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/isamplesorg/igsn_lib/issues/new?title=Issue%20on%20page%20%2Fgenindex.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+
+<h1 id="index">Index</h1>
+
+<div class="genindex-jumpbox">
+ <a href="#A"><strong>A</strong></a>
+ | <a href="#C"><strong>C</strong></a>
+ | <a href="#D"><strong>D</strong></a>
+ | <a href="#E"><strong>E</strong></a>
+ | <a href="#F"><strong>F</strong></a>
+ | <a href="#G"><strong>G</strong></a>
+ | <a href="#H"><strong>H</strong></a>
+ | <a href="#I"><strong>I</strong></a>
+ | <a href="#J"><strong>J</strong></a>
+ | <a href="#L"><strong>L</strong></a>
+ | <a href="#M"><strong>M</strong></a>
+ | <a href="#N"><strong>N</strong></a>
+ | <a href="#O"><strong>O</strong></a>
+ | <a href="#P"><strong>P</strong></a>
+ | <a href="#R"><strong>R</strong></a>
+ | <a href="#S"><strong>S</strong></a>
+ | <a href="#T"><strong>T</strong></a>
+ | <a href="#U"><strong>U</strong></a>
+ 
+</div>
+<h2 id="A">A</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/igsn_lib.models.html#igsn_lib.models.addService">addService() (in module igsn_lib.models)</a>
+</li>
+      <li><a href="api/igsn_lib.models.html#igsn_lib.models.Service.admin_email">admin_email (igsn_lib.models.Service attribute)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/igsn_lib.models.html#igsn_lib.models.IGSN.asJsonDict">asJsonDict() (igsn_lib.models.IGSN method)</a>
+
+      <ul>
+        <li><a href="api/igsn_lib.models.html#igsn_lib.models.Service.asJsonDict">(igsn_lib.models.Service method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="C">C</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/igsn_lib.models.html#igsn_lib.models.createAll">createAll() (in module igsn_lib.models)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/igsn_lib.models.html#igsn_lib.models.Service.createJob">createJob() (igsn_lib.models.Service method)</a>
+</li>
+      <li><a href="api/igsn_lib.models.html#igsn_lib.models.Service.createJobPackage">createJobPackage() (igsn_lib.models.Service method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="D">D</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/igsn_lib.time.html#igsn_lib.time.datetimeToJD">datetimeToJD() (in module igsn_lib.time)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/igsn_lib.html#igsn_lib.DEFAULT_RESOLVE_HEADERS">DEFAULT_RESOLVE_HEADERS (in module igsn_lib)</a>
+</li>
+      <li><a href="api/igsn_lib.time.html#igsn_lib.time.dtnow">dtnow() (in module igsn_lib.time)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="E">E</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/igsn_lib.models.html#igsn_lib.models.Job.execute">execute() (igsn_lib.models.Job method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="F">F</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/igsn_lib.models.html#igsn_lib.models.IGSN.fromOAIRecord">fromOAIRecord() (igsn_lib.models.IGSN method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="G">G</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/igsn_lib.util.html#igsn_lib.util.getCredentials">getCredentials() (in module igsn_lib.util)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/igsn_lib.models.html#igsn_lib.models.getOrCreate">getOrCreate() (in module igsn_lib.models)</a>
+</li>
+      <li><a href="api/igsn_lib.oai.html#igsn_lib.oai.getSickle">getSickle() (in module igsn_lib.oai)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="H">H</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/igsn_lib.models.html#igsn_lib.models.IGSN.harvest_time">harvest_time (igsn_lib.models.IGSN attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="I">I</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/igsn_lib.models.html#igsn_lib.models.IGSN.id">id (igsn_lib.models.IGSN attribute)</a>
+
+      <ul>
+        <li><a href="api/igsn_lib.models.html#igsn_lib.models.Job.id">(igsn_lib.models.Job attribute)</a>
+</li>
+        <li><a href="api/igsn_lib.models.html#igsn_lib.models.Service.id">(igsn_lib.models.Service attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="api/igsn_lib.oai.html#igsn_lib.oai.identify">identify() (in module igsn_lib.oai)</a>
+</li>
+      <li><a href="api/igsn_lib.models.html#igsn_lib.models.Job.ignore_deleted">ignore_deleted (igsn_lib.models.Job attribute)</a>
+</li>
+      <li><a href="api/igsn_lib.models.html#igsn_lib.models.IGSN">IGSN (class in igsn_lib.models)</a>
+</li>
+      <li>
+    igsn_lib
+
+      <ul>
+        <li><a href="api/igsn_lib.html#module-igsn_lib">module</a>
+</li>
+      </ul></li>
+      <li>
+    igsn_lib.models
+
+      <ul>
+        <li><a href="api/igsn_lib.models.html#module-igsn_lib.models">module</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    igsn_lib.oai
+
+      <ul>
+        <li><a href="api/igsn_lib.oai.html#module-igsn_lib.oai">module</a>
+</li>
+      </ul></li>
+      <li>
+    igsn_lib.time
+
+      <ul>
+        <li><a href="api/igsn_lib.time.html#module-igsn_lib.time">module</a>
+</li>
+      </ul></li>
+      <li>
+    igsn_lib.util
+
+      <ul>
+        <li><a href="api/igsn_lib.util.html#module-igsn_lib.util">module</a>
+</li>
+      </ul></li>
+      <li><a href="api/igsn_lib.oai.html#igsn_lib.oai.IGSN_OAI_NAMESPACES">IGSN_OAI_NAMESPACES (in module igsn_lib.oai)</a>
+</li>
+      <li><a href="api/igsn_lib.html#igsn_lib.IGSN_RESOLVER_URL">IGSN_RESOLVER_URL (in module igsn_lib)</a>
+</li>
+      <li><a href="api/igsn_lib.models.html#igsn_lib.models.IGSN.igsn_time">igsn_time (igsn_lib.models.IGSN attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="J">J</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/igsn_lib.time.html#igsn_lib.time.jdFromString">jdFromString() (in module igsn_lib.time)</a>
+</li>
+      <li><a href="api/igsn_lib.time.html#igsn_lib.time.jdnow">jdnow() (in module igsn_lib.time)</a>
+</li>
+      <li><a href="api/igsn_lib.time.html#igsn_lib.time.jdToDateTime">jdToDateTime() (in module igsn_lib.time)</a>
+</li>
+      <li><a href="api/igsn_lib.time.html#igsn_lib.time.jdToJsonString">jdToJsonString() (in module igsn_lib.time)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/igsn_lib.time.html#igsn_lib.time.jdToOAIPMHString">jdToOAIPMHString() (in module igsn_lib.time)</a>
+</li>
+      <li><a href="api/igsn_lib.time.html#igsn_lib.time.jdToString">jdToString() (in module igsn_lib.time)</a>
+</li>
+      <li><a href="api/igsn_lib.models.html#igsn_lib.models.Job">Job (class in igsn_lib.models)</a>
+</li>
+      <li><a href="api/igsn_lib.models.html#igsn_lib.models.Service.jobs">jobs (igsn_lib.models.Service attribute)</a>
+</li>
+      <li><a href="api/igsn_lib.time.html#igsn_lib.time.JSON_TIME_FORMAT">JSON_TIME_FORMAT (in module igsn_lib.time)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="L">L</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/igsn_lib.models.html#igsn_lib.models.IGSN.log">log (igsn_lib.models.IGSN attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="M">M</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/igsn_lib.models.html#igsn_lib.models.Job.metadata_prefix">metadata_prefix (igsn_lib.models.Job attribute)</a>
+</li>
+      <li>
+    module
+
+      <ul>
+        <li><a href="api/igsn_lib.html#module-igsn_lib">igsn_lib</a>
+</li>
+        <li><a href="api/igsn_lib.models.html#module-igsn_lib.models">igsn_lib.models</a>
+</li>
+        <li><a href="api/igsn_lib.oai.html#module-igsn_lib.oai">igsn_lib.oai</a>
+</li>
+        <li><a href="api/igsn_lib.time.html#module-igsn_lib.time">igsn_lib.time</a>
+</li>
+        <li><a href="api/igsn_lib.util.html#module-igsn_lib.util">igsn_lib.util</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/igsn_lib.models.html#igsn_lib.models.Service.mostRecentRecordRetrieved">mostRecentRecordRetrieved() (igsn_lib.models.Service method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="N">N</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/igsn_lib.models.html#igsn_lib.models.Service.name">name (igsn_lib.models.Service attribute)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/igsn_lib.html#igsn_lib.normalize">normalize() (in module igsn_lib)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="O">O</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/igsn_lib.models.html#igsn_lib.models.IGSN.oai_id">oai_id (igsn_lib.models.IGSN attribute)</a>
+</li>
+      <li><a href="api/igsn_lib.models.html#igsn_lib.models.IGSN.oai_time">oai_time (igsn_lib.models.IGSN attribute)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/igsn_lib.time.html#igsn_lib.time.OAI_TIME_FORMAT">OAI_TIME_FORMAT (in module igsn_lib.time)</a>
+</li>
+      <li><a href="api/igsn_lib.oai.html#igsn_lib.oai.oaiRecordToDict">oaiRecordToDict() (in module igsn_lib.oai)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="P">P</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/igsn_lib.models.html#igsn_lib.models.Service.populate">populate() (igsn_lib.models.Service method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="R">R</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/igsn_lib.models.html#igsn_lib.models.IGSN.record">record (igsn_lib.models.IGSN attribute)</a>
+</li>
+      <li><a href="api/igsn_lib.models.html#igsn_lib.models.Service.records">records (igsn_lib.models.Service attribute)</a>
+</li>
+      <li><a href="api/igsn_lib.models.html#igsn_lib.models.IGSN.registrant">registrant (igsn_lib.models.IGSN attribute)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/igsn_lib.models.html#igsn_lib.models.IGSN.related">related (igsn_lib.models.IGSN attribute)</a>
+</li>
+      <li><a href="api/igsn_lib.html#igsn_lib.resolve">resolve() (in module igsn_lib)</a>
+</li>
+      <li><a href="api/igsn_lib.models.html#igsn_lib.models.Job.resumption_token">resumption_token (igsn_lib.models.Job attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="S">S</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/igsn_lib.models.html#igsn_lib.models.Service">Service (class in igsn_lib.models)</a>
+</li>
+      <li><a href="api/igsn_lib.models.html#igsn_lib.models.Job.service">service (igsn_lib.models.Job attribute)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/igsn_lib.models.html#igsn_lib.models.IGSN.service_id">service_id (igsn_lib.models.IGSN attribute)</a>
+
+      <ul>
+        <li><a href="api/igsn_lib.models.html#igsn_lib.models.Job.service_id">(igsn_lib.models.Job attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="api/igsn_lib.models.html#igsn_lib.models.Job.setspec">setspec (igsn_lib.models.Job attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="T">T</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/igsn_lib.models.html#igsn_lib.models.Service.tearliest">tearliest (igsn_lib.models.Service attribute)</a>
+</li>
+      <li><a href="api/igsn_lib.models.html#igsn_lib.models.Job.tend">tend (igsn_lib.models.Job attribute)</a>
+</li>
+      <li><a href="api/igsn_lib.models.html#igsn_lib.models.Job.tfrom">tfrom (igsn_lib.models.Job attribute)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/igsn_lib.models.html#igsn_lib.models.Service.topupHarvestJob">topupHarvestJob() (igsn_lib.models.Service method)</a>
+</li>
+      <li><a href="api/igsn_lib.models.html#igsn_lib.models.Job.tstart">tstart (igsn_lib.models.Job attribute)</a>
+</li>
+      <li><a href="api/igsn_lib.models.html#igsn_lib.models.Job.tuntil">tuntil (igsn_lib.models.Job attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="U">U</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/igsn_lib.models.html#igsn_lib.models.Service.url">url (igsn_lib.models.Service attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By iSamples<br/>
+        
+            &copy; Copyright 2020, iSamples.<br/>
+          <div class="extra_footer">
+            <small>This material is based upon work supported by the 
+National Science Foundation under Grant Numbers <a href='https://nsf.gov/awardsearch/showAward?AWD_ID=2004839'>2004839</a>,
+<a href='https://nsf.gov/awardsearch/showAward?AWD_ID=2004562'>2004562</a>, 
+<a href='https://nsf.gov/awardsearch/showAward?AWD_ID=2004642'>2004642</a>,
+and <a href='https://nsf.gov/awardsearch/showAward?AWD_ID=2004815'>2004815</a>. Any opinions, findings, and conclusions 
+ or recommendations expressed in this material are those of the author(s) and do not necessarily 
+ reflect the views of the National Science Foundation.</small>
+          </div>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="_static/js/index.30270b6e4c972e43c488.js"></script>
+
+
+    
+  </body>
+</html>

@@ -1,0 +1,344 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>igsn_lib &#8212; igsn_lib 0.1 documentation</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.d431a4ee1c1efae0e38bdfebc22debff.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.bfb7730f9caf2ec0b46a44615585038c.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/thebelab.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.30270b6e4c972e43c488.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/thebelab-helper.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <script src="../_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  
+  <h1 class="site-logo" id="site-title">igsn_lib 0.1 documentation</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <p class="caption">
+ <span class="caption-text">
+  Contents:
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../api/igsn_lib.html">
+   igsn_lib Package
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../api/igsn_lib.time.html">
+   igsn_lib.time
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../api/igsn_lib.oai.html">
+   igsn_lib.oai
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../api/igsn_lib.models.html">
+   igsn_lib.models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../api/igsn_lib.util.html">
+   igsn_lib.util
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+</div>
+        <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/isamplesorg/igsn_lib"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/isamplesorg/igsn_lib/issues/new?title=Issue%20on%20page%20%2F_modules/igsn_lib.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <h1>Source code for igsn_lib</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Utility methods for working with IGSNs and dates.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">urllib.parse</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;0.1.0&quot;</span>
+
+<span class="n">IGSN_RESOLVER_URL</span> <span class="o">=</span> <span class="s2">&quot;http://igsn.org/&quot;</span>
+<span class="sd">&quot;&quot;&quot;Resolver URL. </span>
+
+<span class="sd">Note that this seems to always delegate to hdl.handle.net</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">DEFAULT_RESOLVE_HEADERS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;User-Agent&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;igsn_lib/</span><span class="si">{</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Accept&quot;</span><span class="p">:</span> <span class="s2">&quot;application/json, application/ld+json;q=0.9, text/json;q=0.8; text/xml;q=0.7, text/html;q=0.5&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="sd">&quot;&quot;&quot;Default headers for talking to the resolver</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="normalize"><a class="viewcode-back" href="../api/igsn_lib.html#igsn_lib.normalize">[docs]</a><span class="k">def</span> <span class="nf">normalize</span><span class="p">(</span><span class="n">igsn_str</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the value part of an IGSN.</span>
+
+<span class="sd">    Note this method does not verify the prefix. The returned</span>
+<span class="sd">    value may or may not be an actual IGSN.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        igsn_str: IGSN string</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        string, value part of IGSN.</span>
+
+<span class="sd">    Examples:</span>
+
+<span class="sd">        .. jupyter-execute::</span>
+
+<span class="sd">           import igsn_lib</span>
+
+<span class="sd">           # Variants of the fictitious IGSN &quot;ABCD123&quot;</span>
+<span class="sd">           print(igsn_lib.normalize(&quot;10273/AbCd123&quot;))</span>
+<span class="sd">           print(igsn_lib.normalize(&quot;http://hdl.handle.net/10273/ABCD123&quot;))</span>
+<span class="sd">           print(igsn_lib.normalize(&quot;IGSN: abcd123&quot;))</span>
+<span class="sd">           print(igsn_lib.normalize(&quot;info:hdl/10273/ABCD123&quot;))</span>
+<span class="sd">           print(igsn_lib.normalize(&quot;http://some.url/with/perhaps/igsn/ABCD123&quot;))</span>
+<span class="sd">           print(igsn_lib.normalize(&quot;http://igsn.org/ABCD123&quot;))</span>
+<span class="sd">           # Not an IGSN:</span>
+<span class="sd">           print(igsn_lib.normalize(&quot;info:hdl/20.1000/ABCD123&quot;))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">igsn_str</span> <span class="o">=</span> <span class="n">igsn_str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+    <span class="c1"># url or path form</span>
+    <span class="n">parts</span> <span class="o">=</span> <span class="n">igsn_str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="n">candidate</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">label</span> <span class="o">==</span> <span class="s2">&quot;10273&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">candidate</span>
+        <span class="k">if</span> <span class="n">label</span> <span class="o">==</span> <span class="s2">&quot;IGSN.ORG&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">candidate</span>
+        <span class="k">if</span> <span class="n">label</span> <span class="o">==</span> <span class="s2">&quot;IGSN&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">candidate</span>
+        <span class="k">if</span> <span class="n">label</span> <span class="o">==</span> <span class="s2">&quot;IGSN:10273&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">candidate</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="c1"># igsn:XXX form</span>
+    <span class="n">parts</span> <span class="o">=</span> <span class="n">igsn_str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="n">candidate</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">label</span> <span class="o">==</span> <span class="s2">&quot;IGSN&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">candidate</span>
+        <span class="k">if</span> <span class="n">label</span> <span class="o">==</span> <span class="s2">&quot;10273&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">candidate</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="n">igsn_str</span></div>
+
+
+<div class="viewcode-block" id="resolve"><a class="viewcode-back" href="../api/igsn_lib.html#igsn_lib.resolve">[docs]</a><span class="k">def</span> <span class="nf">resolve</span><span class="p">(</span><span class="n">igsn_value</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Resolve an IGSN value</span>
+
+<span class="sd">    #TODO: add support for link headers</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        igsn_value: pre-normalized IGSN string</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        requests.Response</span>
+
+<span class="sd">    Examples:</span>
+
+<span class="sd">        .. jupyter-execute::</span>
+
+<span class="sd">           import json</span>
+<span class="sd">           import igsn_lib</span>
+
+<span class="sd">           res = igsn_lib.resolve(&#39;PRR047915&#39;)</span>
+<span class="sd">           print(json.dumps(res.json(), indent=2))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_L</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;igsn_lib&quot;</span><span class="p">)</span>
+    <span class="n">rheaders</span> <span class="o">=</span> <span class="n">DEFAULT_RESOLVE_HEADERS</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">headers</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">rheaders</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">IGSN_RESOLVER_URL</span><span class="si">}{</span><span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">quote</span><span class="p">(</span><span class="n">igsn_value</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">_L</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Resolve URL = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">rheaders</span><span class="p">)</span></div>
+</pre></div>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By iSamples<br/>
+        
+            &copy; Copyright 2020, iSamples.<br/>
+          <div class="extra_footer">
+            <small>This material is based upon work supported by the 
+National Science Foundation under Grant Numbers <a href='https://nsf.gov/awardsearch/showAward?AWD_ID=2004839'>2004839</a>,
+<a href='https://nsf.gov/awardsearch/showAward?AWD_ID=2004562'>2004562</a>, 
+<a href='https://nsf.gov/awardsearch/showAward?AWD_ID=2004642'>2004642</a>,
+and <a href='https://nsf.gov/awardsearch/showAward?AWD_ID=2004815'>2004815</a>. Any opinions, findings, and conclusions 
+ or recommendations expressed in this material are those of the author(s) and do not necessarily 
+ reflect the views of the National Science Foundation.</small>
+          </div>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.30270b6e4c972e43c488.js"></script>
+
+
+    
+  </body>
+</html>

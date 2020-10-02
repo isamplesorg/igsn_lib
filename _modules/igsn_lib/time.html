@@ -1,0 +1,440 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>igsn_lib.time &#8212; igsn_lib 0.1 documentation</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.d431a4ee1c1efae0e38bdfebc22debff.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.bfb7730f9caf2ec0b46a44615585038c.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/thebelab.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.30270b6e4c972e43c488.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/thebelab-helper.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <script src="../../_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../index.html">
+  
+  
+  <h1 class="site-logo" id="site-title">igsn_lib 0.1 documentation</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <p class="caption">
+ <span class="caption-text">
+  Contents:
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../api/igsn_lib.html">
+   igsn_lib Package
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../api/igsn_lib.time.html">
+   igsn_lib.time
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../api/igsn_lib.oai.html">
+   igsn_lib.oai
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../api/igsn_lib.models.html">
+   igsn_lib.models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../api/igsn_lib.util.html">
+   igsn_lib.util
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+</div>
+        <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/isamplesorg/igsn_lib"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/isamplesorg/igsn_lib/issues/new?title=Issue%20on%20page%20%2F_modules/igsn_lib/time.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <h1>Source code for igsn_lib.time</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Time handling routines for igsn_lib.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">dateparser</span>
+<span class="kn">import</span> <span class="nn">astropy.time</span>
+<span class="kn">import</span> <span class="nn">astropy.utils.exceptions</span>
+
+<span class="n">JSON_TIME_FORMAT</span> <span class="o">=</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">T%H:%M:%S%z&quot;</span>
+<span class="sd">&quot;&quot;&quot;datetime format string for generating JSON content</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">OAI_TIME_FORMAT</span> <span class="o">=</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">T%H:%M:%SZ&quot;</span>
+<span class="sd">&quot;&quot;&quot;datetime format string for generating OAI-PMH requests</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="k">def</span> <span class="nf">_getLogger</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;igsn_lib.time&quot;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="datetimeToJD"><a class="viewcode-back" href="../../api/igsn_lib.time.html#igsn_lib.time.datetimeToJD">[docs]</a><span class="k">def</span> <span class="nf">datetimeToJD</span><span class="p">(</span><span class="n">dt</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert a python datetime to Julian date.</span>
+
+<span class="sd">    Naive datetime is assumed to be UTC.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        dt: datetime.datetime</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float, Julian date</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">        .. jupyter-execute::</span>
+
+<span class="sd">           import igsn_lib.time</span>
+<span class="sd">           import datetime</span>
+
+<span class="sd">           dt = datetime.datetime.now(datetime.timezone.utc)</span>
+<span class="sd">           print(dt)</span>
+<span class="sd">           print(igsn_lib.time.datetimeToJD(dt))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># force UTC if no timezone information is provided with dt</span>
+    <span class="k">if</span> <span class="n">dt</span><span class="o">.</span><span class="n">tzinfo</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">dt</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">tzinfo</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">astropy</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">Time</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span><span class="o">.</span><span class="n">jd</span></div>
+
+
+<div class="viewcode-block" id="dtnow"><a class="viewcode-back" href="../../api/igsn_lib.time.html#igsn_lib.time.dtnow">[docs]</a><span class="k">def</span> <span class="nf">dtnow</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get datetime for now in UTC timezone.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        datetime.datetime with UTC timezone</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">        .. jupyter-execute::</span>
+
+<span class="sd">           import igsn_lib.time</span>
+<span class="sd">           print(igsn_lib.time.dtnow())</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="jdnow"><a class="viewcode-back" href="../../api/igsn_lib.time.html#igsn_lib.time.jdnow">[docs]</a><span class="k">def</span> <span class="nf">jdnow</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Current Julian date.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float, Julian date</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">       .. jupyter-execute::</span>
+
+<span class="sd">          import igsn_lib.time</span>
+<span class="sd">          print(igsn_lib.time.jdnow())</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">datetimeToJD</span><span class="p">(</span><span class="n">dtnow</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="jdFromString"><a class="viewcode-back" href="../../api/igsn_lib.time.html#igsn_lib.time.jdFromString">[docs]</a><span class="k">def</span> <span class="nf">jdFromString</span><span class="p">(</span><span class="n">tstr</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Julian date from string representation of time.</span>
+
+<span class="sd">    Uses dateparser.parse to get date time from the string.</span>
+
+<span class="sd">    See https://dateparser.readthedocs.io/en/latest/</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        tstr: string, time in text.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float, Julian date</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">        .. jupyter-execute::</span>
+
+<span class="sd">           import igsn_lib.time</span>
+
+<span class="sd">           print(igsn_lib.time.jdFromString(&quot;now&quot;))</span>
+<span class="sd">           print(igsn_lib.time.jdFromString(&quot;100 years ago&quot;))</span>
+<span class="sd">           print(igsn_lib.time.jdFromString(&quot;2020-08-15 16:30:00 ET&quot;))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dt</span> <span class="o">=</span> <span class="n">dateparser</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">tstr</span><span class="p">,</span> <span class="n">settings</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;TIMEZONE&quot;</span><span class="p">:</span> <span class="s2">&quot;+0000&quot;</span><span class="p">})</span>
+    <span class="k">return</span> <span class="n">datetimeToJD</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="jdToDateTime"><a class="viewcode-back" href="../../api/igsn_lib.time.html#igsn_lib.time.jdToDateTime">[docs]</a><span class="k">def</span> <span class="nf">jdToDateTime</span><span class="p">(</span><span class="n">jd</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert Julian date to datetime.</span>
+
+<span class="sd">    Note that Julian date values can exceed the range supported by</span>
+<span class="sd">    python datetime, in which case astropy or datetime will raise</span>
+<span class="sd">    an exception, and this method will return None.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        jd: float, Julian date/</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        datetime with UTC timezone or None</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">        .. jupyter-execute::</span>
+
+<span class="sd">           import igsn_lib.time</span>
+<span class="sd">           print(igsn_lib.time.jdToDateTime(2459125.5))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">atime</span> <span class="o">=</span> <span class="n">astropy</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">Time</span><span class="p">(</span><span class="n">jd</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;jd&quot;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">atime</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">_L</span> <span class="o">=</span> <span class="n">_getLogger</span><span class="p">()</span>
+        <span class="n">_L</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="jdToString"><a class="viewcode-back" href="../../api/igsn_lib.time.html#igsn_lib.time.jdToString">[docs]</a><span class="k">def</span> <span class="nf">jdToString</span><span class="p">(</span><span class="n">jd</span><span class="p">,</span> <span class="n">format_str</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert Julian date to a string representation</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        jd: float, Julian date</span>
+<span class="sd">        format_str: python strftime format string</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        string</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">        .. jupyter-execute::</span>
+
+<span class="sd">           import igsn_lib.time</span>
+<span class="sd">           print(igsn_lib.time.jdToString(2459125.5, &quot;%Y%m%d&quot;))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dt</span> <span class="o">=</span> <span class="n">jdToDateTime</span><span class="p">(</span><span class="n">jd</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">dt</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">dt</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">format_str</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="jdToJsonString"><a class="viewcode-back" href="../../api/igsn_lib.time.html#igsn_lib.time.jdToJsonString">[docs]</a><span class="k">def</span> <span class="nf">jdToJsonString</span><span class="p">(</span><span class="n">jd</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert Julian date to a JSON datetime string.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        jd: float, Julian date</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        string or None on error</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">        .. jupyter-execute::</span>
+
+<span class="sd">           import igsn_lib.time</span>
+<span class="sd">           print(igsn_lib.time.jdToJsonString(2459125.5))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">jdToString</span><span class="p">(</span><span class="n">jd</span><span class="p">,</span> <span class="n">JSON_TIME_FORMAT</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="jdToOAIPMHString"><a class="viewcode-back" href="../../api/igsn_lib.time.html#igsn_lib.time.jdToOAIPMHString">[docs]</a><span class="k">def</span> <span class="nf">jdToOAIPMHString</span><span class="p">(</span><span class="n">jd</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert Julian date to an OAI-PMH acceptable datetime string.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        jd: float, Julian date</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        string or None on error</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">        .. jupyter-execute::</span>
+
+<span class="sd">           import igsn_lib.time</span>
+<span class="sd">           print(igsn_lib.time.jdToOAIPMHString(2459125.5))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">jdToString</span><span class="p">(</span><span class="n">jd</span><span class="p">,</span> <span class="n">OAI_TIME_FORMAT</span><span class="p">)</span></div>
+</pre></div>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By iSamples<br/>
+        
+            &copy; Copyright 2020, iSamples.<br/>
+          <div class="extra_footer">
+            <small>This material is based upon work supported by the 
+National Science Foundation under Grant Numbers <a href='https://nsf.gov/awardsearch/showAward?AWD_ID=2004839'>2004839</a>,
+<a href='https://nsf.gov/awardsearch/showAward?AWD_ID=2004562'>2004562</a>, 
+<a href='https://nsf.gov/awardsearch/showAward?AWD_ID=2004642'>2004642</a>,
+and <a href='https://nsf.gov/awardsearch/showAward?AWD_ID=2004815'>2004815</a>. Any opinions, findings, and conclusions 
+ or recommendations expressed in this material are those of the author(s) and do not necessarily 
+ reflect the views of the National Science Foundation.</small>
+          </div>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.30270b6e4c972e43c488.js"></script>
+
+
+    
+  </body>
+</html>
