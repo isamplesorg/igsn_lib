@@ -9,14 +9,10 @@ API
 ---
 
 .. toctree::
-   :maxdepth: 1
-   :caption: Contents:
+   :numbered:
+   :titlesonly:
 
-   api/igsn_lib
-   api/igsn_lib.time
-   api/igsn_lib.oai
-   api/igsn_lib.models
-   api/igsn_lib.util
+   api/index
 
 
 Indices and tables
