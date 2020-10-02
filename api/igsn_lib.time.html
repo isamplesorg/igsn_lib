@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>igsn_lib.time &#8212; igsn_lib 0.1 documentation</title>
+    <title>1.2. igsn_lib.time &#8212; igsn_lib 0.1 documentation</title>
     
   <link rel="stylesheet" href="../_static/css/index.d431a4ee1c1efae0e38bdfebc22debff.css">
 
@@ -50,8 +50,8 @@
     <script src="../_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="igsn_lib.oai" href="igsn_lib.oai.html" />
-    <link rel="prev" title="igsn_lib Package" href="igsn_lib.html" />
+    <link rel="next" title="1.3. igsn_lib.oai" href="igsn_lib.oai.html" />
+    <link rel="prev" title="1.1. igsn_lib Package" href="igsn_lib.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -82,36 +82,38 @@
 </form>
 
 <nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
-  <p class="caption">
- <span class="caption-text">
-  Contents:
- </span>
-</p>
-<ul class="current nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="igsn_lib.html">
-   igsn_lib Package
-  </a>
- </li>
+  <ul class="current nav sidenav_l1">
  <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   igsn_lib.time
+  <a class="reference internal" href="index.html">
+   1. igsn_lib API Documentation
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="igsn_lib.oai.html">
-   igsn_lib.oai
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="igsn_lib.models.html">
-   igsn_lib.models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="igsn_lib.util.html">
-   igsn_lib.util
-  </a>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="igsn_lib.html">
+     1.1. igsn_lib Package
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     1.2. igsn_lib.time
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="igsn_lib.oai.html">
+     1.3. igsn_lib.oai
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="igsn_lib.models.html">
+     1.4. igsn_lib.models
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="igsn_lib.util.html">
+     1.5. igsn_lib.util
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -204,12 +206,12 @@
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#methods">
-   Methods
+   1.2.1. Methods
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#module-igsn_lib.time">
-   Detail
+   1.2.2. Detail
   </a>
  </li>
 </ul>
@@ -224,9 +226,125 @@
               <div>
                 
   <div class="section" id="igsn-lib-time">
-<h1>igsn_lib.time<a class="headerlink" href="#igsn-lib-time" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">1.2. </span>igsn_lib.time<a class="headerlink" href="#igsn-lib-time" title="Permalink to this headline">¶</a></h1>
+<p>This libary provides some convenience methods for working with Julian dates.</p>
+<p>A Julian Date is a floating point value that identifies the number of days before
+or after <code class="docutils literal notranslate"><span class="pre">-4713-11-24</span> <span class="pre">12:00:00.000</span></code> UTC. The range is unlimited, for example
+the estimated age of the universe is about 13.787 billion years <a class="footnote-reference brackets" href="#universe" id="id1">1</a>, and
+that date is far outside of the common operating parameters for databases
+and many programmatic representations of time.</p>
+<p>In JD, the start of the universe can be reliably expressed as approximately:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">astropy.time</span>
+<span class="n">tstart</span> <span class="o">=</span> <span class="n">astropy</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">Time</span><span class="p">(</span><span class="o">-</span><span class="mf">13.787E9</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;byear&#39;</span><span class="p">)</span>
+<span class="n">jd</span> <span class="o">=</span> <span class="n">tstart</span><span class="o">.</span><span class="n">jd</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Universe started on Julian Date: </span><span class="si">{</span><span class="n">jd</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>Universe started on Julian Date: -5035592473533.512
+</pre></div>
+</div>
+</div>
+</div>
+<p>The start of the universe can not be expressed in a python datetime:</p>
+<blockquote>
+<div><div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+  <span class="nb">print</span><span class="p">(</span><span class="n">tstart</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">))</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+  <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ERROR: with timezone: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+  <span class="nb">print</span><span class="p">(</span><span class="n">tstart</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">())</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+  <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ERROR: without timezone: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>ERROR: with timezone: name &#39;datetime&#39; is not defined
+ERROR: without timezone: ERFA function &quot;d2dtf&quot; yielded 1 of &quot;unacceptable date (Note 6)&quot;
+</pre></div>
+</div>
+</div>
+</div>
+</div></blockquote>
+<p>Julian dates are equally applicable to the current time (and future). For example,
+this page was last edited:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span>
+<span class="n">jd</span> <span class="o">=</span> <span class="n">astropy</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">Time</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">))</span><span class="o">.</span><span class="n">jd</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;It is now: </span><span class="si">{</span><span class="n">jd</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>It is now: 2459125.427341496
+</pre></div>
+</div>
+</div>
+</div>
+<p>Julian dates can be used to provide a consistent representation of geological time boundaries,
+albeit at a higher resolution than the actual boundaries can be determined. For example the
+Cenozoic <a class="footnote-reference brackets" href="#cenozoic" id="id2">2</a> period ranges from 66 million years ago to modern time. This can be
+expressed in JD as:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cenozoic</span> <span class="o">=</span> <span class="p">(</span>
+  <span class="n">astropy</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">Time</span><span class="p">(</span><span class="o">-</span><span class="mf">66E6</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;byear&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">jd</span><span class="p">,</span>
+  <span class="n">astropy</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">Time</span><span class="p">(</span><span class="mi">1950</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;byear&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">jd</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The cenozoic period is JD </span><span class="si">{</span><span class="n">cenozoic</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2"> to JD </span><span class="si">{</span><span class="n">cenozoic</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>The cenozoic period is JD -24104264059 to JD 2433282.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Positions in archeologic and ‘recent’ geologic time are conventionally denoted
+in years, measured backwards from the present, which is fixed to 1950 when the
+precision requires it.</p>
+<p>The start of the cenozoic is the Cretaceous-Paleogene Boundary (KBP, <a class="footnote-reference brackets" href="#kbp" id="id3">3</a>)
+determined to be 66.038 +- 0.025/0.049 Ma <a class="footnote-reference brackets" href="#kbpage" id="id4">4</a>. That translates to JD:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">c0</span> <span class="o">=</span> <span class="n">astropy</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">Time</span><span class="p">(</span><span class="o">-</span><span class="mf">66.038E6</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;byear&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">jd</span>
+<span class="n">c1</span> <span class="o">=</span> <span class="mi">365</span><span class="o">*</span><span class="mf">1E6</span><span class="o">*</span><span class="mf">0.025</span>
+<span class="n">c2</span> <span class="o">=</span> <span class="mi">365</span><span class="o">*</span><span class="mf">1E6</span><span class="o">*</span><span class="mf">0.049</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cenozoic start = </span><span class="si">{</span><span class="n">c0</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2"> +- </span><span class="si">{</span><span class="n">c1</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">c2</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>Cenozoic start = -24118143263 +- 9125000/17885000
+</pre></div>
+</div>
+</div>
+</div>
+<dl class="footnote brackets">
+<dt class="label" id="universe"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p><a class="reference external" href="https://en.wikipedia.org/wiki/Age_of_the_universe">https://en.wikipedia.org/wiki/Age_of_the_universe</a></p>
+</dd>
+<dt class="label" id="cenozoic"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd><p><a class="reference external" href="https://en.wikipedia.org/wiki/Cenozoic">https://en.wikipedia.org/wiki/Cenozoic</a></p>
+</dd>
+<dt class="label" id="kbp"><span class="brackets"><a class="fn-backref" href="#id3">3</a></span></dt>
+<dd><p><a class="reference external" href="https://en.wikipedia.org/wiki/Cretaceous%E2%80%93Paleogene_extinction_event">https://en.wikipedia.org/wiki/Cretaceous%E2%80%93Paleogene_extinction_event</a></p>
+</dd>
+<dt class="label" id="kbpage"><span class="brackets"><a class="fn-backref" href="#id4">4</a></span></dt>
+<dd><p><a class="reference external" href="https://www.cugb.edu.cn/uploadCms/file/20600/20131028144132060.pdf">https://www.cugb.edu.cn/uploadCms/file/20600/20131028144132060.pdf</a></p>
+</dd>
+</dl>
 <div class="section" id="methods">
-<h2>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.2.1. </span>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h2>
+<p>The following methods are provided in the <code class="docutils literal notranslate"><span class="pre">igsn_lib.time</span></code> module:</p>
 <table class="longtable table autosummary">
 <colgroup>
 <col style="width: 10%" />
@@ -261,7 +379,7 @@
 </table>
 </div>
 <div class="section" id="module-igsn_lib.time">
-<span id="detail"></span><h2>Detail<a class="headerlink" href="#module-igsn_lib.time" title="Permalink to this headline">¶</a></h2>
+<span id="detail"></span><h2><span class="section-number">1.2.2. </span>Detail<a class="headerlink" href="#module-igsn_lib.time" title="Permalink to this headline">¶</a></h2>
 <p>Time handling routines for igsn_lib.</p>
 <dl class="py data">
 <dt id="igsn_lib.time.JSON_TIME_FORMAT">
@@ -301,10 +419,8 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2020-10-02 21:30:53.363173+00:00
-</pre></div>
-</div>
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2459125.396450963
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2020-10-02 22:15:22.636319+00:00
+2459125.4273453276
 </pre></div>
 </div>
 </div>
@@ -329,7 +445,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2020-10-02 21:30:53.592840+00:00
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2020-10-02 22:15:22.645279+00:00
 </pre></div>
 </div>
 </div>
@@ -362,8 +478,8 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2459125.396454014
-2422600.396454059
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2459125.4273458095
+2422600.427345853
 2459077.3958333335
 </pre></div>
 </div>
@@ -507,7 +623,7 @@ an exception, and this method will return None.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2459125.396454681
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2459125.4273464596
 </pre></div>
 </div>
 </div>
@@ -526,8 +642,8 @@ an exception, and this method will return None.</p>
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="igsn_lib.html" title="previous page">igsn_lib Package</a>
-    <a class='right-next' id="next-link" href="igsn_lib.oai.html" title="next page">igsn_lib.oai</a>
+    <a class='left-prev' id="prev-link" href="igsn_lib.html" title="previous page"><span class="section-number">1.1. </span>igsn_lib Package</a>
+    <a class='right-next' id="next-link" href="igsn_lib.oai.html" title="next page"><span class="section-number">1.3. </span>igsn_lib.oai</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
