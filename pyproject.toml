@@ -24,6 +24,10 @@ sphinx-thebe = "^0.0.7"
 psycopg2 = "^2.8.6"
 astropy = "^4.0.1"
 numpy = "^1.19.2"
+sphinx_copybutton = "^0.3.0"
+sphinxcontrib-bibtex = "^1.0.0"
+sphinx = "^3.2.1"
+sphinx-automodapi = "^0.13"
 
 [tool.poetry.dev-dependencies]
 
