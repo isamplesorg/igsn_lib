@@ -1,5 +1,4 @@
-/igsn_store.db
-.idea
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -129,3 +128,8 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+igsn_store.db
+.idea
+.DS_Store
+.vscode
