@@ -14,7 +14,7 @@ In JD, the start of the universe can be reliably expressed as approximately:
 .. jupyter-execute::
 
    import astropy.time
-   tstart = astropy.time.Time(-13.787E9, format='byear')
+   tstart = astropy.time.Time(-13.787E9, format='jyear')
    jd = tstart.jd
    print(f"Universe started on Julian Date: {jd}")
 
@@ -48,8 +48,8 @@ expressed in JD as:
 .. jupyter-execute::
 
   cenozoic = (
-    astropy.time.Time(-66E6, format='byear').jd,
-    astropy.time.Time(1950, format='byear').jd,
+    astropy.time.Time(-66E6, format='jyear').jd,
+    astropy.time.Time(1950, format='jyear').jd,
   )
   print(f"The cenozoic period is JD {cenozoic[0]:.0f} to JD {cenozoic[1]:.0f}.")
 
@@ -62,7 +62,7 @@ determined to be 66.038 +- 0.025/0.049 Ma [#KBPage]_. That translates to JD:
 
 .. jupyter-execute::
 
-   c0 = astropy.time.Time(-66.038E6, format='byear').jd
+   c0 = astropy.time.Time(-66.038E6, format='jyear').jd
    c1 = 365*1E6*0.025
    c2 = 365*1E6*0.049
    print(f"Cenozoic start = {c0:.0f} +- {c1:.0f}/{c2:.0f}")
@@ -75,8 +75,7 @@ determined to be 66.038 +- 0.025/0.049 Ma [#KBPage]_. That translates to JD:
 
 
 
-Methods
--------
+.. rubric:: Methods
 
 The following methods are provided in the ``igsn_lib.time`` module:
 
@@ -84,8 +83,7 @@ The following methods are provided in the ``igsn_lib.time`` module:
    :functions:
 
 
-Detail
-------
+.. rubric:: Detail
 
 .. automodule:: igsn_lib.time
    :members:

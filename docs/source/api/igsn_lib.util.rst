@@ -2,15 +2,13 @@ igsn_lib.util
 =============
 
 
-Methods
--------
+.. rubric:: Methods
 
 .. autofuncsummary:: igsn_lib.util
    :functions:
 
 
-Detail
-------
+.. rubric:: Detail
 
 .. automodule:: igsn_lib.util
    :members:

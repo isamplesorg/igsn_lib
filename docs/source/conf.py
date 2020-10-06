@@ -68,6 +68,10 @@ html_theme = "sphinx_book_theme"
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
+html_css_files = [
+    'css/custom.css',
+]
+
 theme_extra_footer = """<small>This material is based upon work supported by the 
 National Science Foundation under Grant Numbers <a href='https://nsf.gov/awardsearch/showAward?AWD_ID=2004839'>2004839</a>,
 <a href='https://nsf.gov/awardsearch/showAward?AWD_ID=2004562'>2004562</a>, 

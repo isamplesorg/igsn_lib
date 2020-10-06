@@ -1,17 +1,18 @@
 igsn_lib Package
 ================
 
-Methods
--------
+.. rubric:: Methods
+
 
 .. autofuncsummary:: igsn_lib
    :functions:
 
 
-Detail
-------
+.. rubric:: Detail
+
 
 .. automodule:: igsn_lib
    :members:
    :undoc-members:
    :show-inheritance:
+
