@@ -32,6 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/thebelab.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css" />
     
   <link rel="preload" as="script" href="../../_static/js/index.30270b6e4c972e43c488.js">
 
@@ -83,7 +84,7 @@
   <ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="../../api/index.html">
-   1. igsn_lib API Documentation
+   1. igsn_lib Package Documentation
   </a>
  </li>
 </ul>
@@ -179,6 +180,10 @@
 
 <span class="n">OAI_TIME_FORMAT</span> <span class="o">=</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">T%H:%M:%SZ&quot;</span>
 <span class="sd">&quot;&quot;&quot;datetime format string for generating OAI-PMH requests</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">_BCE_JD0</span> <span class="o">=</span> <span class="mi">1721060</span>
+<span class="sd">&quot;&quot;&quot;Julian date 0 for BCE 1, year &#39;0000&#39;</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 
@@ -369,6 +374,106 @@
 <span class="sd">           print(igsn_lib.time.jdToOAIPMHString(2459125.5))</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">jdToString</span><span class="p">(</span><span class="n">jd</span><span class="p">,</span> <span class="n">OAI_TIME_FORMAT</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="jdToMa"><a class="viewcode-back" href="../../api/igsn_lib.time.html#igsn_lib.time.jdToMa">[docs]</a><span class="k">def</span> <span class="nf">jdToMa</span><span class="p">(</span><span class="n">jd</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert Julian date to Ma (millions of years ago).</span>
+
+<span class="sd">    Note that positive Ma values are in the past.</span>
+
+<span class="sd">    By convention, 0Ma = 1950 present time..</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        jd: float, Julian date</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float, Ma</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">        .. jupyter-execute::</span>
+
+<span class="sd">           import igsn_lib.time</span>
+<span class="sd">           print(igsn_lib.time.jdToMa(-363521138))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">atime</span> <span class="o">=</span> <span class="n">astropy</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">Time</span><span class="p">(</span><span class="n">jd</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;jd&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">jyear</span>
+    <span class="k">return</span> <span class="o">-</span><span class="n">atime</span> <span class="o">/</span> <span class="mf">1.0e6</span></div>
+
+
+<div class="viewcode-block" id="maToJd"><a class="viewcode-back" href="../../api/igsn_lib.time.html#igsn_lib.time.maToJd">[docs]</a><span class="k">def</span> <span class="nf">maToJd</span><span class="p">(</span><span class="n">Ma</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert Ma (millions of years ago) to Julian date.</span>
+
+<span class="sd">    Note that positive Ma values are in the past.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        Ma: float, millions of years ago</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float, Julian date</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">        .. jupyter-execute::</span>
+
+<span class="sd">           import igsn_lib.time</span>
+<span class="sd">           print(igsn_lib.time.maToJd(-1.0))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">atime</span> <span class="o">=</span> <span class="n">astropy</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">Time</span><span class="p">(</span><span class="o">-</span><span class="n">Ma</span> <span class="o">*</span> <span class="mf">1.0e6</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;jyear&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">jd</span>
+    <span class="k">return</span> <span class="n">atime</span></div>
+
+
+<div class="viewcode-block" id="jdToBCE"><a class="viewcode-back" href="../../api/igsn_lib.time.html#igsn_lib.time.jdToBCE">[docs]</a><span class="k">def</span> <span class="nf">jdToBCE</span><span class="p">(</span><span class="n">jd</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert Julian date to BCE, where 1 BCE = year 0000.</span>
+
+<span class="sd">    Positive BCE years are older than year 0000.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        jd: Julian Date</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float, BCE year</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">        .. jupyter-execute::</span>
+
+<span class="sd">           import igsn_lib.time</span>
+<span class="sd">           print(igsn_lib.time.jdToBCE(0.0))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">atime</span> <span class="o">=</span> <span class="n">astropy</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">Time</span><span class="p">(</span><span class="n">jd</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;jd&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">jyear</span>
+    <span class="c1"># 0000 = -1 BCE</span>
+    <span class="k">if</span> <span class="n">atime</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">atime</span> <span class="o">=</span> <span class="n">atime</span><span class="o">-</span><span class="mi">1</span>
+    <span class="k">return</span> <span class="o">-</span><span class="n">atime</span></div>
+
+
+<div class="viewcode-block" id="bceToJd"><a class="viewcode-back" href="../../api/igsn_lib.time.html#igsn_lib.time.bceToJd">[docs]</a><span class="k">def</span> <span class="nf">bceToJd</span><span class="p">(</span><span class="n">bce</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert BCE date to Julian date, where 1 BCE = year 0000.</span>
+
+<span class="sd">    Positive BCE years are older than year 0000.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        bce: float, years BCE</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float, Julian date</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">        .. jupyter-execute::</span>
+
+<span class="sd">           import igsn_lib.time</span>
+<span class="sd">           print(igsn_lib.time.bceToJd(-1))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># 0000 = 1 BCE</span>
+    <span class="n">bce</span> <span class="o">=</span> <span class="o">-</span><span class="n">bce</span>
+    <span class="k">if</span> <span class="n">bce</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">bce</span> <span class="o">=</span> <span class="n">bce</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">astropy</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">Time</span><span class="p">(</span><span class="n">bce</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;jyear&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">jd</span></div>
 </pre></div>
 
               </div>

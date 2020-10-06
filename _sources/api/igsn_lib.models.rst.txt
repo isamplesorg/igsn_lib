@@ -1,22 +1,19 @@
 igsn_lib.models
 ===============
 
-Classes
--------
+.. rubric:: Classes
 
 .. autofuncsummary:: igsn_lib.models
    :classes:
 
 
-Methods
--------
+.. rubric:: Methods
 
 .. autofuncsummary:: igsn_lib.models
    :functions:
 
 
-Detail
-------
+.. rubric:: Detail
 
 .. automodule:: igsn_lib.models
    :members:

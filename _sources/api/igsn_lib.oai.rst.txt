@@ -2,15 +2,13 @@ igsn_lib.oai
 ============
 
 
-Methods
--------
+.. rubric:: Methods
 
 .. autofuncsummary:: igsn_lib.oai
    :functions:
 
 
-Detail
-------
+.. rubric:: Detail
 
 .. automodule:: igsn_lib.oai
    :members:
