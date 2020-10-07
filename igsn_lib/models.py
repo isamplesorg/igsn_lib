@@ -199,6 +199,31 @@ class Job(Base):
             return tok["token"]
         return None
 
+    def asDict(self):
+        d = {
+            'id': self.id,
+            'service_id': self.service_id,
+            'tstart': None,
+            'tend': None,
+            'ignore_deleted': self.ignore_deleted,
+            'metadata_prefix': self.metadata_prefix,
+            'setspec': self.setspec,
+            'tfrom': None,
+            'tuntil': None
+        }
+        if self.tstart is not None:
+            d['tstart'] = self.tstart.strftime(igsn_lib.time.JSON_TIME_FORMAT)
+        if self.tend is not None:
+            d['tend'] = self.tend.strftime(igsn_lib.time.JSON_TIME_FORMAT)
+        if self.tfrom is not None:
+            d['tfrom'] = self.tfrom.strftime(igsn_lib.time.JSON_TIME_FORMAT)
+        if self.tuntil is not None:
+            d['tuntil'] = self.tuntil.strftime(igsn_lib.time.JSON_TIME_FORMAT)
+        return d
+
+    def __repr__(self):
+        return json.dumps(self.asDict(), indent=2)
+
     def execute(self, session, callback=None):
         '''
         Execute this task, harvesting records until complete.
@@ -313,6 +338,11 @@ class Service(Base):
         self.admin_email = info.adminEmail
         if session is not None:
             session.commit()
+
+    def listSets(self):
+        oai = igsn_lib.oai.getSickle(self.url)
+        return oai.ListSets()
+
 
     def mostRecentRecordRetrieved(self, session):
         """

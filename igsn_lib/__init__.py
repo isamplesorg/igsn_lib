@@ -13,6 +13,12 @@ IGSN_RESOLVER_URL = "http://igsn.org/"
 Note that this seems to always delegate to hdl.handle.net
 """
 
+N2T_RESOLVER_URL = "https://n2t.net/"
+"""N2T Resolver URL. 
+
+N2T will resolve many types of identifiers, including IGSNs
+"""
+
 DEFAULT_RESOLVE_HEADERS = {
     "User-Agent": f"igsn_lib/{__version__}",
     "Accept": "application/json, application/ld+json;q=0.9, text/json;q=0.8; text/xml;q=0.7, text/html;q=0.5",
@@ -76,6 +82,17 @@ def normalize(igsn_str):
             return candidate
         return None
     return igsn_str
+
+
+def resolveN2T(identifier, headers=None):
+    _L = logging.getLogger("igsn_lib")
+    rheaders = DEFAULT_RESOLVE_HEADERS.copy()
+    if headers is not None:
+        rheaders.update(headers)
+    url = f"{N2T_RESOLVER_URL}{urllib.parse.quote(identifier)}"
+    _L.debug("Resolve URL = %s", url)
+    return requests.get(url, headers=rheaders)
+
 
 
 def resolve(igsn_value, headers=None):
