@@ -180,6 +180,12 @@
 <span class="sd">Note that this seems to always delegate to hdl.handle.net</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
+<span class="n">N2T_RESOLVER_URL</span> <span class="o">=</span> <span class="s2">&quot;https://n2t.net/&quot;</span>
+<span class="sd">&quot;&quot;&quot;N2T Resolver URL. </span>
+
+<span class="sd">N2T will resolve many types of identifiers, including IGSNs</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
 <span class="n">DEFAULT_RESOLVE_HEADERS</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;User-Agent&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;igsn_lib/</span><span class="si">{</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
     <span class="s2">&quot;Accept&quot;</span><span class="p">:</span> <span class="s2">&quot;application/json, application/ld+json;q=0.9, text/json;q=0.8; text/xml;q=0.7, text/html;q=0.5&quot;</span><span class="p">,</span>
@@ -243,6 +249,17 @@
             <span class="k">return</span> <span class="n">candidate</span>
         <span class="k">return</span> <span class="kc">None</span>
     <span class="k">return</span> <span class="n">igsn_str</span></div>
+
+
+<div class="viewcode-block" id="resolveN2T"><a class="viewcode-back" href="../api/igsn_lib.html#igsn_lib.resolveN2T">[docs]</a><span class="k">def</span> <span class="nf">resolveN2T</span><span class="p">(</span><span class="n">identifier</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">_L</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;igsn_lib&quot;</span><span class="p">)</span>
+    <span class="n">rheaders</span> <span class="o">=</span> <span class="n">DEFAULT_RESOLVE_HEADERS</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">headers</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">rheaders</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">N2T_RESOLVER_URL</span><span class="si">}{</span><span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">quote</span><span class="p">(</span><span class="n">identifier</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">_L</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Resolve URL = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">rheaders</span><span class="p">)</span></div>
+
 
 
 <div class="viewcode-block" id="resolve"><a class="viewcode-back" href="../api/igsn_lib.html#igsn_lib.resolve">[docs]</a><span class="k">def</span> <span class="nf">resolve</span><span class="p">(</span><span class="n">igsn_value</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>

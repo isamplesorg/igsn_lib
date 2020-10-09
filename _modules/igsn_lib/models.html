@@ -366,6 +366,31 @@
             <span class="k">return</span> <span class="n">tok</span><span class="p">[</span><span class="s2">&quot;token&quot;</span><span class="p">]</span>
         <span class="k">return</span> <span class="kc">None</span>
 
+<div class="viewcode-block" id="Job.asDict"><a class="viewcode-back" href="../../api/igsn_lib.models.html#igsn_lib.models.Job.asDict">[docs]</a>    <span class="k">def</span> <span class="nf">asDict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+            <span class="s1">&#39;service_id&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">service_id</span><span class="p">,</span>
+            <span class="s1">&#39;tstart&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s1">&#39;tend&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s1">&#39;ignore_deleted&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">ignore_deleted</span><span class="p">,</span>
+            <span class="s1">&#39;metadata_prefix&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata_prefix</span><span class="p">,</span>
+            <span class="s1">&#39;setspec&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">setspec</span><span class="p">,</span>
+            <span class="s1">&#39;tfrom&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s1">&#39;tuntil&#39;</span><span class="p">:</span> <span class="kc">None</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tstart</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">d</span><span class="p">[</span><span class="s1">&#39;tstart&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tstart</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">igsn_lib</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">JSON_TIME_FORMAT</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tend</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">d</span><span class="p">[</span><span class="s1">&#39;tend&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tend</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">igsn_lib</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">JSON_TIME_FORMAT</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tfrom</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">d</span><span class="p">[</span><span class="s1">&#39;tfrom&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tfrom</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">igsn_lib</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">JSON_TIME_FORMAT</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tuntil</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">d</span><span class="p">[</span><span class="s1">&#39;tuntil&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tuntil</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">igsn_lib</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">JSON_TIME_FORMAT</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">d</span></div>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">asDict</span><span class="p">(),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
 <div class="viewcode-block" id="Job.execute"><a class="viewcode-back" href="../../api/igsn_lib.models.html#igsn_lib.models.Job.execute">[docs]</a>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Execute this task, harvesting records until complete.</span>
@@ -480,6 +505,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">admin_email</span> <span class="o">=</span> <span class="n">info</span><span class="o">.</span><span class="n">adminEmail</span>
         <span class="k">if</span> <span class="n">session</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Service.listSets"><a class="viewcode-back" href="../../api/igsn_lib.models.html#igsn_lib.models.Service.listSets">[docs]</a>    <span class="k">def</span> <span class="nf">listSets</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">oai</span> <span class="o">=</span> <span class="n">igsn_lib</span><span class="o">.</span><span class="n">oai</span><span class="o">.</span><span class="n">getSickle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">oai</span><span class="o">.</span><span class="n">ListSets</span><span class="p">()</span></div>
+
 
 <div class="viewcode-block" id="Service.mostRecentRecordRetrieved"><a class="viewcode-back" href="../../api/igsn_lib.models.html#igsn_lib.models.Service.mostRecentRecordRetrieved">[docs]</a>    <span class="k">def</span> <span class="nf">mostRecentRecordRetrieved</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>

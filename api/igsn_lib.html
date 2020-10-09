@@ -222,6 +222,9 @@
 <tr class="row-even"><td><p><a class="reference internal" href="#igsn_lib.resolve" title="igsn_lib.resolve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">resolve</span></code></a>(igsn_value[, headers])</p></td>
 <td><p>Resolve an IGSN value</p></td>
 </tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.resolveN2T" title="igsn_lib.resolveN2T"><code class="xref py py-obj docutils literal notranslate"><span class="pre">resolveN2T</span></code></a>(identifier[, headers])</p></td>
+<td><p></p></td>
+</tr>
 </tbody>
 </table>
 <p class="rubric">Detail</p>
@@ -237,6 +240,13 @@
 <code class="sig-prename descclassname">igsn_lib.</code><code class="sig-name descname">IGSN_RESOLVER_URL</code><em class="property"> = 'http://igsn.org/'</em><a class="headerlink" href="#igsn_lib.IGSN_RESOLVER_URL" title="Permalink to this definition">¶</a></dt>
 <dd><p>Resolver URL.</p>
 <p>Note that this seems to always delegate to hdl.handle.net</p>
+</dd></dl>
+
+<dl class="py data">
+<dt id="igsn_lib.N2T_RESOLVER_URL">
+<code class="sig-prename descclassname">igsn_lib.</code><code class="sig-name descname">N2T_RESOLVER_URL</code><em class="property"> = 'https://n2t.net/'</em><a class="headerlink" href="#igsn_lib.N2T_RESOLVER_URL" title="Permalink to this definition">¶</a></dt>
+<dd><p>N2T Resolver URL.</p>
+<p>N2T will resolve many types of identifiers, including IGSNs</p>
 </dd></dl>
 
 <dl class="py function">
@@ -338,6 +348,11 @@ None
 </div>
 </div>
 </dd></dl>
+
+<dl class="py function">
+<dt id="igsn_lib.resolveN2T">
+<code class="sig-prename descclassname">igsn_lib.</code><code class="sig-name descname">resolveN2T</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">identifier</span></em>, <em class="sig-param"><span class="n">headers</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib.html#resolveN2T"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.resolveN2T" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </div>
 
