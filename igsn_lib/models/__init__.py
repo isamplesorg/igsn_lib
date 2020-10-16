@@ -19,6 +19,10 @@ _L = logging.getLogger("igsn_lib.models")
 
 Base = sqlalchemy.ext.declarative.declarative_base()
 
+def dtToJson(dt):
+    if dt is None:
+        return None
+    return dt.strftime(igsn_lib.time.JSON_TIME_FORMAT)
 
 class IGSN(Base):
     """
@@ -70,31 +74,23 @@ class IGSN(Base):
         return json.dumps(self.asJsonDict(), indent=2)
 
     def asJsonDict(self):
-        '''
+        """
         Provide a JSON serializable dict representation of instance.
 
         Returns:
             dict
-        '''
+        """
         d = {
             "id": self.id,
             "oai_id": self.oai_id,
             "service_id": self.service_id,
-            "harvest_time": None,
-            "oai_time": None,
-            "igsn_time": None,
+            "harvest_time": dtToJson(self.harvest_time),
+            "oai_time": dtToJson(self.oai_time),
+            "igsn_time": dtToJson(self.igsn_time),
             "registrant": self.registrant,
             "related": self.related,
             "log": self.log,
         }
-        if self.harvest_time is not None:
-            d["harvest_time"] = self.harvest_time.strftime(
-                igsn_lib.time.JSON_TIME_FORMAT
-            )
-        if self.oai_time is not None:
-            d["oai_time"] = self.oai_time.strftime(igsn_lib.time.JSON_TIME_FORMAT)
-        if self.igsn_time is not None:
-            d["igsn_time"] = self.igsn_time.strftime(igsn_lib.time.JSON_TIME_FORMAT)
         return d
 
     def fromOAIRecord(self, record):
@@ -154,9 +150,10 @@ class IGSN(Base):
 
 
 class Job(Base):
-    '''
+    """
     Describes an OAI-PMH  harvest job.
-    '''
+    """
+
     __tablename__ = "job"
     id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True)
     service_id = sqlalchemy.Column(
@@ -164,19 +161,32 @@ class Job(Base):
     )
     service = sqlalchemy.orm.relationship("Service", back_populates="jobs")
     tstart = sqlalchemy.Column(
-        sqlalchemy.DateTime(timezone=True), nullable=True, default=None,
-        doc="Time when the job was started."
+        sqlalchemy.DateTime(timezone=True),
+        nullable=True,
+        default=None,
+        doc="Time when the job was started.",
     )
     tend = sqlalchemy.Column(
-        sqlalchemy.DateTime(timezone=True), nullable=True, default=None,
-        doc="Time when the job was completed."
+        sqlalchemy.DateTime(timezone=True),
+        nullable=True,
+        default=None,
+        doc="Time when the job was completed.",
     )
-    ignore_deleted = sqlalchemy.Column(sqlalchemy.Boolean, default=True,
-                                       doc="Ignore records flagged by the OAI-PMH provider as deleted.")
-    metadata_prefix = sqlalchemy.Column(sqlalchemy.String, default="igsn",
-                                        doc="The metadata prefix to use when requesting records.")
-    setspec = sqlalchemy.Column(sqlalchemy.String, nullable=True,
-                                doc="The OAI-PMH set to use when requesting records.")
+    ignore_deleted = sqlalchemy.Column(
+        sqlalchemy.Boolean,
+        default=True,
+        doc="Ignore records flagged by the OAI-PMH provider as deleted.",
+    )
+    metadata_prefix = sqlalchemy.Column(
+        sqlalchemy.String,
+        default="igsn",
+        doc="The metadata prefix to use when requesting records.",
+    )
+    setspec = sqlalchemy.Column(
+        sqlalchemy.String,
+        nullable=True,
+        doc="The OAI-PMH set to use when requesting records.",
+    )
     tfrom = sqlalchemy.Column(
         sqlalchemy.DateTime(timezone=True),
         nullable=True,
@@ -187,45 +197,32 @@ class Job(Base):
         nullable=True,
         doc="end of time range for this job, OAI time range boundaries are inclusive",
     )
-    resumption_token = sqlalchemy.Column(
-        sqlalchemy.String,
+    tlast_record = sqlalchemy.Column(
+        sqlalchemy.DateTime(timezone=True),
         nullable=True,
-        doc="resume token to retrieve the next page form the provider",
+        doc="Time stamp of last retrieved, comitted record. Resumption starts here.",
     )
-
-    def _getResumptionToken(self):
-        if self.resumption_token is not None:
-            tok = json.loads(self.resumption_token)
-            return tok["token"]
-        return None
 
     def asDict(self):
         d = {
-            'id': self.id,
-            'service_id': self.service_id,
-            'tstart': None,
-            'tend': None,
-            'ignore_deleted': self.ignore_deleted,
-            'metadata_prefix': self.metadata_prefix,
-            'setspec': self.setspec,
-            'tfrom': None,
-            'tuntil': None
+            "id": self.id,
+            "service_id": self.service_id,
+            "tstart": dtToJson(self.tstart),
+            "tend": dtToJson(self.tend),
+            "ignore_deleted": self.ignore_deleted,
+            "metadata_prefix": self.metadata_prefix,
+            "setspec": self.setspec,
+            "tfrom": dtToJson(self.tfrom),
+            "tuntil": dtToJson(self.tuntil),
+            "tlast_record": dtToJson(self.tlast_record),
         }
-        if self.tstart is not None:
-            d['tstart'] = self.tstart.strftime(igsn_lib.time.JSON_TIME_FORMAT)
-        if self.tend is not None:
-            d['tend'] = self.tend.strftime(igsn_lib.time.JSON_TIME_FORMAT)
-        if self.tfrom is not None:
-            d['tfrom'] = self.tfrom.strftime(igsn_lib.time.JSON_TIME_FORMAT)
-        if self.tuntil is not None:
-            d['tuntil'] = self.tuntil.strftime(igsn_lib.time.JSON_TIME_FORMAT)
         return d
 
     def __repr__(self):
         return json.dumps(self.asDict(), indent=2)
 
-    def execute(self, session, callback=None):
-        '''
+    def execute(self, session, callback=None, resume=True):
+        """
         Execute this task, harvesting records until complete.
 
         #TODO: implement support for resumption of interupted job
@@ -233,10 +230,11 @@ class Job(Base):
         Args:
             session: sqlalchemy session
             callback: optional callback mutate record before committing
+            resume: If True, start retrieval from the last retrieved date
 
         Returns:
             integer, number of records added
-        '''
+        """
         svc = igsn_lib.oai.getSickle(self.service.url)
         kwargs = {"metadataPrefix": self.metadata_prefix}
         if self.setspec is not None:
@@ -245,8 +243,23 @@ class Job(Base):
             kwargs["from"] = self.tfrom.strftime(igsn_lib.time.OAI_TIME_FORMAT)
         if self.tuntil is not None:
             kwargs["until"] = self.tuntil.strftime(igsn_lib.time.OAI_TIME_FORMAT)
+        if resume and self.tlast_record is not None:
+            if self.tuntil is not None:
+                if self.tlast_record > self.tuntil:
+                    _L.error(
+                        "Start date (%s) must be less than end date (%s)",
+                        self.tlast_record,
+                        self.tuntil,
+                    )
+                    return 0
+            kwargs["from"] = self.tlast_record.strftime(igsn_lib.time.OAI_TIME_FORMAT)
+            _L.info("Resuming harvest job from %s", kwargs["from"])
+
         self.tstart = igsn_lib.time.dtnow()
+        self.tend = None
         counter = 0
+        new_count = 0
+        total_count = -1
         try:
             records = svc.ListRecords(ignore_deleted=self.ignore_deleted, **kwargs)
         except sickle.oaiexceptions.NoRecordsMatch as e:
@@ -255,16 +268,12 @@ class Job(Base):
             session.commit()
             return counter
         for record in records:
-            restok = records.resumption_token.token
-            if restok != self._getResumptionToken():
-                rtok = {
-                    "token": records.resumption_token.token,
-                    "cursor": records.resumption_token.cursor,
-                    "complete_list_size": records.resumption_token.complete_list_size,
-                    "expiration_date": records.resumption_token.expiration_date,
-                }
-                self.resumption_token = json.dumps(rtok)
-                session.commit()
+            if total_count < 0:
+                _L.info(
+                    "OAI-PMH batch has %s records",
+                    records.resumption_token.complete_list_size,
+                )
+            total_count = int(records.resumption_token.complete_list_size)
             try:
                 igsn = IGSN(
                     service_id=self.service_id, harvest_time=igsn_lib.time.dtnow()
@@ -276,9 +285,10 @@ class Job(Base):
                     _L.debug("NEW")
                     if callback is not None:
                         callback(record, igsn)
-                    counter += 1
+                    new_count += 1
                     try:
                         session.add(igsn)
+                        self.tlast_record = igsn.oai_time
                         session.commit()
                     except sqlalchemy.exc.IntegrityError as e:
                         _L.warning("IGSN entry already exists: %s", str(igsn))
@@ -286,9 +296,12 @@ class Job(Base):
                     _L.debug("EXISTING")
             except Exception as e:
                 _L.error(e)
+            counter += 1
+            if counter % 10 == 0:
+                _L.info("%s (%s) / %s", new_count, counter, total_count)
         self.tend = igsn_lib.time.dtnow()
         session.commit()
-        return counter
+        return new_count, counter, total_count
 
 
 class Service(Base):
@@ -307,12 +320,10 @@ class Service(Base):
         d = {
             "id": self.id,
             "url": self.url,
-            "tearliest": None,
+            "tearliest": dtToJson(self.tearliest),
             "name": self.name,
             "admin_email": self.admin_email,
         }
-        if self.tearliest is not None:
-            d["tearliest"] = self.tearliest.strftime(igsn_lib.time.JSON_TIME_FORMAT)
         return d
 
     def populate(self, session=None, url=None):
@@ -339,10 +350,9 @@ class Service(Base):
         if session is not None:
             session.commit()
 
-    def listSets(self):
-        oai = igsn_lib.oai.getSickle(self.url)
-        return oai.ListSets()
-
+    def listSets(self, get_counts=False):
+        oai_svc = igsn_lib.oai.getSickle(self.url)
+        return igsn_lib.oai.listSets(oai_svc, get_counts=get_counts)
 
     def mostRecentRecordRetrieved(self, session):
         """

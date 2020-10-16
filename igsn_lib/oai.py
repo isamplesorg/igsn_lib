@@ -5,6 +5,7 @@ Methods in support of OAI-PMH harvesting of IGSN records.
 import logging
 import dateparser
 import sickle
+import sickle.oaiexceptions
 import xmltodict
 import igsn_lib
 import igsn_lib.time
@@ -18,8 +19,8 @@ IGSN_OAI_NAMESPACES = {
     "http://igsn.org/schema/kernel-v.1.0": "igsn",
     "http://schema.igsn.org/description/1.0": "igsn_desc",
 }
-'''Metadata namespaces commonly seen in IGSN OAI-PMH responses
-'''
+"""Metadata namespaces commonly seen in IGSN OAI-PMH responses
+"""
 
 
 def _getLogger():
@@ -52,6 +53,56 @@ def identify(url):
     svc = getSickle(url)
     response = svc.Identify()
     return response
+
+
+def recordCount(svc, ignore_deleted=False, setSpec=None, tfrom=None, tuntil=None):
+    L = _getLogger()
+    kwargs = {
+        "metadataPrefix": "igsn",
+        "set": setSpec,
+        "from": None,
+        "until": None,
+    }
+    kwargs["from"] = igsn_lib.time.datetimeFromSomething(tfrom).strftime(
+        igsn_lib.time.OAI_TIME_FORMAT
+    )
+    kwargs["until"] = igsn_lib.time.datetimeFromSomething(tuntil).strftime(
+        igsn_lib.time.OAI_TIME_FORMAT
+    )
+    count = 0
+    try:
+        response = svc.ListRecords(ignore_deleted=ignore_deleted, **kwargs)
+        count = int(response.resumption_token.complete_list_size)
+    except sickle.oaiexceptions.NoRecordsMatch as e:
+        L.info("No records for set %s @ %s - %s", setSpec, tfrom, tuntil)
+    return count
+
+
+def listSets(svc, get_counts=False):
+    """
+
+    Args:
+        svc:
+        get_counts:
+
+    Returns:
+
+    """
+    L = _getLogger()
+    result = []
+    response = svc.ListSets()
+    for s in response:
+        entry = {"setSpec": s.setSpec, "setName": s.setName, "count": None}
+        if get_counts:
+            kwargs = {"metadataPrefix": "igsn", "set": s.setSpec}
+            try:
+                lr_response = svc.ListRecords(ignore_deleted=False, **kwargs)
+                entry["count"] = int(lr_response.resumption_token.complete_list_size)
+            except sickle.oaiexceptions.NoRecordsMatch as e:
+                entry["count"] = 0
+            L.info("Count for set %s %s", s.setSpec, entry["count"])
+        result.append(entry)
+    return result
 
 
 def oaiRecordToDict(xml_string):

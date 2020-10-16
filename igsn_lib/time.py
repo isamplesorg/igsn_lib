@@ -24,6 +24,18 @@ def _getLogger():
     return logging.getLogger("igsn_lib.time")
 
 
+def datetimeFromSomething(V):
+    if isinstance(V, datetime.datetime):
+        return V
+    if isinstance(V, float):
+        return jdToDateTime(V)
+    if isinstance(V, str):
+        return dateparser.parse(
+            V, settings={"TIMEZONE": "+0000", "RETURN_AS_TIMEZONE_AWARE": True}
+        )
+    return None
+
+
 def datetimeToJD(dt):
     """
     Convert a python datetime to Julian date.
@@ -279,7 +291,7 @@ def jdToBCE(jd):
     atime = astropy.time.Time(jd, format="jd").jyear
     # 0000 = -1 BCE
     if atime <= 0:
-        atime = atime-1
+        atime = atime - 1
     return -atime
 
 
