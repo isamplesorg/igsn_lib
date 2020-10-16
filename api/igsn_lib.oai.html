@@ -222,8 +222,18 @@
 <tr class="row-even"><td><p><a class="reference internal" href="#igsn_lib.oai.identify" title="igsn_lib.oai.identify"><code class="xref py py-obj docutils literal notranslate"><span class="pre">identify</span></code></a>(url)</p></td>
 <td><p>Call the OAI-PMH Identify operation on the provided service URL.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.oai.oaiRecordToDict" title="igsn_lib.oai.oaiRecordToDict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">oaiRecordToDict</span></code></a>(xml_string)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.oai.listSets" title="igsn_lib.oai.listSets"><code class="xref py py-obj docutils literal notranslate"><span class="pre">listSets</span></code></a>(svc[, get_counts])</p></td>
+<td><p><dl class="field-list simple">
+<dt class="field-odd">param svc</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#igsn_lib.oai.oaiRecordToDict" title="igsn_lib.oai.oaiRecordToDict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">oaiRecordToDict</span></code></a>(xml_string)</p></td>
 <td><p>Converts an OAI-PMH IGSN metadata record to a dict</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.oai.recordCount" title="igsn_lib.oai.recordCount"><code class="xref py py-obj docutils literal notranslate"><span class="pre">recordCount</span></code></a>(svc[, ignore_deleted, setSpec, …])</p></td>
+<td><p></p></td>
 </tr>
 </tbody>
 </table>
@@ -261,6 +271,20 @@
 <dd class="field-even"><p>sickle.Identify object</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="igsn_lib.oai.listSets">
+<code class="sig-prename descclassname">igsn_lib.oai.</code><code class="sig-name descname">listSets</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">svc</span></em>, <em class="sig-param"><span class="n">get_counts</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/oai.html#listSets"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.oai.listSets" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>svc</strong> – </p></li>
+<li><p><strong>get_counts</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+<p>Returns:</p>
 </dd></dl>
 
 <dl class="py function">
@@ -358,6 +382,11 @@
 </div>
 </div>
 </dd></dl>
+
+<dl class="py function">
+<dt id="igsn_lib.oai.recordCount">
+<code class="sig-prename descclassname">igsn_lib.oai.</code><code class="sig-name descname">recordCount</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">svc</span></em>, <em class="sig-param"><span class="n">ignore_deleted</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">setSpec</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">tfrom</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">tuntil</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/oai.html#recordCount"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.oai.recordCount" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </div>
 

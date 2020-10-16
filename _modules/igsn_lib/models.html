@@ -186,6 +186,10 @@
 
 <span class="n">Base</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">declarative</span><span class="o">.</span><span class="n">declarative_base</span><span class="p">()</span>
 
+<div class="viewcode-block" id="dtToJson"><a class="viewcode-back" href="../../api/igsn_lib.models.html#igsn_lib.models.dtToJson">[docs]</a><span class="k">def</span> <span class="nf">dtToJson</span><span class="p">(</span><span class="n">dt</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">dt</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="n">dt</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">igsn_lib</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">JSON_TIME_FORMAT</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="IGSN"><a class="viewcode-back" href="../../api/igsn_lib.models.html#igsn_lib.models.IGSN">[docs]</a><span class="k">class</span> <span class="nc">IGSN</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -237,31 +241,23 @@
         <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">asJsonDict</span><span class="p">(),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
 <div class="viewcode-block" id="IGSN.asJsonDict"><a class="viewcode-back" href="../../api/igsn_lib.models.html#igsn_lib.models.IGSN.asJsonDict">[docs]</a>    <span class="k">def</span> <span class="nf">asJsonDict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
+        <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Provide a JSON serializable dict representation of instance.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            dict</span>
-<span class="sd">        &#39;&#39;&#39;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">d</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
             <span class="s2">&quot;oai_id&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">oai_id</span><span class="p">,</span>
             <span class="s2">&quot;service_id&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">service_id</span><span class="p">,</span>
-            <span class="s2">&quot;harvest_time&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="s2">&quot;oai_time&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="s2">&quot;igsn_time&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s2">&quot;harvest_time&quot;</span><span class="p">:</span> <span class="n">dtToJson</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">harvest_time</span><span class="p">),</span>
+            <span class="s2">&quot;oai_time&quot;</span><span class="p">:</span> <span class="n">dtToJson</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">oai_time</span><span class="p">),</span>
+            <span class="s2">&quot;igsn_time&quot;</span><span class="p">:</span> <span class="n">dtToJson</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">igsn_time</span><span class="p">),</span>
             <span class="s2">&quot;registrant&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">registrant</span><span class="p">,</span>
             <span class="s2">&quot;related&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">related</span><span class="p">,</span>
             <span class="s2">&quot;log&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="p">,</span>
         <span class="p">}</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">harvest_time</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">d</span><span class="p">[</span><span class="s2">&quot;harvest_time&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">harvest_time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span>
-                <span class="n">igsn_lib</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">JSON_TIME_FORMAT</span>
-            <span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">oai_time</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">d</span><span class="p">[</span><span class="s2">&quot;oai_time&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">oai_time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">igsn_lib</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">JSON_TIME_FORMAT</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">igsn_time</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">d</span><span class="p">[</span><span class="s2">&quot;igsn_time&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">igsn_time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">igsn_lib</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">JSON_TIME_FORMAT</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">d</span></div>
 
 <div class="viewcode-block" id="IGSN.fromOAIRecord"><a class="viewcode-back" href="../../api/igsn_lib.models.html#igsn_lib.models.IGSN.fromOAIRecord">[docs]</a>    <span class="k">def</span> <span class="nf">fromOAIRecord</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">record</span><span class="p">):</span>
@@ -321,9 +317,10 @@
 
 
 <div class="viewcode-block" id="Job"><a class="viewcode-back" href="../../api/igsn_lib.models.html#igsn_lib.models.Job">[docs]</a><span class="k">class</span> <span class="nc">Job</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
+    <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Describes an OAI-PMH  harvest job.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;job&quot;</span>
     <span class="nb">id</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">service_id</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span>
@@ -331,19 +328,32 @@
     <span class="p">)</span>
     <span class="n">service</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">orm</span><span class="o">.</span><span class="n">relationship</span><span class="p">(</span><span class="s2">&quot;Service&quot;</span><span class="p">,</span> <span class="n">back_populates</span><span class="o">=</span><span class="s2">&quot;jobs&quot;</span><span class="p">)</span>
     <span class="n">tstart</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span>
-        <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">DateTime</span><span class="p">(</span><span class="n">timezone</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;Time when the job was started.&quot;</span>
+        <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">DateTime</span><span class="p">(</span><span class="n">timezone</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+        <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;Time when the job was started.&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">tend</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span>
-        <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">DateTime</span><span class="p">(</span><span class="n">timezone</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;Time when the job was completed.&quot;</span>
+        <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">DateTime</span><span class="p">(</span><span class="n">timezone</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+        <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;Time when the job was completed.&quot;</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="n">ignore_deleted</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Boolean</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                                       <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;Ignore records flagged by the OAI-PMH provider as deleted.&quot;</span><span class="p">)</span>
-    <span class="n">metadata_prefix</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">sqlalchemy</span><span class="o">.</span><span class="n">String</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;igsn&quot;</span><span class="p">,</span>
-                                        <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;The metadata prefix to use when requesting records.&quot;</span><span class="p">)</span>
-    <span class="n">setspec</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">sqlalchemy</span><span class="o">.</span><span class="n">String</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                                <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;The OAI-PMH set to use when requesting records.&quot;</span><span class="p">)</span>
+    <span class="n">ignore_deleted</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span>
+        <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Boolean</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;Ignore records flagged by the OAI-PMH provider as deleted.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">metadata_prefix</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span>
+        <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">String</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;igsn&quot;</span><span class="p">,</span>
+        <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;The metadata prefix to use when requesting records.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">setspec</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span>
+        <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">String</span><span class="p">,</span>
+        <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;The OAI-PMH set to use when requesting records.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
     <span class="n">tfrom</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span>
         <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">DateTime</span><span class="p">(</span><span class="n">timezone</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
         <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -354,45 +364,32 @@
         <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;end of time range for this job, OAI time range boundaries are inclusive&quot;</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="n">resumption_token</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span>
-        <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">String</span><span class="p">,</span>
+    <span class="n">tlast_record</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span>
+        <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">DateTime</span><span class="p">(</span><span class="n">timezone</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
         <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-        <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;resume token to retrieve the next page form the provider&quot;</span><span class="p">,</span>
+        <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;Time stamp of last retrieved, comitted record. Resumption starts here.&quot;</span><span class="p">,</span>
     <span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">_getResumptionToken</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">resumption_token</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">tok</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">resumption_token</span><span class="p">)</span>
-            <span class="k">return</span> <span class="n">tok</span><span class="p">[</span><span class="s2">&quot;token&quot;</span><span class="p">]</span>
-        <span class="k">return</span> <span class="kc">None</span>
 
 <div class="viewcode-block" id="Job.asDict"><a class="viewcode-back" href="../../api/igsn_lib.models.html#igsn_lib.models.Job.asDict">[docs]</a>    <span class="k">def</span> <span class="nf">asDict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">d</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
-            <span class="s1">&#39;service_id&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">service_id</span><span class="p">,</span>
-            <span class="s1">&#39;tstart&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="s1">&#39;tend&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="s1">&#39;ignore_deleted&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">ignore_deleted</span><span class="p">,</span>
-            <span class="s1">&#39;metadata_prefix&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata_prefix</span><span class="p">,</span>
-            <span class="s1">&#39;setspec&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">setspec</span><span class="p">,</span>
-            <span class="s1">&#39;tfrom&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="s1">&#39;tuntil&#39;</span><span class="p">:</span> <span class="kc">None</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+            <span class="s2">&quot;service_id&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">service_id</span><span class="p">,</span>
+            <span class="s2">&quot;tstart&quot;</span><span class="p">:</span> <span class="n">dtToJson</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tstart</span><span class="p">),</span>
+            <span class="s2">&quot;tend&quot;</span><span class="p">:</span> <span class="n">dtToJson</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tend</span><span class="p">),</span>
+            <span class="s2">&quot;ignore_deleted&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">ignore_deleted</span><span class="p">,</span>
+            <span class="s2">&quot;metadata_prefix&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata_prefix</span><span class="p">,</span>
+            <span class="s2">&quot;setspec&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">setspec</span><span class="p">,</span>
+            <span class="s2">&quot;tfrom&quot;</span><span class="p">:</span> <span class="n">dtToJson</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tfrom</span><span class="p">),</span>
+            <span class="s2">&quot;tuntil&quot;</span><span class="p">:</span> <span class="n">dtToJson</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tuntil</span><span class="p">),</span>
+            <span class="s2">&quot;tlast_record&quot;</span><span class="p">:</span> <span class="n">dtToJson</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tlast_record</span><span class="p">),</span>
         <span class="p">}</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tstart</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">d</span><span class="p">[</span><span class="s1">&#39;tstart&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tstart</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">igsn_lib</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">JSON_TIME_FORMAT</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tend</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">d</span><span class="p">[</span><span class="s1">&#39;tend&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tend</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">igsn_lib</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">JSON_TIME_FORMAT</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tfrom</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">d</span><span class="p">[</span><span class="s1">&#39;tfrom&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tfrom</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">igsn_lib</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">JSON_TIME_FORMAT</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tuntil</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">d</span><span class="p">[</span><span class="s1">&#39;tuntil&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tuntil</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">igsn_lib</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">JSON_TIME_FORMAT</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">d</span></div>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">asDict</span><span class="p">(),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Job.execute"><a class="viewcode-back" href="../../api/igsn_lib.models.html#igsn_lib.models.Job.execute">[docs]</a>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
+<div class="viewcode-block" id="Job.execute"><a class="viewcode-back" href="../../api/igsn_lib.models.html#igsn_lib.models.Job.execute">[docs]</a>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">resume</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Execute this task, harvesting records until complete.</span>
 
 <span class="sd">        #TODO: implement support for resumption of interupted job</span>
@@ -400,10 +397,11 @@
 <span class="sd">        Args:</span>
 <span class="sd">            session: sqlalchemy session</span>
 <span class="sd">            callback: optional callback mutate record before committing</span>
+<span class="sd">            resume: If True, start retrieval from the last retrieved date</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            integer, number of records added</span>
-<span class="sd">        &#39;&#39;&#39;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">svc</span> <span class="o">=</span> <span class="n">igsn_lib</span><span class="o">.</span><span class="n">oai</span><span class="o">.</span><span class="n">getSickle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">service</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
         <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;metadataPrefix&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata_prefix</span><span class="p">}</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">setspec</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -412,8 +410,23 @@
             <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;from&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tfrom</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">igsn_lib</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">OAI_TIME_FORMAT</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tuntil</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;until&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tuntil</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">igsn_lib</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">OAI_TIME_FORMAT</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">resume</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">tlast_record</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tuntil</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tlast_record</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">tuntil</span><span class="p">:</span>
+                    <span class="n">_L</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
+                        <span class="s2">&quot;Start date (</span><span class="si">%s</span><span class="s2">) must be less than end date (</span><span class="si">%s</span><span class="s2">)&quot;</span><span class="p">,</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">tlast_record</span><span class="p">,</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">tuntil</span><span class="p">,</span>
+                    <span class="p">)</span>
+                    <span class="k">return</span> <span class="mi">0</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;from&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tlast_record</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">igsn_lib</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">OAI_TIME_FORMAT</span><span class="p">)</span>
+            <span class="n">_L</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Resuming harvest job from </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;from&quot;</span><span class="p">])</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">tstart</span> <span class="o">=</span> <span class="n">igsn_lib</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">dtnow</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tend</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">new_count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">total_count</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">records</span> <span class="o">=</span> <span class="n">svc</span><span class="o">.</span><span class="n">ListRecords</span><span class="p">(</span><span class="n">ignore_deleted</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ignore_deleted</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">except</span> <span class="n">sickle</span><span class="o">.</span><span class="n">oaiexceptions</span><span class="o">.</span><span class="n">NoRecordsMatch</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
@@ -422,16 +435,12 @@
             <span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
             <span class="k">return</span> <span class="n">counter</span>
         <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">records</span><span class="p">:</span>
-            <span class="n">restok</span> <span class="o">=</span> <span class="n">records</span><span class="o">.</span><span class="n">resumption_token</span><span class="o">.</span><span class="n">token</span>
-            <span class="k">if</span> <span class="n">restok</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getResumptionToken</span><span class="p">():</span>
-                <span class="n">rtok</span> <span class="o">=</span> <span class="p">{</span>
-                    <span class="s2">&quot;token&quot;</span><span class="p">:</span> <span class="n">records</span><span class="o">.</span><span class="n">resumption_token</span><span class="o">.</span><span class="n">token</span><span class="p">,</span>
-                    <span class="s2">&quot;cursor&quot;</span><span class="p">:</span> <span class="n">records</span><span class="o">.</span><span class="n">resumption_token</span><span class="o">.</span><span class="n">cursor</span><span class="p">,</span>
-                    <span class="s2">&quot;complete_list_size&quot;</span><span class="p">:</span> <span class="n">records</span><span class="o">.</span><span class="n">resumption_token</span><span class="o">.</span><span class="n">complete_list_size</span><span class="p">,</span>
-                    <span class="s2">&quot;expiration_date&quot;</span><span class="p">:</span> <span class="n">records</span><span class="o">.</span><span class="n">resumption_token</span><span class="o">.</span><span class="n">expiration_date</span><span class="p">,</span>
-                <span class="p">}</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">resumption_token</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">rtok</span><span class="p">)</span>
-                <span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">total_count</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">_L</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                    <span class="s2">&quot;OAI-PMH batch has </span><span class="si">%s</span><span class="s2"> records&quot;</span><span class="p">,</span>
+                    <span class="n">records</span><span class="o">.</span><span class="n">resumption_token</span><span class="o">.</span><span class="n">complete_list_size</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="n">total_count</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">records</span><span class="o">.</span><span class="n">resumption_token</span><span class="o">.</span><span class="n">complete_list_size</span><span class="p">)</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">igsn</span> <span class="o">=</span> <span class="n">IGSN</span><span class="p">(</span>
                     <span class="n">service_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">service_id</span><span class="p">,</span> <span class="n">harvest_time</span><span class="o">=</span><span class="n">igsn_lib</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">dtnow</span><span class="p">()</span>
@@ -443,9 +452,10 @@
                     <span class="n">_L</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;NEW&quot;</span><span class="p">)</span>
                     <span class="k">if</span> <span class="n">callback</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                         <span class="n">callback</span><span class="p">(</span><span class="n">record</span><span class="p">,</span> <span class="n">igsn</span><span class="p">)</span>
-                    <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="n">new_count</span> <span class="o">+=</span> <span class="mi">1</span>
                     <span class="k">try</span><span class="p">:</span>
                         <span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">igsn</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">tlast_record</span> <span class="o">=</span> <span class="n">igsn</span><span class="o">.</span><span class="n">oai_time</span>
                         <span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
                     <span class="k">except</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">exc</span><span class="o">.</span><span class="n">IntegrityError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
                         <span class="n">_L</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;IGSN entry already exists: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">igsn</span><span class="p">))</span>
@@ -453,9 +463,12 @@
                     <span class="n">_L</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;EXISTING&quot;</span><span class="p">)</span>
             <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
                 <span class="n">_L</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+            <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">counter</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">_L</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> (</span><span class="si">%s</span><span class="s2">) / </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">new_count</span><span class="p">,</span> <span class="n">counter</span><span class="p">,</span> <span class="n">total_count</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tend</span> <span class="o">=</span> <span class="n">igsn_lib</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">dtnow</span><span class="p">()</span>
         <span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">counter</span></div></div>
+        <span class="k">return</span> <span class="n">new_count</span><span class="p">,</span> <span class="n">counter</span><span class="p">,</span> <span class="n">total_count</span></div></div>
 
 
 <div class="viewcode-block" id="Service"><a class="viewcode-back" href="../../api/igsn_lib.models.html#igsn_lib.models.Service">[docs]</a><span class="k">class</span> <span class="nc">Service</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
@@ -474,12 +487,10 @@
         <span class="n">d</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
             <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">,</span>
-            <span class="s2">&quot;tearliest&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s2">&quot;tearliest&quot;</span><span class="p">:</span> <span class="n">dtToJson</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tearliest</span><span class="p">),</span>
             <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
             <span class="s2">&quot;admin_email&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">admin_email</span><span class="p">,</span>
         <span class="p">}</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tearliest</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">d</span><span class="p">[</span><span class="s2">&quot;tearliest&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tearliest</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">igsn_lib</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">JSON_TIME_FORMAT</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">d</span></div>
 
 <div class="viewcode-block" id="Service.populate"><a class="viewcode-back" href="../../api/igsn_lib.models.html#igsn_lib.models.Service.populate">[docs]</a>    <span class="k">def</span> <span class="nf">populate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -506,10 +517,9 @@
         <span class="k">if</span> <span class="n">session</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="Service.listSets"><a class="viewcode-back" href="../../api/igsn_lib.models.html#igsn_lib.models.Service.listSets">[docs]</a>    <span class="k">def</span> <span class="nf">listSets</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">oai</span> <span class="o">=</span> <span class="n">igsn_lib</span><span class="o">.</span><span class="n">oai</span><span class="o">.</span><span class="n">getSickle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">oai</span><span class="o">.</span><span class="n">ListSets</span><span class="p">()</span></div>
-
+<div class="viewcode-block" id="Service.listSets"><a class="viewcode-back" href="../../api/igsn_lib.models.html#igsn_lib.models.Service.listSets">[docs]</a>    <span class="k">def</span> <span class="nf">listSets</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">get_counts</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="n">oai_svc</span> <span class="o">=</span> <span class="n">igsn_lib</span><span class="o">.</span><span class="n">oai</span><span class="o">.</span><span class="n">getSickle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">igsn_lib</span><span class="o">.</span><span class="n">oai</span><span class="o">.</span><span class="n">listSets</span><span class="p">(</span><span class="n">oai_svc</span><span class="p">,</span> <span class="n">get_counts</span><span class="o">=</span><span class="n">get_counts</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Service.mostRecentRecordRetrieved"><a class="viewcode-back" href="../../api/igsn_lib.models.html#igsn_lib.models.Service.mostRecentRecordRetrieved">[docs]</a>    <span class="k">def</span> <span class="nf">mostRecentRecordRetrieved</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>

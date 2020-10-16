@@ -265,7 +265,7 @@ this page was last edited:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>It is now: 2459132.296272086
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>It is now: 2459139.240080113
 </pre></div>
 </div>
 </div>
@@ -335,37 +335,40 @@ determined to be 66.038 +- 0.025/0.049 Ma <a class="footnote-reference brackets"
 <tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.time.bceToJd" title="igsn_lib.time.bceToJd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bceToJd</span></code></a>(bce)</p></td>
 <td><p>Convert BCE date to Julian date, where 1 BCE = year 0000.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#igsn_lib.time.datetimeToJD" title="igsn_lib.time.datetimeToJD"><code class="xref py py-obj docutils literal notranslate"><span class="pre">datetimeToJD</span></code></a>(dt)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#igsn_lib.time.datetimeFromSomething" title="igsn_lib.time.datetimeFromSomething"><code class="xref py py-obj docutils literal notranslate"><span class="pre">datetimeFromSomething</span></code></a>(V)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.time.datetimeToJD" title="igsn_lib.time.datetimeToJD"><code class="xref py py-obj docutils literal notranslate"><span class="pre">datetimeToJD</span></code></a>(dt)</p></td>
 <td><p>Convert a python datetime to Julian date.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.time.dtnow" title="igsn_lib.time.dtnow"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dtnow</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#igsn_lib.time.dtnow" title="igsn_lib.time.dtnow"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dtnow</span></code></a>()</p></td>
 <td><p>Get datetime for now in UTC timezone.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#igsn_lib.time.jdFromString" title="igsn_lib.time.jdFromString"><code class="xref py py-obj docutils literal notranslate"><span class="pre">jdFromString</span></code></a>(tstr)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.time.jdFromString" title="igsn_lib.time.jdFromString"><code class="xref py py-obj docutils literal notranslate"><span class="pre">jdFromString</span></code></a>(tstr)</p></td>
 <td><p>Julian date from string representation of time.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.time.jdToBCE" title="igsn_lib.time.jdToBCE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">jdToBCE</span></code></a>(jd)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#igsn_lib.time.jdToBCE" title="igsn_lib.time.jdToBCE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">jdToBCE</span></code></a>(jd)</p></td>
 <td><p>Convert Julian date to BCE, where 1 BCE = year 0000.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#igsn_lib.time.jdToDateTime" title="igsn_lib.time.jdToDateTime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">jdToDateTime</span></code></a>(jd)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.time.jdToDateTime" title="igsn_lib.time.jdToDateTime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">jdToDateTime</span></code></a>(jd)</p></td>
 <td><p>Convert Julian date to datetime.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.time.jdToJsonString" title="igsn_lib.time.jdToJsonString"><code class="xref py py-obj docutils literal notranslate"><span class="pre">jdToJsonString</span></code></a>(jd)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#igsn_lib.time.jdToJsonString" title="igsn_lib.time.jdToJsonString"><code class="xref py py-obj docutils literal notranslate"><span class="pre">jdToJsonString</span></code></a>(jd)</p></td>
 <td><p>Convert Julian date to a JSON datetime string.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#igsn_lib.time.jdToMa" title="igsn_lib.time.jdToMa"><code class="xref py py-obj docutils literal notranslate"><span class="pre">jdToMa</span></code></a>(jd)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.time.jdToMa" title="igsn_lib.time.jdToMa"><code class="xref py py-obj docutils literal notranslate"><span class="pre">jdToMa</span></code></a>(jd)</p></td>
 <td><p>Convert Julian date to Ma (millions of years ago).</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.time.jdToOAIPMHString" title="igsn_lib.time.jdToOAIPMHString"><code class="xref py py-obj docutils literal notranslate"><span class="pre">jdToOAIPMHString</span></code></a>(jd)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#igsn_lib.time.jdToOAIPMHString" title="igsn_lib.time.jdToOAIPMHString"><code class="xref py py-obj docutils literal notranslate"><span class="pre">jdToOAIPMHString</span></code></a>(jd)</p></td>
 <td><p>Convert Julian date to an OAI-PMH acceptable datetime string.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#igsn_lib.time.jdToString" title="igsn_lib.time.jdToString"><code class="xref py py-obj docutils literal notranslate"><span class="pre">jdToString</span></code></a>(jd, format_str)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.time.jdToString" title="igsn_lib.time.jdToString"><code class="xref py py-obj docutils literal notranslate"><span class="pre">jdToString</span></code></a>(jd, format_str)</p></td>
 <td><p>Convert Julian date to a string representation</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.time.jdnow" title="igsn_lib.time.jdnow"><code class="xref py py-obj docutils literal notranslate"><span class="pre">jdnow</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#igsn_lib.time.jdnow" title="igsn_lib.time.jdnow"><code class="xref py py-obj docutils literal notranslate"><span class="pre">jdnow</span></code></a>()</p></td>
 <td><p>Current Julian date.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#igsn_lib.time.maToJd" title="igsn_lib.time.maToJd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">maToJd</span></code></a>(Ma)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.time.maToJd" title="igsn_lib.time.maToJd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">maToJd</span></code></a>(Ma)</p></td>
 <td><p>Convert Ma (millions of years ago) to Julian date.</p></td>
 </tr>
 </tbody>
@@ -414,6 +417,11 @@ determined to be 66.038 +- 0.025/0.049 Ma <a class="footnote-reference brackets"
 </dd></dl>
 
 <dl class="py function">
+<dt id="igsn_lib.time.datetimeFromSomething">
+<code class="sig-prename descclassname">igsn_lib.time.</code><code class="sig-name descname">datetimeFromSomething</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">V</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/time.html#datetimeFromSomething"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.time.datetimeFromSomething" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
 <dt id="igsn_lib.time.datetimeToJD">
 <code class="sig-prename descclassname">igsn_lib.time.</code><code class="sig-name descname">datetimeToJD</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dt</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/time.html#datetimeToJD"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.time.datetimeToJD" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a python datetime to Julian date.</p>
@@ -439,8 +447,8 @@ determined to be 66.038 +- 0.025/0.049 Ma <a class="footnote-reference brackets"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2020-10-09 19:06:38.231995+00:00
-2459132.296275833
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2020-10-16 17:45:43.263525+00:00
+2459139.2400840684
 </pre></div>
 </div>
 </div>
@@ -465,7 +473,7 @@ determined to be 66.038 +- 0.025/0.049 Ma <a class="footnote-reference brackets"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2020-10-09 19:06:38.239104+00:00
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2020-10-16 17:45:43.271546+00:00
 </pre></div>
 </div>
 </div>
@@ -498,8 +506,8 @@ determined to be 66.038 +- 0.025/0.049 Ma <a class="footnote-reference brackets"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2459132.2962762653
-2422607.296276303
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2459139.2400845424
+2422614.2400845876
 2459077.3958333335
 </pre></div>
 </div>
@@ -702,7 +710,7 @@ an exception, and this method will return None.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2459132.2962769843
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2459139.2400854207
 </pre></div>
 </div>
 </div>

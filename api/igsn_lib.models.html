@@ -243,7 +243,10 @@
 <tr class="row-even"><td><p><a class="reference internal" href="#igsn_lib.models.createAll" title="igsn_lib.models.createAll"><code class="xref py py-obj docutils literal notranslate"><span class="pre">createAll</span></code></a>(engine)</p></td>
 <td><p>Create the database tables etc if not aleady present.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.models.getOrCreate" title="igsn_lib.models.getOrCreate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getOrCreate</span></code></a>(session, model[, create_method, …])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.models.dtToJson" title="igsn_lib.models.dtToJson"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dtToJson</span></code></a>(dt)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#igsn_lib.models.getOrCreate" title="igsn_lib.models.getOrCreate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getOrCreate</span></code></a>(session, model[, create_method, …])</p></td>
 <td><p>Get or create and get a record.</p></td>
 </tr>
 </tbody>
@@ -406,7 +409,7 @@
 
 <dl class="py method">
 <dt id="igsn_lib.models.Job.execute">
-<code class="sig-name descname">execute</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">session</span></em>, <em class="sig-param"><span class="n">callback</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/models.html#Job.execute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.models.Job.execute" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">execute</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">session</span></em>, <em class="sig-param"><span class="n">callback</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">resume</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/models.html#Job.execute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.models.Job.execute" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute this task, harvesting records until complete.</p>
 <p>#TODO: implement support for resumption of interupted job</p>
 <dl class="field-list simple">
@@ -414,6 +417,7 @@
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>session</strong> – sqlalchemy session</p></li>
 <li><p><strong>callback</strong> – optional callback mutate record before committing</p></li>
+<li><p><strong>resume</strong> – If True, start retrieval from the last retrieved date</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -437,12 +441,6 @@
 <dt id="igsn_lib.models.Job.metadata_prefix">
 <code class="sig-name descname">metadata_prefix</code><a class="headerlink" href="#igsn_lib.models.Job.metadata_prefix" title="Permalink to this definition">¶</a></dt>
 <dd><p>The metadata prefix to use when requesting records.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="igsn_lib.models.Job.resumption_token">
-<code class="sig-name descname">resumption_token</code><a class="headerlink" href="#igsn_lib.models.Job.resumption_token" title="Permalink to this definition">¶</a></dt>
-<dd><p>resume token to retrieve the next page form the provider</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -471,6 +469,12 @@
 <dt id="igsn_lib.models.Job.tfrom">
 <code class="sig-name descname">tfrom</code><a class="headerlink" href="#igsn_lib.models.Job.tfrom" title="Permalink to this definition">¶</a></dt>
 <dd><p>start of time range for this job, OAI time range boundaries are inclusive</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="igsn_lib.models.Job.tlast_record">
+<code class="sig-name descname">tlast_record</code><a class="headerlink" href="#igsn_lib.models.Job.tlast_record" title="Permalink to this definition">¶</a></dt>
+<dd><p>Time stamp of last retrieved, comitted record. Resumption starts here.</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -536,7 +540,7 @@
 
 <dl class="py method">
 <dt id="igsn_lib.models.Service.listSets">
-<code class="sig-name descname">listSets</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/models.html#Service.listSets"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.models.Service.listSets" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">listSets</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">get_counts</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/models.html#Service.listSets"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.models.Service.listSets" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -620,6 +624,11 @@
 </dd>
 </dl>
 </dd></dl>
+
+<dl class="py function">
+<dt id="igsn_lib.models.dtToJson">
+<code class="sig-prename descclassname">igsn_lib.models.</code><code class="sig-name descname">dtToJson</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dt</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/models.html#dtToJson"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.models.dtToJson" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py function">
 <dt id="igsn_lib.models.getOrCreate">
