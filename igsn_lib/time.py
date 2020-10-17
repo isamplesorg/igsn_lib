@@ -25,6 +25,8 @@ def _getLogger():
 
 
 def datetimeFromSomething(V):
+    if V is None:
+        return None
     if isinstance(V, datetime.datetime):
         return V
     if isinstance(V, float):

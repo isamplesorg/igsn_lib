@@ -3,6 +3,7 @@ Methods in support of OAI-PMH harvesting of IGSN records.
 """
 
 import logging
+import concurrent.futures
 import dateparser
 import sickle
 import sickle.oaiexceptions
@@ -22,6 +23,10 @@ IGSN_OAI_NAMESPACES = {
 """Metadata namespaces commonly seen in IGSN OAI-PMH responses
 """
 
+DEFAULT_METADATA_PREFIX = "igsn"
+DEFAULT_THREAD_COUNT = 10
+DEFAULT_ENCODING = "utf-8"
+
 
 def _getLogger():
     return logging.getLogger("igsn_lib.oai")
@@ -37,7 +42,7 @@ def getSickle(url):
     Returns:
         sickle.Sickle instance
     """
-    return sickle.Sickle(url, encoding="utf-8")
+    return sickle.Sickle(url, encoding=DEFAULT_ENCODING)
 
 
 def identify(url):
@@ -45,71 +50,151 @@ def identify(url):
     Call the OAI-PMH Identify operation on the provided service URL.
 
     Args:
-        url: OAI-PMH service URL
+        url (str): OAI-PMH service URL
 
     Returns:
         sickle.Identify object
+
+    Examples:
+        .. jupyter-execute::
+
+           import igsn_lib.oai
+           import xmltodict
+           import json
+
+           url = "https://doidb.wdc-terra.org/igsnoaip/oai"
+           res = igsn_lib.oai.identify(url)
+           res_dict = xmltodict.parse(
+             res.raw,
+             process_namespaces=True,
+             namespaces=igsn_lib.oai.IGSN_OAI_NAMESPACES
+           )
+           print(json.dumps(res_dict, indent=2))
     """
     svc = getSickle(url)
     response = svc.Identify()
     return response
 
 
-def recordCount(svc, ignore_deleted=False, setSpec=None, tfrom=None, tuntil=None):
+def recordCount(
+    svc,
+    metadata_prefix=DEFAULT_METADATA_PREFIX,
+    ignore_deleted=False,
+    set_spec=None,
+    tfrom=None,
+    tuntil=None,
+):
+    """
+    Determine the number of records that match an OAI-PMH ListRecords request.
+
+    Args:
+        svc (Sickle): Initialized instance of Sickle
+        metadata_prefix (str): Metadata prefix to use (igsn)
+        ignore_deleted (bool): Ignore deleted records in the request
+        setSpec (str): Optional set name to limit records
+        tfrom (str or datetime): Optional representation of time for the earliest record (inclusive)
+        tuntil (str or datetime): Optional representation of time for the latest record (inclusive)
+
+    Returns:
+        int: Number of records matching the specified subset.
+
+    Examples:
+
+        .. jupyter-execute::
+
+           import igsn_lib.oai
+
+           svc_url = "https://doidb.wdc-terra.org/igsnoaip/oai"
+           svc = igsn_lib.oai.getSickle(svc_url)
+           count = igsn_lib.oai.recordCount(
+             svc,
+             set_spec='IEDA',
+             tfrom='2020-01-01',
+             tuntil='2020-02-01'
+           )
+           print(f"Matching records = {count}")
+
+    """
     L = _getLogger()
     kwargs = {
-        "metadataPrefix": "igsn",
-        "set": setSpec,
+        "metadataPrefix": metadata_prefix,
+        "set": set_spec,
         "from": None,
         "until": None,
     }
-    kwargs["from"] = igsn_lib.time.datetimeFromSomething(tfrom).strftime(
-        igsn_lib.time.OAI_TIME_FORMAT
-    )
-    kwargs["until"] = igsn_lib.time.datetimeFromSomething(tuntil).strftime(
-        igsn_lib.time.OAI_TIME_FORMAT
-    )
+    try:
+        kwargs["from"] = igsn_lib.time.datetimeFromSomething(tfrom).strftime(
+            igsn_lib.time.OAI_TIME_FORMAT
+        )
+    except:
+        pass
+    try:
+        kwargs["until"] = igsn_lib.time.datetimeFromSomething(tuntil).strftime(
+            igsn_lib.time.OAI_TIME_FORMAT
+        )
+    except:
+        pass
     count = 0
     try:
         response = svc.ListRecords(ignore_deleted=ignore_deleted, **kwargs)
         count = int(response.resumption_token.complete_list_size)
     except sickle.oaiexceptions.NoRecordsMatch as e:
-        L.info("No records for set %s @ %s - %s", setSpec, tfrom, tuntil)
+        L.info("No records for set %s @ %s - %s", set_spec, tfrom, tuntil)
     return count
 
 
 def listSets(svc, get_counts=False):
     """
+    List the sets reported by an OAI-PMH service.
 
     Args:
-        svc:
-        get_counts:
+        svc (Sickle): Initialized instance of Sickle
+        get_counts (boolean): Return record counts with set
 
     Returns:
+        list: list of ``{setSpec:, setName:, count:}``
 
+    Examples:
+        .. jupyter-execute::
+
+           import igsn_lib.oai
+
+           svc_url = "https://doidb.wdc-terra.org/igsnoaip/oai"
+           svc = igsn_lib.oai.getSickle(svc_url)
+           sets = igsn_lib.oai.listSets(svc, get_counts=True)
+           for s in sets:
+             print(f"{s['count']:10} {s['setSpec']}: {s['setName']}")
     """
+
+    def _doCount(_svc, _entry):
+        _entry["count"] = recordCount(_svc, set_spec=_entry["setSpec"])
+        return _entry
+
     L = _getLogger()
     result = []
     response = svc.ListSets()
     for s in response:
         entry = {"setSpec": s.setSpec, "setName": s.setName, "count": None}
-        if get_counts:
-            kwargs = {"metadataPrefix": "igsn", "set": s.setSpec}
-            try:
-                lr_response = svc.ListRecords(ignore_deleted=False, **kwargs)
-                entry["count"] = int(lr_response.resumption_token.complete_list_size)
-            except sickle.oaiexceptions.NoRecordsMatch as e:
-                entry["count"] = 0
-            L.info("Count for set %s %s", s.setSpec, entry["count"])
         result.append(entry)
-    return result
+    if not get_counts:
+        return
+    count_result = []
+    with concurrent.futures.ThreadPoolExecutor(
+        max_workers=DEFAULT_THREAD_COUNT
+    ) as executor:
+        futures = []
+        for entry in result:
+            futures.append(executor.submit(_doCount, svc, entry))
+        for future in concurrent.futures.as_completed(futures):
+            count_result.append(future.result())
+    return count_result
 
 
 def oaiRecordToDict(xml_string):
     '''
     Converts an OAI-PMH IGSN metadata record to a dict
 
-    The IGSN schema is at https://doidb.wdc-terra.org//igsn/schemas/igsn.org/schema/1.0/igsn.xsd
+    The IGSN schema is at https://doidb.wdc-terra.org/igsn/schemas/igsn.org/schema/1.0/igsn.xsd
 
     Times are returned as timezone aware python datetime, TZ=UTC.
 
@@ -160,6 +245,7 @@ def oaiRecordToDict(xml_string):
         "registrant": None,  # registrant name
         "oai_time": None,  # time stamp on the OAI record
         "igsn_time": None,  # submitted or registered time in the log
+        "set_spec": [], # list of setSpec entries for record
         "log": [],  # list of log entries
         "related": [],  # list of related identifiers
         "_source": {},
@@ -181,6 +267,7 @@ def oaiRecordToDict(xml_string):
     igsn_id = _sample["igsn:sampleNumber"]["#text"]
     data["igsn_id"] = igsn_lib.normalize(igsn_id)
     data["registrant"] = _sample["igsn:registrant"]["igsn:registrantName"]
+    data["set_spec"] = data["_source"]["oai:record"]["oai:header"]["oai:setSpec"]
     # log 'events':
     #   https://doidb.wdc-terra.org//igsn/schemas/igsn.org/schema/1.0/include/igsn-eventType-v1.0.xsd
     igsn_log = _sample["igsn:log"]["igsn:logElement"]
