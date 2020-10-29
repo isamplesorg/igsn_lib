@@ -140,7 +140,7 @@ class Identifier(Base):
                   </metadata>
                 </record>
                """
-               record = igsn_lib.models.IGSN()
+               record = igsn_lib.models.Identifier()
                record.fromOAIRecord(xml)
                print(record)
 

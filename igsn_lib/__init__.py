@@ -163,19 +163,22 @@ def resolve(igsn_value, include_body=False, headers=None):
 
     Args:
         igsn_value: pre-normalized IGSN string
+        include_body: (bool) If True then return response body, otherwise only HEAD request is made
+        headers: (dict) Optional headers to send in request
 
     Returns:
-        requests.Response
+        list of requests.Response objects
 
     Examples:
 
         .. jupyter-execute::
 
+           import pprint
            import json
            import igsn_lib
 
-           res = igsn_lib.resolve('PRR047915')
-           print(json.dumps(res.json(), indent=2))
+           res = igsn_lib.resolve('PRR047915', include_body=True)
+           print(json.dumps(res[-1].json(), indent=2))
     """
     _L = logging.getLogger("igsn_lib")
     rheaders = DEFAULT_RESOLVE_HEADERS.copy()
