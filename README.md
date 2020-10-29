@@ -21,4 +21,3 @@ poetry install
 ```
 
 This library is developed under the [iSamples project](https://isamples.org/).
-
