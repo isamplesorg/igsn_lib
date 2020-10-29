@@ -34,5 +34,6 @@ def test_normalize(igsn_str, expected):
 
 @pytest.mark.parametrize("igsn_val,status_code", igsn_resolve_values)
 def test_resolve(igsn_val, status_code):
-    response = igsn_lib.resolve(igsn_val)
-    assert response.status_code == status_code
+    responses = igsn_lib.resolve(igsn_val)
+    last_response = responses[-1]
+    assert last_response.status_code == status_code
