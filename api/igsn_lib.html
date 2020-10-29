@@ -116,6 +116,11 @@
    </li>
   </ul>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notes/igsn_counts.html">
+   2. Counting Registered IGSNs
+  </a>
+ </li>
 </ul>
 
 </nav>
@@ -220,11 +225,11 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.normalize" title="igsn_lib.normalize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">normalize</span></code></a>(igsn_str)</p></td>
 <td><p>Return the value part of an IGSN.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#igsn_lib.resolve" title="igsn_lib.resolve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">resolve</span></code></a>(igsn_value[, headers])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#igsn_lib.resolve" title="igsn_lib.resolve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">resolve</span></code></a>(igsn_value[, include_body, headers])</p></td>
 <td><p>Resolve an IGSN value</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.resolveN2T" title="igsn_lib.resolveN2T"><code class="xref py py-obj docutils literal notranslate"><span class="pre">resolveN2T</span></code></a>(identifier[, headers, callback])</p></td>
-<td><p></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.resolveN2T" title="igsn_lib.resolveN2T"><code class="xref py py-obj docutils literal notranslate"><span class="pre">resolveN2T</span></code></a>(identifier[, include_body, …])</p></td>
+<td><p>Use N2T to resolve the identifier</p></td>
 </tr>
 </tbody>
 </table>
@@ -232,7 +237,7 @@
 <span class="target" id="module-igsn_lib"></span><p>Utility methods for working with IGSNs and dates.</p>
 <dl class="py data">
 <dt id="igsn_lib.DEFAULT_RESOLVE_HEADERS">
-<code class="sig-prename descclassname">igsn_lib.</code><code class="sig-name descname">DEFAULT_RESOLVE_HEADERS</code><em class="property"> = {'Accept': 'application/json, application/ld+json;q=0.9, text/json;q=0.8; text/xml;q=0.7, text/html;q=0.5', 'User-Agent': 'igsn_lib/0.1.0'}</em><a class="headerlink" href="#igsn_lib.DEFAULT_RESOLVE_HEADERS" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">igsn_lib.</code><code class="sig-name descname">DEFAULT_RESOLVE_HEADERS</code><em class="property"> = {'Accept': 'application/json, application/ld+json;q=0.9, text/json;q=0.8; text/xml;q=0.7, text/html;q=0.5', 'Accept-Language': 'en-US, en;q=0.9', 'User-Agent': 'igsn_lib/0.1.0'}</em><a class="headerlink" href="#igsn_lib.DEFAULT_RESOLVE_HEADERS" title="Permalink to this definition">¶</a></dt>
 <dd><p>Default headers for talking to the resolver</p>
 </dd></dl>
 
@@ -303,25 +308,30 @@ None
 
 <dl class="py function">
 <dt id="igsn_lib.resolve">
-<code class="sig-prename descclassname">igsn_lib.</code><code class="sig-name descname">resolve</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">igsn_value</span></em>, <em class="sig-param"><span class="n">headers</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib.html#resolve"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.resolve" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">igsn_lib.</code><code class="sig-name descname">resolve</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">igsn_value</span></em>, <em class="sig-param"><span class="n">include_body</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">headers</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib.html#resolve"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.resolve" title="Permalink to this definition">¶</a></dt>
 <dd><p>Resolve an IGSN value</p>
 <p>#TODO: add support for link headers</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>igsn_value</strong> – pre-normalized IGSN string</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>igsn_value</strong> – pre-normalized IGSN string</p></li>
+<li><p><strong>include_body</strong> – (bool) If True then return response body, otherwise only HEAD request is made</p></li>
+<li><p><strong>headers</strong> – (dict) Optional headers to send in request</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>requests.Response</p>
+<dd class="field-even"><p>list of requests.Response objects</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pprint</span>
+<span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">igsn_lib</span>
 
-<span class="n">res</span> <span class="o">=</span> <span class="n">igsn_lib</span><span class="o">.</span><span class="n">resolve</span><span class="p">(</span><span class="s1">&#39;PRR047915&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">json</span><span class="p">(),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">igsn_lib</span><span class="o">.</span><span class="n">resolve</span><span class="p">(</span><span class="s1">&#39;PRR047915&#39;</span><span class="p">,</span> <span class="n">include_body</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">json</span><span class="p">(),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -358,8 +368,20 @@ None
 
 <dl class="py function">
 <dt id="igsn_lib.resolveN2T">
-<code class="sig-prename descclassname">igsn_lib.</code><code class="sig-name descname">resolveN2T</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">identifier</span></em>, <em class="sig-param"><span class="n">headers</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">callback</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib.html#resolveN2T"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.resolveN2T" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-prename descclassname">igsn_lib.</code><code class="sig-name descname">resolveN2T</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">identifier</span></em>, <em class="sig-param"><span class="n">include_body</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">headers</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">callback</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib.html#resolveN2T"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.resolveN2T" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use N2T to resolve the identifier</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>identifier</strong> – pre-normalized IGSN string</p></li>
+<li><p><strong>include_body</strong> – (bool) If True then return response body, otherwise only HEAD request is made</p></li>
+<li><p><strong>headers</strong> – (dict) Optional headers to send in request</p></li>
+<li><p><strong>callback</strong> – (method) Optional method to call after completion of each step of the resolve chain</p></li>
+</ul>
+</dd>
+</dl>
+<p>Returns:</p>
+</dd></dl>
 
 </div>
 

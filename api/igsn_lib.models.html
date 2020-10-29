@@ -116,6 +116,11 @@
    </li>
   </ul>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notes/igsn_counts.html">
+   2. Counting Registered IGSNs
+  </a>
+ </li>
 </ul>
 
 </nav>
@@ -220,7 +225,7 @@
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Base</span></code>(**kwargs)</p></td>
 <td><p>The base class of the class hierarchy.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#igsn_lib.models.IGSN" title="igsn_lib.models.IGSN"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IGSN</span></code></a>(**kwargs)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#igsn_lib.models.Identifier" title="igsn_lib.models.Identifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Identifier</span></code></a>(**kwargs)</p></td>
 <td><p>Defines a minimal IGSN record to capture information provided from an OAI-PMH endpoint.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.models.Job" title="igsn_lib.models.Job"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Job</span></code></a>(**kwargs)</p></td>
@@ -244,10 +249,7 @@
 <tr class="row-even"><td><p><a class="reference internal" href="#igsn_lib.models.createAll" title="igsn_lib.models.createAll"><code class="xref py py-obj docutils literal notranslate"><span class="pre">createAll</span></code></a>(engine)</p></td>
 <td><p>Create the database tables etc if not aleady present.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.models.dtToJson" title="igsn_lib.models.dtToJson"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dtToJson</span></code></a>(dt)</p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#igsn_lib.models.getOrCreate" title="igsn_lib.models.getOrCreate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getOrCreate</span></code></a>(session, model[, create_method, …])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.models.getOrCreate" title="igsn_lib.models.getOrCreate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getOrCreate</span></code></a>(session, model[, create_method, …])</p></td>
 <td><p>Get or create and get a record.</p></td>
 </tr>
 </tbody>
@@ -256,12 +258,12 @@
 <span class="target" id="module-igsn_lib.models"></span><p>Basic SQL database interface for minimal IGSN metadata.</p>
 <p>All dates are stored in UTC.</p>
 <dl class="py class">
-<dt id="igsn_lib.models.IGSN">
-<em class="property">class </em><code class="sig-prename descclassname">igsn_lib.models.</code><code class="sig-name descname">IGSN</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/models.html#IGSN"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.models.IGSN" title="Permalink to this definition">¶</a></dt>
+<dt id="igsn_lib.models.Identifier">
+<em class="property">class </em><code class="sig-prename descclassname">igsn_lib.models.</code><code class="sig-name descname">Identifier</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/models.html#Identifier"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.models.Identifier" title="Permalink to this definition">¶</a></dt>
 <dd><p>Defines a minimal IGSN record to capture information provided from an OAI-PMH endpoint.</p>
 <dl class="py method">
-<dt id="igsn_lib.models.IGSN.asJsonDict">
-<code class="sig-name descname">asJsonDict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/models.html#IGSN.asJsonDict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.models.IGSN.asJsonDict" title="Permalink to this definition">¶</a></dt>
+<dt id="igsn_lib.models.Identifier.asJsonDict">
+<code class="sig-name descname">asJsonDict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/models.html#Identifier.asJsonDict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.models.Identifier.asJsonDict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Provide a JSON serializable dict representation of instance.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -271,8 +273,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="igsn_lib.models.IGSN.fromOAIRecord">
-<code class="sig-name descname">fromOAIRecord</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">record</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/models.html#IGSN.fromOAIRecord"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.models.IGSN.fromOAIRecord" title="Permalink to this definition">¶</a></dt>
+<dt id="igsn_lib.models.Identifier.fromOAIRecord">
+<code class="sig-name descname">fromOAIRecord</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">record</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/models.html#Identifier.fromOAIRecord"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.models.Identifier.fromOAIRecord" title="Permalink to this definition">¶</a></dt>
 <dd><p>Populates self from an OAI-PMH IGSN XML string</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -310,7 +312,7 @@
 <span class="s2">   &lt;/metadata&gt;</span>
 <span class="s2"> &lt;/record&gt;</span>
 <span class="s2">&quot;&quot;&quot;</span>
-<span class="n">record</span> <span class="o">=</span> <span class="n">igsn_lib</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">IGSN</span><span class="p">()</span>
+<span class="n">record</span> <span class="o">=</span> <span class="n">igsn_lib</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">Identifier</span><span class="p">()</span>
 <span class="n">record</span><span class="o">.</span><span class="n">fromOAIRecord</span><span class="p">(</span><span class="n">xml</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">record</span><span class="p">)</span>
 </pre></div>
@@ -319,11 +321,11 @@
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>{
   &quot;id&quot;: &quot;BSU0005JF&quot;,
-  &quot;oai_id&quot;: &quot;oai:registry.igsn.org:6940929&quot;,
+  &quot;provider_id&quot;: &quot;oai:registry.igsn.org:6940929&quot;,
   &quot;service_id&quot;: null,
   &quot;harvest_time&quot;: null,
-  &quot;oai_time&quot;: &quot;2019-10-15T06:00:10+0000&quot;,
-  &quot;igsn_time&quot;: &quot;2019-10-15T04:00:09+0000&quot;,
+  &quot;provider_time&quot;: &quot;2019-10-15T06:00:10+0000&quot;,
+  &quot;id_time&quot;: &quot;2019-10-15T04:00:09+0000&quot;,
   &quot;registrant&quot;: &quot;IEDA&quot;,
   &quot;related&quot;: null,
   &quot;log&quot;: [
@@ -331,6 +333,10 @@
       &quot;event&quot;: &quot;submitted&quot;,
       &quot;time&quot;: &quot;2019-10-15T04:00:09+0000&quot;
     }
+  ],
+  &quot;sets&quot;: [
+    &quot;IEDA&quot;,
+    &quot;IEDA.SESAR&quot;
   ]
 }
 </pre></div>
@@ -340,62 +346,73 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="igsn_lib.models.IGSN.harvest_time">
-<code class="sig-name descname">harvest_time</code><a class="headerlink" href="#igsn_lib.models.IGSN.harvest_time" title="Permalink to this definition">¶</a></dt>
+<dt id="igsn_lib.models.Identifier.harvest_time">
+<code class="sig-name descname">harvest_time</code><a class="headerlink" href="#igsn_lib.models.Identifier.harvest_time" title="Permalink to this definition">¶</a></dt>
 <dd><p>When the record was harvested, UTC datetime</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="igsn_lib.models.IGSN.id">
-<code class="sig-name descname">id</code><a class="headerlink" href="#igsn_lib.models.IGSN.id" title="Permalink to this definition">¶</a></dt>
-<dd><p>id is the IGSN value, must be unique in the datastore</p>
+<dt id="igsn_lib.models.Identifier.id">
+<code class="sig-name descname">id</code><a class="headerlink" href="#igsn_lib.models.Identifier.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>value, must be unique in the datastore</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>id is the identifier scheme</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="igsn_lib.models.IGSN.igsn_time">
-<code class="sig-name descname">igsn_time</code><a class="headerlink" href="#igsn_lib.models.IGSN.igsn_time" title="Permalink to this definition">¶</a></dt>
-<dd><p>time reported in the IGSN record submitted or registered log event,UTC datetime</p>
+<dt id="igsn_lib.models.Identifier.id_time">
+<code class="sig-name descname">id_time</code><a class="headerlink" href="#igsn_lib.models.Identifier.id_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Time reported in the record submitted or registered log event, UTC datetime</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="igsn_lib.models.IGSN.log">
-<code class="sig-name descname">log</code><a class="headerlink" href="#igsn_lib.models.IGSN.log" title="Permalink to this definition">¶</a></dt>
-<dd><p>log entries in IGSN record</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="igsn_lib.models.IGSN.oai_id">
-<code class="sig-name descname">oai_id</code><a class="headerlink" href="#igsn_lib.models.IGSN.oai_id" title="Permalink to this definition">¶</a></dt>
-<dd><p>The OAI-PMH record id.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="igsn_lib.models.IGSN.oai_time">
-<code class="sig-name descname">oai_time</code><a class="headerlink" href="#igsn_lib.models.IGSN.oai_time" title="Permalink to this definition">¶</a></dt>
-<dd><p>Timestamp reported for OAI-PMH record, UTC datetime</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="igsn_lib.models.IGSN.record">
-<code class="sig-name descname">record</code><a class="headerlink" href="#igsn_lib.models.IGSN.record" title="Permalink to this definition">¶</a></dt>
+<dt id="igsn_lib.models.Identifier.identifier">
+<code class="sig-name descname">identifier</code><a class="headerlink" href="#igsn_lib.models.Identifier.identifier" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt id="igsn_lib.models.IGSN.registrant">
-<code class="sig-name descname">registrant</code><a class="headerlink" href="#igsn_lib.models.IGSN.registrant" title="Permalink to this definition">¶</a></dt>
-<dd><p>registrant name reported in the IGSN record</p>
+<dt id="igsn_lib.models.Identifier.log">
+<code class="sig-name descname">log</code><a class="headerlink" href="#igsn_lib.models.Identifier.log" title="Permalink to this definition">¶</a></dt>
+<dd><p>log entries in source record</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="igsn_lib.models.IGSN.related">
-<code class="sig-name descname">related</code><a class="headerlink" href="#igsn_lib.models.IGSN.related" title="Permalink to this definition">¶</a></dt>
-<dd><p>related identifiers in the IGSN record</p>
+<dt id="igsn_lib.models.Identifier.provider_id">
+<code class="sig-name descname">provider_id</code><a class="headerlink" href="#igsn_lib.models.Identifier.provider_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>The provider internal id, e.g. OAI-PMH record id.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="igsn_lib.models.IGSN.service_id">
-<code class="sig-name descname">service_id</code><a class="headerlink" href="#igsn_lib.models.IGSN.service_id" title="Permalink to this definition">¶</a></dt>
+<dt id="igsn_lib.models.Identifier.provider_time">
+<code class="sig-name descname">provider_time</code><a class="headerlink" href="#igsn_lib.models.Identifier.provider_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Timestamp reported for identifier provider entry if available, UTC datetime</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="igsn_lib.models.Identifier.registrant">
+<code class="sig-name descname">registrant</code><a class="headerlink" href="#igsn_lib.models.Identifier.registrant" title="Permalink to this definition">¶</a></dt>
+<dd><p>Registrant name reported in the source record</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="igsn_lib.models.Identifier.related">
+<code class="sig-name descname">related</code><a class="headerlink" href="#igsn_lib.models.Identifier.related" title="Permalink to this definition">¶</a></dt>
+<dd><p>Related identifiers reported in the source record</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="igsn_lib.models.Identifier.service_id">
+<code class="sig-name descname">service_id</code><a class="headerlink" href="#igsn_lib.models.Identifier.service_id" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="igsn_lib.models.Identifier.set_spec">
+<code class="sig-name descname">set_spec</code><a class="headerlink" href="#igsn_lib.models.Identifier.set_spec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set labels, e.g. OAI-PMH set names</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -535,6 +552,11 @@
 <dd></dd></dl>
 
 <dl class="py attribute">
+<dt id="igsn_lib.models.Service.identifiers">
+<code class="sig-name descname">identifiers</code><a class="headerlink" href="#igsn_lib.models.Service.identifiers" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
 <dt id="igsn_lib.models.Service.jobs">
 <code class="sig-name descname">jobs</code><a class="headerlink" href="#igsn_lib.models.Service.jobs" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -545,8 +567,8 @@
 <dd></dd></dl>
 
 <dl class="py method">
-<dt id="igsn_lib.models.Service.mostRecentRecordRetrieved">
-<code class="sig-name descname">mostRecentRecordRetrieved</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">session</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/models.html#Service.mostRecentRecordRetrieved"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.models.Service.mostRecentRecordRetrieved" title="Permalink to this definition">¶</a></dt>
+<dt id="igsn_lib.models.Service.mostRecentIdentifierRetrieved">
+<code class="sig-name descname">mostRecentIdentifierRetrieved</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">session</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/models.html#Service.mostRecentIdentifierRetrieved"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.models.Service.mostRecentIdentifierRetrieved" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the most recent harvested record for this service</p>
 <p>Returns: IGSN</p>
 </dd></dl>
@@ -557,8 +579,8 @@
 <dd></dd></dl>
 
 <dl class="py method">
-<dt id="igsn_lib.models.Service.populate">
-<code class="sig-name descname">populate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">session</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">url</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/models.html#Service.populate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.models.Service.populate" title="Permalink to this definition">¶</a></dt>
+<dt id="igsn_lib.models.Service.populateOAI">
+<code class="sig-name descname">populateOAI</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">session</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">url</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/models.html#Service.populateOAI"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.models.Service.populateOAI" title="Permalink to this definition">¶</a></dt>
 <dd><p>Populate record from Identify service</p>
 <p>If session is provided then record is commited on success</p>
 <dl class="field-list simple">
@@ -571,11 +593,6 @@
 </dl>
 <p>Returns: nothing</p>
 </dd></dl>
-
-<dl class="py attribute">
-<dt id="igsn_lib.models.Service.records">
-<code class="sig-name descname">records</code><a class="headerlink" href="#igsn_lib.models.Service.records" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="igsn_lib.models.Service.tearliest">
@@ -625,11 +642,6 @@
 </dd>
 </dl>
 </dd></dl>
-
-<dl class="py function">
-<dt id="igsn_lib.models.dtToJson">
-<code class="sig-prename descclassname">igsn_lib.models.</code><code class="sig-name descname">dtToJson</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dt</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/models.html#dtToJson"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.models.dtToJson" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="py function">
 <dt id="igsn_lib.models.getOrCreate">

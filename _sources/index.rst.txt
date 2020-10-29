@@ -13,6 +13,7 @@ API
    :titlesonly:
 
    api/index
+   notes/igsn_counts
 
 
 Indices and tables

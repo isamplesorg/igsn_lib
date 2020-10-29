@@ -87,6 +87,11 @@
    1. igsn_lib Package Documentation
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notes/igsn_counts.html">
+   2. Counting Registered IGSNs
+  </a>
+ </li>
 </ul>
 
 </nav>
@@ -190,6 +195,7 @@
 <span class="n">DEFAULT_RESOLVE_HEADERS</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;User-Agent&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;igsn_lib/</span><span class="si">{</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
     <span class="s2">&quot;Accept&quot;</span><span class="p">:</span> <span class="s2">&quot;application/json, application/ld+json;q=0.9, text/json;q=0.8; text/xml;q=0.7, text/html;q=0.5&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Accept-Language&quot;</span><span class="p">:</span> <span class="s2">&quot;en-US, en;q=0.9&quot;</span><span class="p">,</span>
 <span class="p">}</span>
 <span class="sd">&quot;&quot;&quot;Default headers for talking to the resolver</span>
 <span class="sd">&quot;&quot;&quot;</span>
@@ -252,40 +258,50 @@
     <span class="k">return</span> <span class="n">igsn_str</span></div>
 
 
-<span class="k">def</span> <span class="nf">_doResolveStep</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">_doResolveStep</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">include_body</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
     <span class="n">L</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;igsn_lib&quot;</span><span class="p">)</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">allow_redirects</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">response</span>
+    <span class="k">if</span> <span class="n">include_body</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+            <span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">allow_redirects</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">requests</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">allow_redirects</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="FakeResponse"><a class="viewcode-back" href="../api/igsn_lib.html#igsn_lib.FakeResponse">[docs]</a><span class="k">class</span> <span class="nc">FakeResponse</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span> <span class="o">=</span> <span class="n">d</span></div>
 
-<span class="k">def</span> <span class="nf">_doResolve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+<span class="k">def</span> <span class="nf">_doResolve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">include_body</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="n">L</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;igsn_lib&quot;</span><span class="p">)</span>
     <span class="n">responses</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">c_url</span> <span class="o">=</span> <span class="n">url</span>
     <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
         <span class="n">cheaders</span> <span class="o">=</span> <span class="n">headers</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">c_url</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">N2T_RESOLVER_URL</span><span class="p">):</span>
-            <span class="n">cheaders</span><span class="p">[</span><span class="s1">&#39;Accept&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;*/*&#39;</span>
+            <span class="n">cheaders</span><span class="p">[</span><span class="s2">&quot;Accept&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;*/*&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">do_continue</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="k">if</span> <span class="n">callback</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">do_continue</span> <span class="o">=</span> <span class="n">callback</span><span class="p">(</span><span class="n">c_url</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">do_continue</span><span class="p">:</span>
-                <span class="n">response</span> <span class="o">=</span> <span class="n">_doResolveStep</span><span class="p">(</span><span class="n">c_url</span><span class="p">,</span> <span class="n">cheaders</span><span class="p">)</span>
+                <span class="n">response</span> <span class="o">=</span> <span class="n">_doResolveStep</span><span class="p">(</span>
+                    <span class="n">c_url</span><span class="p">,</span> <span class="n">include_body</span><span class="o">=</span><span class="n">include_body</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">cheaders</span>
+                <span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">responses</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
             <span class="n">L</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-            <span class="n">fake_response</span> <span class="o">=</span> <span class="n">FakeResponse</span><span class="p">({</span>
-                <span class="s1">&#39;status_code&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="n">c_url</span><span class="p">,</span>
-                <span class="s1">&#39;headers&#39;</span><span class="p">:</span> <span class="p">{},</span>
-                <span class="s1">&#39;encoding&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span>
-            <span class="p">})</span>
+            <span class="n">fake_response</span> <span class="o">=</span> <span class="n">FakeResponse</span><span class="p">(</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;status_code&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                    <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">c_url</span><span class="p">,</span>
+                    <span class="s2">&quot;headers&quot;</span><span class="p">:</span> <span class="p">{},</span>
+                    <span class="s2">&quot;encoding&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;request&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">c_url</span><span class="p">,</span> <span class="s2">&quot;headers&quot;</span><span class="p">:</span> <span class="n">cheaders</span><span class="p">},</span>
+                <span class="p">}</span>
+            <span class="p">)</span>
             <span class="n">responses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fake_response</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">responses</span>
         <span class="n">responses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
@@ -293,7 +309,7 @@
             <span class="n">L</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Aborting _doResolve on error status </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">responses</span>
         <span class="k">elif</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">&gt;=</span> <span class="mi">300</span><span class="p">:</span>
-            <span class="n">c_url</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Location&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="n">c_url</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Location&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">c_url</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">L</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;redirect code but no location! </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
                 <span class="k">return</span> <span class="n">responses</span>
@@ -301,30 +317,30 @@
             <span class="k">return</span> <span class="n">responses</span>
 
 
-<div class="viewcode-block" id="resolveN2T"><a class="viewcode-back" href="../api/igsn_lib.html#igsn_lib.resolveN2T">[docs]</a><span class="k">def</span> <span class="nf">resolveN2T</span><span class="p">(</span><span class="n">identifier</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="resolveN2T"><a class="viewcode-back" href="../api/igsn_lib.html#igsn_lib.resolveN2T">[docs]</a><span class="k">def</span> <span class="nf">resolveN2T</span><span class="p">(</span><span class="n">identifier</span><span class="p">,</span> <span class="n">include_body</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Use N2T to resolve the identifier</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        identifier: pre-normalized IGSN string</span>
+<span class="sd">        include_body: (bool) If True then return response body, otherwise only HEAD request is made</span>
+<span class="sd">        headers: (dict) Optional headers to send in request</span>
+<span class="sd">        callback: (method) Optional method to call after completion of each step of the resolve chain</span>
+
+<span class="sd">    Returns:</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">_L</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;igsn_lib&quot;</span><span class="p">)</span>
     <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">N2T_RESOLVER_URL</span><span class="si">}{</span><span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">quote</span><span class="p">(</span><span class="n">identifier</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
     <span class="n">n2theaders</span> <span class="o">=</span> <span class="n">DEFAULT_RESOLVE_HEADERS</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">headers</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">n2theaders</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">_doResolve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">n2theaders</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="n">callback</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">headers</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">n2theaders</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span>
-        <span class="n">n2theaders</span><span class="p">[</span><span class="s2">&quot;Accept&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;*/*&quot;</span>
-    <span class="n">_L</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Resolve URL = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">n2theaders</span><span class="p">,</span> <span class="n">allow_redirects</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">&gt;=</span> <span class="mi">400</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">response</span>
-    <span class="n">r_url</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Location&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">r_url</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">response</span>
-    <span class="n">rheaders</span> <span class="o">=</span> <span class="n">DEFAULT_RESOLVE_HEADERS</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-    <span class="k">if</span> <span class="n">rheaders</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">rheaders</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">r_url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">rheaders</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">_doResolve</span><span class="p">(</span>
+        <span class="n">url</span><span class="p">,</span> <span class="n">include_body</span><span class="o">=</span><span class="n">include_body</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">n2theaders</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="n">callback</span>
+    <span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="resolve"><a class="viewcode-back" href="../api/igsn_lib.html#igsn_lib.resolve">[docs]</a><span class="k">def</span> <span class="nf">resolve</span><span class="p">(</span><span class="n">igsn_value</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="resolve"><a class="viewcode-back" href="../api/igsn_lib.html#igsn_lib.resolve">[docs]</a><span class="k">def</span> <span class="nf">resolve</span><span class="p">(</span><span class="n">igsn_value</span><span class="p">,</span> <span class="n">include_body</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Resolve an IGSN value</span>
 
@@ -332,19 +348,22 @@
 
 <span class="sd">    Args:</span>
 <span class="sd">        igsn_value: pre-normalized IGSN string</span>
+<span class="sd">        include_body: (bool) If True then return response body, otherwise only HEAD request is made</span>
+<span class="sd">        headers: (dict) Optional headers to send in request</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        requests.Response</span>
+<span class="sd">        list of requests.Response objects</span>
 
 <span class="sd">    Examples:</span>
 
 <span class="sd">        .. jupyter-execute::</span>
 
+<span class="sd">           import pprint</span>
 <span class="sd">           import json</span>
 <span class="sd">           import igsn_lib</span>
 
-<span class="sd">           res = igsn_lib.resolve(&#39;PRR047915&#39;)</span>
-<span class="sd">           print(json.dumps(res.json(), indent=2))</span>
+<span class="sd">           res = igsn_lib.resolve(&#39;PRR047915&#39;, include_body=True)</span>
+<span class="sd">           print(json.dumps(res[-1].json(), indent=2))</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">_L</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;igsn_lib&quot;</span><span class="p">)</span>
     <span class="n">rheaders</span> <span class="o">=</span> <span class="n">DEFAULT_RESOLVE_HEADERS</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -352,7 +371,7 @@
         <span class="n">rheaders</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span>
     <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">IGSN_RESOLVER_URL</span><span class="si">}{</span><span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">quote</span><span class="p">(</span><span class="n">igsn_value</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
     <span class="n">_L</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Resolve URL = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">rheaders</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">_doResolve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">include_body</span><span class="o">=</span><span class="n">include_body</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">rheaders</span><span class="p">)</span></div>
 </pre></div>
 
               </div>

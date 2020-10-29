@@ -116,6 +116,11 @@
    </li>
   </ul>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notes/igsn_counts.html">
+   2. Counting Registered IGSNs
+  </a>
+ </li>
 </ul>
 
 </nav>
@@ -226,19 +231,49 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.oai.listSets" title="igsn_lib.oai.listSets"><code class="xref py py-obj docutils literal notranslate"><span class="pre">listSets</span></code></a>(svc[, get_counts])</p></td>
 <td><p>List the sets reported by an OAI-PMH service.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#igsn_lib.oai.oaiRecordToDict" title="igsn_lib.oai.oaiRecordToDict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">oaiRecordToDict</span></code></a>(xml_string)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#igsn_lib.oai.oaiDictRecordToJson" title="igsn_lib.oai.oaiDictRecordToJson"><code class="xref py py-obj docutils literal notranslate"><span class="pre">oaiDictRecordToJson</span></code></a>(record[, indent, …])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.oai.oaiRecordToDict" title="igsn_lib.oai.oaiRecordToDict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">oaiRecordToDict</span></code></a>(xml_string)</p></td>
 <td><p>Converts an OAI-PMH IGSN metadata record to a dict</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.oai.recordCount" title="igsn_lib.oai.recordCount"><code class="xref py py-obj docutils literal notranslate"><span class="pre">recordCount</span></code></a>(svc[, metadata_prefix, …])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#igsn_lib.oai.recordCount" title="igsn_lib.oai.recordCount"><code class="xref py py-obj docutils literal notranslate"><span class="pre">recordCount</span></code></a>(svc[, metadata_prefix, …])</p></td>
 <td><p>Determine the number of records that match an OAI-PMH ListRecords request.</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Detail</p>
 <span class="target" id="module-igsn_lib.oai"></span><p>Methods in support of OAI-PMH harvesting of IGSN records.</p>
+<dl class="py class">
+<dt id="igsn_lib.oai.DatetimeEncoder">
+<em class="property">class </em><code class="sig-prename descclassname">igsn_lib.oai.</code><code class="sig-name descname">DatetimeEncoder</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">skipkeys</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">ensure_ascii</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">check_circular</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">allow_nan</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">sort_keys</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">indent</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">separators</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">default</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/oai.html#DatetimeEncoder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.oai.DatetimeEncoder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">json.encoder.JSONEncoder</span></code></p>
+<dl class="py method">
+<dt id="igsn_lib.oai.DatetimeEncoder.default">
+<code class="sig-name descname">default</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/oai.html#DatetimeEncoder.default"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.oai.DatetimeEncoder.default" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implement this method in a subclass such that it returns
+a serializable object for <code class="docutils literal notranslate"><span class="pre">o</span></code>, or calls the base implementation
+(to raise a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>).</p>
+<p>For example, to support arbitrary iterators, you could
+implement default like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">default</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">iterable</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">o</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">iterable</span><span class="p">)</span>
+    <span class="c1"># Let the base class default method raise the TypeError</span>
+    <span class="k">return</span> <span class="n">JSONEncoder</span><span class="o">.</span><span class="n">default</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
 <dl class="py data">
-<dt id="igsn_lib.oai.IGSN_OAI_NAMESPACES">
-<code class="sig-prename descclassname">igsn_lib.oai.</code><code class="sig-name descname">IGSN_OAI_NAMESPACES</code><em class="property"> = {'http://igsn.org/schema/kernel-v.1.0': 'igsn', 'http://purl.org/dc/elements/1.1/': 'dc', 'http://schema.igsn.org/description/1.0': 'igsn_desc', 'http://www.openarchives.org/OAI/2.0/': 'oai', 'http://www.openarchives.org/OAI/2.0/oai-identifier': 'oai_identifier', 'http://www.openarchives.org/OAI/2.0/oai_dc/': 'oai_dc', 'http://www.w3.org/2001/XMLSchema-instance': 'xsi'}</em><a class="headerlink" href="#igsn_lib.oai.IGSN_OAI_NAMESPACES" title="Permalink to this definition">¶</a></dt>
+<dt id="igsn_lib.oai.IGSN_OAI_NAMESPACES_INV">
+<code class="sig-prename descclassname">igsn_lib.oai.</code><code class="sig-name descname">IGSN_OAI_NAMESPACES_INV</code><em class="property"> = {'dc': 'http://purl.org/dc/elements/1.1/', 'igsn': 'http://igsn.org/schema/kernel-v.1.0', 'igsn_desc': 'http://schema.igsn.org/description/1.0', 'oai': 'http://www.openarchives.org/OAI/2.0/', 'oai_dc': 'http://www.openarchives.org/OAI/2.0/oai_dc/', 'oai_identifier': 'http://www.openarchives.org/OAI/2.0/oai-identifier', 'xsi': 'http://www.w3.org/2001/XMLSchema-instance'}</em><a class="headerlink" href="#igsn_lib.oai.IGSN_OAI_NAMESPACES_INV" title="Permalink to this definition">¶</a></dt>
 <dd><p>Metadata namespaces commonly seen in IGSN OAI-PMH responses</p>
 </dd></dl>
 
@@ -353,52 +388,57 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>         0 REFQUALITY: Reference quality citations only.
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>         0 CNRS.REFQUALITY: Centre national de la recherche scientifique (reference quality citations only)
+         0 REFQUALITY: Reference quality citations only.
+         0 CSIRO.REFQUALITY: CSIRO (reference quality citations only)
+         0 CNRS.CNRS.REFQUALITY: Centre national de la recherche scientifique (reference quality citations only)
          0 ANDS.AUSCOPE.REFQUALITY: AuScope (reference quality citations only)
          0 ANDS.REFQUALITY: Australian National Data Service (reference quality citations only)
-         0 CNRS.REFQUALITY: Centre national de la recherche scientifique (reference quality citations only)
-         0 CNRS.CNRS.REFQUALITY: Centre national de la recherche scientifique (reference quality citations only)
-         0 CSIRO.REFQUALITY: CSIRO (reference quality citations only)
-         0 CSIRO.CSIRO.REFQUALITY: CSIRO (reference quality citations only)
-       886 CNRS: Centre national de la recherche scientifique
        886 CNRS.CNRS: Centre national de la recherche scientifique
+         0 CSIRO.CSIRO.REFQUALITY: CSIRO (reference quality citations only)
          0 GEOAUS.REFQUALITY: Geoscience Australia (reference quality citations only)
          0 GEOAUS.AU.REFQUALITY: Geoscience Australia (reference quality citations only)
+       886 CNRS: Centre national de la recherche scientifique
+      3202 ANDS: Australian National Data Service
          0 GFZ.REFQUALITY: GFZ Allocator (reference quality citations only)
-     33248 CSIRO: CSIRO
          0 GFZ.GFZ.REFQUALITY: Deutsches GeoForschungsZentrum GFZ (reference quality citations only)
-      3198 ANDS.AUSCOPE: AuScope
-      3198 ANDS: Australian National Data Service
          0 IEDA.REFQUALITY: Integrated Earth Data Applications (reference quality citations only)
+      3202 ANDS.AUSCOPE: AuScope
          0 IEDA.SESAR.REFQUALITY: System for Earth Sample Registration (reference quality citations only)
          0 IFREMER.REFQUALITY: Institut français de recherche pour l&#39;exploitation de la mer (reference quality citations only)
      33248 CSIRO.CSIRO: CSIRO
-     10381 GFZ: GFZ Allocator
+     33248 CSIRO: CSIRO
          0 IFREMER.IGSN.REFQUALITY: Institut français de recherche pour l&#39;exploitation de la mer (reference quality citations only)
      18624 IFREMER: Institut français de recherche pour l&#39;exploitation de la mer
-         0 KIGAM.REFQUALITY: Korea Institute of Geoscience and Mineral Resources (reference quality citations only)
-     18624 IFREMER.IGSN: Institut français de recherche pour l&#39;exploitation de la mer
-         0 KIGAM.DC.REFQUALITY: Korea Institute of Geoscience and Mineral Resources (reference quality citations only)
      10381 GFZ.GFZ: Deutsches GeoForschungsZentrum GFZ
+         0 KIGAM.REFQUALITY: Korea Institute of Geoscience and Mineral Resources (reference quality citations only)
+     10381 GFZ: GFZ Allocator
+   3604363 GEOAUS: Geoscience Australia
+         0 KIGAM.DC.REFQUALITY: Korea Institute of Geoscience and Mineral Resources (reference quality citations only)
          0 MARUM.REFQUALITY: MARUM Center for Marine Environmental Studies at University of Bremen (reference quality citations only)
-      1388 KIGAM: Korea Institute of Geoscience and Mineral Resources
          0 MARUM.HB.REFQUALITY: MARUM Center for Marine Environmental Sciences (reference quality citations only)
-      1388 KIGAM.DC: Korea Institute of Geoscience and Mineral Resources
-        60 UKI.RZ: Universität Kiel - Rechenzentrum
+     18624 IFREMER.IGSN: Institut français de recherche pour l&#39;exploitation de la mer
          0 UKI.REFQUALITY: Universität Kiel (reference quality citations only)
          0 UKI.RZ.REFQUALITY: Universität Kiel - Rechenzentrum (reference quality citations only)
-        60 UKI: Universität Kiel
     136587 MARUM: MARUM Center for Marine Environmental Studies at University of Bremen
+   3604363 GEOAUS.AU: Geoscience Australia
+        60 UKI: Universität Kiel
+      1397 KIGAM.DC: Korea Institute of Geoscience and Mineral Resources
+        60 UKI.RZ: Universität Kiel - Rechenzentrum
+      1397 KIGAM: Korea Institute of Geoscience and Mineral Resources
     136587 MARUM.HB: MARUM Center for Marine Environmental Sciences
-   3530185 GEOAUS: Geoscience Australia
-   3530185 GEOAUS.AU: Geoscience Australia
-   4528006 IEDA: Integrated Earth Data Applications
-   4528006 IEDA.SESAR: System for Earth Sample Registration
+   4529202 IEDA: Integrated Earth Data Applications
+   4529202 IEDA.SESAR: System for Earth Sample Registration
 </pre></div>
 </div>
 </div>
 </div>
 </dd></dl>
+
+<dl class="py function">
+<dt id="igsn_lib.oai.oaiDictRecordToJson">
+<code class="sig-prename descclassname">igsn_lib.oai.</code><code class="sig-name descname">oaiDictRecordToJson</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">record</span></em>, <em class="sig-param"><span class="n">indent</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">include_source</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/oai.html#oaiDictRecordToJson"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.oai.oaiDictRecordToJson" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py function">
 <dt id="igsn_lib.oai.oaiRecordToDict">

@@ -87,6 +87,11 @@
    1. igsn_lib Package Documentation
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../notes/igsn_counts.html">
+   2. Counting Registered IGSNs
+  </a>
+ </li>
 </ul>
 
 </nav>
@@ -177,6 +182,7 @@
 <span class="kn">import</span> <span class="nn">sqlalchemy.ext.declarative</span>
 <span class="kn">import</span> <span class="nn">sqlalchemy.orm</span>
 <span class="kn">import</span> <span class="nn">sqlalchemy.exc</span>
+<span class="kn">import</span> <span class="nn">sqlalchemy.schema</span>
 <span class="kn">import</span> <span class="nn">sickle.oaiexceptions</span>
 <span class="kn">import</span> <span class="nn">igsn_lib</span>
 <span class="kn">import</span> <span class="nn">igsn_lib.oai</span>
@@ -187,61 +193,67 @@
 
 <span class="n">Base</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">declarative</span><span class="o">.</span><span class="n">declarative_base</span><span class="p">()</span>
 
-<div class="viewcode-block" id="dtToJson"><a class="viewcode-back" href="../../api/igsn_lib.models.html#igsn_lib.models.dtToJson">[docs]</a><span class="k">def</span> <span class="nf">dtToJson</span><span class="p">(</span><span class="n">dt</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">dt</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">return</span> <span class="kc">None</span>
-    <span class="k">return</span> <span class="n">dt</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">igsn_lib</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">JSON_TIME_FORMAT</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="IGSN"><a class="viewcode-back" href="../../api/igsn_lib.models.html#igsn_lib.models.IGSN">[docs]</a><span class="k">class</span> <span class="nc">IGSN</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+<div class="viewcode-block" id="Identifier"><a class="viewcode-back" href="../../api/igsn_lib.models.html#igsn_lib.models.Identifier">[docs]</a><span class="k">class</span> <span class="nc">Identifier</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Defines a minimal IGSN record to capture information provided from an OAI-PMH endpoint.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;igsn&quot;</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;identifier&quot;</span>
     <span class="nb">id</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span>
         <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">String</span><span class="p">,</span>
         <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-        <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;id is the IGSN value, must be unique in the datastore&quot;</span><span class="p">,</span>
+        <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;id is the identifier scheme:value, must be unique in the datastore&quot;</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="n">oai_id</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">sqlalchemy</span><span class="o">.</span><span class="n">String</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;The OAI-PMH record id.&quot;</span><span class="p">)</span>
+    <span class="n">provider_id</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span>
+        <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">String</span><span class="p">,</span>
+        <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;The provider internal id, e.g. OAI-PMH record id.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
     <span class="n">service_id</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span>
         <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s2">&quot;service.id&quot;</span><span class="p">)</span>
     <span class="p">)</span>
-    <span class="n">record</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">orm</span><span class="o">.</span><span class="n">relationship</span><span class="p">(</span><span class="s2">&quot;Service&quot;</span><span class="p">,</span> <span class="n">back_populates</span><span class="o">=</span><span class="s2">&quot;records&quot;</span><span class="p">)</span>
+    <span class="n">identifier</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">orm</span><span class="o">.</span><span class="n">relationship</span><span class="p">(</span><span class="s2">&quot;Service&quot;</span><span class="p">,</span> <span class="n">back_populates</span><span class="o">=</span><span class="s2">&quot;identifiers&quot;</span><span class="p">)</span>
     <span class="n">harvest_time</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span>
         <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">DateTime</span><span class="p">(</span><span class="n">timezone</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
         <span class="n">default</span><span class="o">=</span><span class="n">igsn_lib</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">dtnow</span><span class="p">,</span>
         <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;When the record was harvested, UTC datetime&quot;</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="n">oai_time</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span>
+    <span class="n">provider_time</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span>
         <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">DateTime</span><span class="p">(</span><span class="n">timezone</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
         <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-        <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;Timestamp reported for OAI-PMH record, UTC datetime&quot;</span><span class="p">,</span>
+        <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;Timestamp reported for identifier provider entry if available, UTC datetime&quot;</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="n">igsn_time</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span>
+    <span class="n">id_time</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span>
         <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">DateTime</span><span class="p">(</span><span class="n">timezone</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
         <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-        <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;time reported in the IGSN record submitted or registered log event,UTC datetime&quot;</span><span class="p">,</span>
+        <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;Time reported in the record submitted or registered log event, UTC datetime&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">registrant</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span>
         <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">String</span><span class="p">,</span>
         <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-        <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;registrant name reported in the IGSN record&quot;</span><span class="p">,</span>
+        <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;Registrant name reported in the source record&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">related</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span>
         <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">JSON</span><span class="p">,</span>
         <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;related identifiers in the IGSN record&quot;</span><span class="p">,</span>
+        <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;Related identifiers reported in the source record&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">log</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span>
-        <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">JSON</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;log entries in IGSN record&quot;</span>
+        <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">JSON</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;log entries in source record&quot;</span>
+    <span class="p">)</span>
+    <span class="n">set_spec</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span>
+        <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">JSON</span><span class="p">,</span>
+        <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;Set labels, e.g. OAI-PMH set names&quot;</span><span class="p">,</span>
     <span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">asJsonDict</span><span class="p">(),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
-<div class="viewcode-block" id="IGSN.asJsonDict"><a class="viewcode-back" href="../../api/igsn_lib.models.html#igsn_lib.models.IGSN.asJsonDict">[docs]</a>    <span class="k">def</span> <span class="nf">asJsonDict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Identifier.asJsonDict"><a class="viewcode-back" href="../../api/igsn_lib.models.html#igsn_lib.models.Identifier.asJsonDict">[docs]</a>    <span class="k">def</span> <span class="nf">asJsonDict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Provide a JSON serializable dict representation of instance.</span>
 
@@ -250,18 +262,19 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">d</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
-            <span class="s2">&quot;oai_id&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">oai_id</span><span class="p">,</span>
+            <span class="s2">&quot;provider_id&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">provider_id</span><span class="p">,</span>
             <span class="s2">&quot;service_id&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">service_id</span><span class="p">,</span>
-            <span class="s2">&quot;harvest_time&quot;</span><span class="p">:</span> <span class="n">dtToJson</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">harvest_time</span><span class="p">),</span>
-            <span class="s2">&quot;oai_time&quot;</span><span class="p">:</span> <span class="n">dtToJson</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">oai_time</span><span class="p">),</span>
-            <span class="s2">&quot;igsn_time&quot;</span><span class="p">:</span> <span class="n">dtToJson</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">igsn_time</span><span class="p">),</span>
+            <span class="s2">&quot;harvest_time&quot;</span><span class="p">:</span> <span class="n">igsn_lib</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">datetimeToJsonStr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">harvest_time</span><span class="p">),</span>
+            <span class="s2">&quot;provider_time&quot;</span><span class="p">:</span> <span class="n">igsn_lib</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">datetimeToJsonStr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">provider_time</span><span class="p">),</span>
+            <span class="s2">&quot;id_time&quot;</span><span class="p">:</span> <span class="n">igsn_lib</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">datetimeToJsonStr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_time</span><span class="p">),</span>
             <span class="s2">&quot;registrant&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">registrant</span><span class="p">,</span>
             <span class="s2">&quot;related&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">related</span><span class="p">,</span>
             <span class="s2">&quot;log&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="p">,</span>
+            <span class="s2">&quot;sets&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_spec</span><span class="p">,</span>
         <span class="p">}</span>
         <span class="k">return</span> <span class="n">d</span></div>
 
-<div class="viewcode-block" id="IGSN.fromOAIRecord"><a class="viewcode-back" href="../../api/igsn_lib.models.html#igsn_lib.models.IGSN.fromOAIRecord">[docs]</a>    <span class="k">def</span> <span class="nf">fromOAIRecord</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">record</span><span class="p">):</span>
+<div class="viewcode-block" id="Identifier.fromOAIRecord"><a class="viewcode-back" href="../../api/igsn_lib.models.html#igsn_lib.models.Identifier.fromOAIRecord">[docs]</a>    <span class="k">def</span> <span class="nf">fromOAIRecord</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">record</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Populates self from an OAI-PMH IGSN XML string</span>
 
@@ -300,21 +313,25 @@
 <span class="sd">                  &lt;/metadata&gt;</span>
 <span class="sd">                &lt;/record&gt;</span>
 <span class="sd">               &quot;&quot;&quot;</span>
-<span class="sd">               record = igsn_lib.models.IGSN()</span>
+<span class="sd">               record = igsn_lib.models.Identifier()</span>
 <span class="sd">               record.fromOAIRecord(xml)</span>
 <span class="sd">               print(record)</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">igsn_lib</span><span class="o">.</span><span class="n">oai</span><span class="o">.</span><span class="n">oaiRecordToDict</span><span class="p">(</span><span class="n">record</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">record</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">record</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">igsn_lib</span><span class="o">.</span><span class="n">oai</span><span class="o">.</span><span class="n">oaiRecordToDict</span><span class="p">(</span><span class="n">record</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;igsn_id&quot;</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">oai_id</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;oai_id&quot;</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">oai_time</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;oai_time&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">provider_id</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;oai_id&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">provider_time</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;oai_time&quot;</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">registrant</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;registrant&quot;</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">igsn_time</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;igsn_time&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id_time</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;igsn_time&quot;</span><span class="p">]</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;related&quot;</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">related</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;related&quot;</span><span class="p">]</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;log&quot;</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">log</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;log&quot;</span><span class="p">]</span></div></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">log</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;log&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;set_spec&quot;</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_spec</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;set_spec&quot;</span><span class="p">]</span></div></div>
 
 
 <div class="viewcode-block" id="Job"><a class="viewcode-back" href="../../api/igsn_lib.models.html#igsn_lib.models.Job">[docs]</a><span class="k">class</span> <span class="nc">Job</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
@@ -375,14 +392,14 @@
         <span class="n">d</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
             <span class="s2">&quot;service_id&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">service_id</span><span class="p">,</span>
-            <span class="s2">&quot;tstart&quot;</span><span class="p">:</span> <span class="n">dtToJson</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tstart</span><span class="p">),</span>
-            <span class="s2">&quot;tend&quot;</span><span class="p">:</span> <span class="n">dtToJson</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tend</span><span class="p">),</span>
+            <span class="s2">&quot;tstart&quot;</span><span class="p">:</span> <span class="n">igsn_lib</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">datetimeToJsonStr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tstart</span><span class="p">),</span>
+            <span class="s2">&quot;tend&quot;</span><span class="p">:</span> <span class="n">igsn_lib</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">datetimeToJsonStr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tend</span><span class="p">),</span>
             <span class="s2">&quot;ignore_deleted&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">ignore_deleted</span><span class="p">,</span>
             <span class="s2">&quot;metadata_prefix&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata_prefix</span><span class="p">,</span>
             <span class="s2">&quot;setspec&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">setspec</span><span class="p">,</span>
-            <span class="s2">&quot;tfrom&quot;</span><span class="p">:</span> <span class="n">dtToJson</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tfrom</span><span class="p">),</span>
-            <span class="s2">&quot;tuntil&quot;</span><span class="p">:</span> <span class="n">dtToJson</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tuntil</span><span class="p">),</span>
-            <span class="s2">&quot;tlast_record&quot;</span><span class="p">:</span> <span class="n">dtToJson</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tlast_record</span><span class="p">),</span>
+            <span class="s2">&quot;tfrom&quot;</span><span class="p">:</span> <span class="n">igsn_lib</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">datetimeToJsonStr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tfrom</span><span class="p">),</span>
+            <span class="s2">&quot;tuntil&quot;</span><span class="p">:</span> <span class="n">igsn_lib</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">datetimeToJsonStr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tuntil</span><span class="p">),</span>
+            <span class="s2">&quot;tlast_record&quot;</span><span class="p">:</span> <span class="n">igsn_lib</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">datetimeToJsonStr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tlast_record</span><span class="p">),</span>
         <span class="p">}</span>
         <span class="k">return</span> <span class="n">d</span></div>
 
@@ -443,12 +460,12 @@
                 <span class="p">)</span>
             <span class="n">total_count</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">records</span><span class="o">.</span><span class="n">resumption_token</span><span class="o">.</span><span class="n">complete_list_size</span><span class="p">)</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="n">igsn</span> <span class="o">=</span> <span class="n">IGSN</span><span class="p">(</span>
+                <span class="n">igsn</span> <span class="o">=</span> <span class="n">Identifier</span><span class="p">(</span>
                     <span class="n">service_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">service_id</span><span class="p">,</span> <span class="n">harvest_time</span><span class="o">=</span><span class="n">igsn_lib</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">dtnow</span><span class="p">()</span>
                 <span class="p">)</span>
                 <span class="n">igsn</span><span class="o">.</span><span class="n">fromOAIRecord</span><span class="p">(</span><span class="n">record</span><span class="o">.</span><span class="n">raw</span><span class="p">)</span>
                 <span class="n">_L</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">igsn</span><span class="p">)</span>
-                <span class="n">exists</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">IGSN</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">igsn</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+                <span class="n">exists</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Identifier</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">igsn</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="n">exists</span><span class="p">:</span>
                     <span class="n">_L</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;NEW&quot;</span><span class="p">)</span>
                     <span class="k">if</span> <span class="n">callback</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -456,7 +473,7 @@
                     <span class="n">new_count</span> <span class="o">+=</span> <span class="mi">1</span>
                     <span class="k">try</span><span class="p">:</span>
                         <span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">igsn</span><span class="p">)</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">tlast_record</span> <span class="o">=</span> <span class="n">igsn</span><span class="o">.</span><span class="n">oai_time</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">tlast_record</span> <span class="o">=</span> <span class="n">igsn</span><span class="o">.</span><span class="n">provider_time</span>
                         <span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
                     <span class="k">except</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">exc</span><span class="o">.</span><span class="n">IntegrityError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
                         <span class="n">_L</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;IGSN entry already exists: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">igsn</span><span class="p">))</span>
@@ -488,13 +505,13 @@
         <span class="n">d</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
             <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">,</span>
-            <span class="s2">&quot;tearliest&quot;</span><span class="p">:</span> <span class="n">dtToJson</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tearliest</span><span class="p">),</span>
+            <span class="s2">&quot;tearliest&quot;</span><span class="p">:</span> <span class="n">igsn_lib</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">datetimeToJsonStr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tearliest</span><span class="p">),</span>
             <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
             <span class="s2">&quot;admin_email&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">admin_email</span><span class="p">,</span>
         <span class="p">}</span>
         <span class="k">return</span> <span class="n">d</span></div>
 
-<div class="viewcode-block" id="Service.populate"><a class="viewcode-back" href="../../api/igsn_lib.models.html#igsn_lib.models.Service.populate">[docs]</a>    <span class="k">def</span> <span class="nf">populate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Service.populateOAI"><a class="viewcode-back" href="../../api/igsn_lib.models.html#igsn_lib.models.Service.populateOAI">[docs]</a>    <span class="k">def</span> <span class="nf">populateOAI</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Populate record from Identify service</span>
 
@@ -522,17 +539,17 @@
         <span class="n">oai_svc</span> <span class="o">=</span> <span class="n">igsn_lib</span><span class="o">.</span><span class="n">oai</span><span class="o">.</span><span class="n">getSickle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">igsn_lib</span><span class="o">.</span><span class="n">oai</span><span class="o">.</span><span class="n">listSets</span><span class="p">(</span><span class="n">oai_svc</span><span class="p">,</span> <span class="n">get_counts</span><span class="o">=</span><span class="n">get_counts</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Service.mostRecentRecordRetrieved"><a class="viewcode-back" href="../../api/igsn_lib.models.html#igsn_lib.models.Service.mostRecentRecordRetrieved">[docs]</a>    <span class="k">def</span> <span class="nf">mostRecentRecordRetrieved</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+<div class="viewcode-block" id="Service.mostRecentIdentifierRetrieved"><a class="viewcode-back" href="../../api/igsn_lib.models.html#igsn_lib.models.Service.mostRecentIdentifierRetrieved">[docs]</a>    <span class="k">def</span> <span class="nf">mostRecentIdentifierRetrieved</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get the most recent harvested record for this service</span>
 
 <span class="sd">        Returns: IGSN</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">rec</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">IGSN</span><span class="p">)</span>
+            <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Identifier</span><span class="p">)</span>
             <span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">Service</span><span class="p">)</span>
             <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Service</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
-            <span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">IGSN</span><span class="o">.</span><span class="n">oai_time</span><span class="o">.</span><span class="n">desc</span><span class="p">())</span>
+            <span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">Identifier</span><span class="o">.</span><span class="n">provider_time</span><span class="o">.</span><span class="n">desc</span><span class="p">())</span>
             <span class="o">.</span><span class="n">first</span><span class="p">()</span>
         <span class="p">)</span>
         <span class="k">return</span> <span class="n">rec</span></div>
@@ -540,7 +557,7 @@
 <div class="viewcode-block" id="Service.topupHarvestJob"><a class="viewcode-back" href="../../api/igsn_lib.models.html#igsn_lib.models.Service.topupHarvestJob">[docs]</a>    <span class="k">def</span> <span class="nf">topupHarvestJob</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">ignore_deleted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">metadata_prefix</span><span class="o">=</span><span class="s2">&quot;igsn&quot;</span><span class="p">,</span> <span class="n">setspec</span><span class="o">=</span><span class="kc">None</span>
     <span class="p">):</span>
-        <span class="n">last_rec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mostRecentRecordRetrieved</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+        <span class="n">last_rec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mostRecentIdentifierRetrieved</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
         <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;RECENT RECORD: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">last_rec</span><span class="p">)</span>
         <span class="n">job</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">createJob</span><span class="p">(</span>
             <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">,</span>
@@ -638,8 +655,8 @@
     <span class="s2">&quot;Job&quot;</span><span class="p">,</span> <span class="n">order_by</span><span class="o">=</span><span class="n">Job</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">back_populates</span><span class="o">=</span><span class="s2">&quot;service&quot;</span>
 <span class="p">)</span>
 
-<span class="n">Service</span><span class="o">.</span><span class="n">records</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">orm</span><span class="o">.</span><span class="n">relationship</span><span class="p">(</span>
-    <span class="s2">&quot;IGSN&quot;</span><span class="p">,</span> <span class="n">order_by</span><span class="o">=</span><span class="n">IGSN</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">back_populates</span><span class="o">=</span><span class="s2">&quot;record&quot;</span>
+<span class="n">Service</span><span class="o">.</span><span class="n">identifiers</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">orm</span><span class="o">.</span><span class="n">relationship</span><span class="p">(</span>
+    <span class="s2">&quot;Identifier&quot;</span><span class="p">,</span> <span class="n">order_by</span><span class="o">=</span><span class="n">Identifier</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">back_populates</span><span class="o">=</span><span class="s2">&quot;identifier&quot;</span>
 <span class="p">)</span>
 
 
@@ -702,7 +719,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">svc</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">getOrCreate</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">Service</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">svc</span><span class="o">.</span><span class="n">tearliest</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">svc</span><span class="o">.</span><span class="n">populate</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)</span>
+        <span class="n">svc</span><span class="o">.</span><span class="n">populateOAI</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">svc</span></div>
 </pre></div>
 
