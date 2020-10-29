@@ -145,6 +145,18 @@ def _doResolve(url, include_body=False, headers=None, timeout=5, callback=None):
 
 
 def resolveN2T(identifier, include_body=False, headers=None, callback=None):
+    """
+    Use N2T to resolve the identifier
+
+    Args:
+        identifier: pre-normalized IGSN string
+        include_body: (bool) If True then return response body, otherwise only HEAD request is made
+        headers: (dict) Optional headers to send in request
+        callback: (method) Optional method to call after completion of each step of the resolve chain
+
+    Returns:
+
+    """
     _L = logging.getLogger("igsn_lib")
     url = f"{N2T_RESOLVER_URL}{urllib.parse.quote(identifier)}"
     n2theaders = DEFAULT_RESOLVE_HEADERS.copy()
