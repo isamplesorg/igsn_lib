@@ -22,6 +22,7 @@ N2T will resolve many types of identifiers, including IGSNs
 DEFAULT_RESOLVE_HEADERS = {
     "User-Agent": f"igsn_lib/{__version__}",
     "Accept": "application/json, application/ld+json;q=0.9, text/json;q=0.8; text/xml;q=0.7, text/html;q=0.5",
+    "Accept-Language": "en-US, en;q=0.9",
 }
 """Default headers for talking to the resolver
 """
@@ -84,40 +85,50 @@ def normalize(igsn_str):
     return igsn_str
 
 
-def _doResolveStep(url, headers=None, timeout=5):
+def _doResolveStep(url, include_body=False, headers=None, timeout=5):
     L = logging.getLogger("igsn_lib")
-    response = requests.head(url, headers=headers, allow_redirects=False, timeout=timeout)
-    return response
+    if include_body:
+        return requests.get(
+            url, headers=headers, allow_redirects=False, timeout=timeout
+        )
+    return requests.head(url, headers=headers, allow_redirects=False, timeout=timeout)
 
 
 class FakeResponse(object):
     def __init__(self, d):
         self.__dict__ = d
 
-def _doResolve(url, headers=None, timeout=5, callback=None):
+
+def _doResolve(url, include_body=False, headers=None, timeout=5, callback=None):
     L = logging.getLogger("igsn_lib")
     responses = []
     c_url = url
     while True:
         cheaders = headers.copy()
         if c_url.startswith(N2T_RESOLVER_URL):
-            cheaders['Accept'] = '*/*'
+            cheaders["Accept"] = "*/*"
         try:
             do_continue = True
             if callback is not None:
                 do_continue = callback(c_url)
             if do_continue:
-                response = _doResolveStep(c_url, cheaders)
+                response = _doResolveStep(
+                    c_url, include_body=include_body, headers=cheaders
+                )
             else:
                 return responses
         except Exception as e:
             L.error(e)
-            fake_response = FakeResponse({
-                'status_code': 0,
-                'url': c_url,
-                'headers': {},
-                'encoding': ''
-            })
+            fake_response = FakeResponse(
+                {
+                    "status_code": 0,
+                    "url": c_url,
+                    "headers": {},
+                    "encoding": "",
+                    "text": "",
+                    "request": {"url": c_url, "headers": cheaders},
+                }
+            )
             responses.append(fake_response)
             return responses
         responses.append(response)
@@ -125,7 +136,7 @@ def _doResolve(url, headers=None, timeout=5, callback=None):
             L.warning("Aborting _doResolve on error status %s", response.status_code)
             return responses
         elif response.status_code >= 300:
-            c_url = response.headers.get('Location', None)
+            c_url = response.headers.get("Location", None)
             if c_url is None:
                 L.warning("redirect code but no location! %s", response.status_code)
                 return responses
@@ -133,30 +144,18 @@ def _doResolve(url, headers=None, timeout=5, callback=None):
             return responses
 
 
-def resolveN2T(identifier, headers=None, callback=None):
+def resolveN2T(identifier, include_body=False, headers=None, callback=None):
     _L = logging.getLogger("igsn_lib")
     url = f"{N2T_RESOLVER_URL}{urllib.parse.quote(identifier)}"
     n2theaders = DEFAULT_RESOLVE_HEADERS.copy()
     if headers is not None:
         n2theaders.update(headers)
-    return _doResolve(url, n2theaders, callback=callback)
-    if headers is not None:
-        n2theaders.update(headers)
-        n2theaders["Accept"] = "*/*"
-    _L.debug("Resolve URL = %s", url)
-    response = requests.get(url, headers=n2theaders, allow_redirects=False)
-    if response.status_code >= 400:
-        return response
-    r_url = response.headers.get("Location", None)
-    if r_url is None:
-        return response
-    rheaders = DEFAULT_RESOLVE_HEADERS.copy()
-    if rheaders is not None:
-        rheaders.update(headers)
-    return requests.get(r_url, headers=rheaders)
+    return _doResolve(
+        url, include_body=include_body, headers=n2theaders, callback=callback
+    )
 
 
-def resolve(igsn_value, headers=None):
+def resolve(igsn_value, include_body=False, headers=None):
     """
     Resolve an IGSN value
 
@@ -184,4 +183,4 @@ def resolve(igsn_value, headers=None):
         rheaders.update(headers)
     url = f"{IGSN_RESOLVER_URL}{urllib.parse.quote(igsn_value)}"
     _L.debug("Resolve URL = %s", url)
-    return requests.get(url, headers=rheaders)
+    return _doResolve(url, include_body=include_body, headers=rheaders)

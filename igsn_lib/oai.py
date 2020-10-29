@@ -4,9 +4,11 @@ Methods in support of OAI-PMH harvesting of IGSN records.
 
 import logging
 import concurrent.futures
+import datetime
 import dateparser
 import sickle
 import sickle.oaiexceptions
+import json
 import xmltodict
 import igsn_lib
 import igsn_lib.time
@@ -20,12 +22,15 @@ IGSN_OAI_NAMESPACES = {
     "http://igsn.org/schema/kernel-v.1.0": "igsn",
     "http://schema.igsn.org/description/1.0": "igsn_desc",
 }
+IGSN_OAI_NAMESPACES_INV = {v: k for k, v in IGSN_OAI_NAMESPACES.items()}
+
 """Metadata namespaces commonly seen in IGSN OAI-PMH responses
 """
 
 DEFAULT_METADATA_PREFIX = "igsn"
 DEFAULT_THREAD_COUNT = 10
 DEFAULT_ENCODING = "utf-8"
+DEFAULT_IGSN_OAIPMH_PROVIDER = "https://doidb.wdc-terra.org/igsnoaip/oai"
 
 
 def _getLogger():
@@ -177,7 +182,7 @@ def listSets(svc, get_counts=False):
         entry = {"setSpec": s.setSpec, "setName": s.setName, "count": None}
         result.append(entry)
     if not get_counts:
-        return
+        return result
     count_result = []
     with concurrent.futures.ThreadPoolExecutor(
         max_workers=DEFAULT_THREAD_COUNT
@@ -245,7 +250,7 @@ def oaiRecordToDict(xml_string):
         "registrant": None,  # registrant name
         "oai_time": None,  # time stamp on the OAI record
         "igsn_time": None,  # submitted or registered time in the log
-        "set_spec": [], # list of setSpec entries for record
+        "set_spec": [],  # list of setSpec entries for record
         "log": [],  # list of log entries
         "related": [],  # list of related identifiers
         "_source": {},
@@ -257,6 +262,7 @@ def oaiRecordToDict(xml_string):
     except Exception as e:
         _L.error(e)
         return None
+    # _L.debug(json.dumps(data["_source"], indent=2))
     data["oai_id"] = data["_source"]["oai:record"]["oai:header"]["oai:identifier"]
     # Always store time in UTC
     data["oai_time"] = dateparser.parse(
@@ -292,6 +298,10 @@ def oaiRecordToDict(xml_string):
             # Use registered time if submitted not available
             if igsn_time is None:
                 igsn_time = _time
+        if _event == "updated":
+            # Fall back to updated time
+            if igsn_time is None:
+                igsn_time = _time
     data["igsn_time"] = igsn_time
     _related_ids = []
     try:
@@ -303,7 +313,7 @@ def oaiRecordToDict(xml_string):
                 _related_ids,
             ]
     except KeyError:
-        logging.debug("No related identifiers in record")
+        _L.debug("No related identifiers in record")
     for related_id in _related_ids:
         entry = {}
         entry["id"] = related_id.get("#text", "")
@@ -311,3 +321,20 @@ def oaiRecordToDict(xml_string):
         entry["rel_type"] = related_id.get("@relationType", "")
         data["related"].append(entry)
     return data
+
+
+class DatetimeEncoder(json.JSONEncoder):
+    def default(self, obj):
+        try:
+            return super().default(obj)
+        except TypeError:
+            if isinstance(obj,datetime.datetime):
+                return igsn_lib.time.datetimeToJsonStr(obj)
+            return str(obj)
+
+def oaiDictRecordToJson(record, indent=2, include_source=False):
+    result = record.copy()
+    if not include_source:
+        result.pop('_source',None)
+    return json.dumps(result, cls=DatetimeEncoder, indent=indent)
+

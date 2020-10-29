@@ -9,6 +9,7 @@ import sqlalchemy
 import sqlalchemy.ext.declarative
 import sqlalchemy.orm
 import sqlalchemy.exc
+import sqlalchemy.schema
 import sickle.oaiexceptions
 import igsn_lib
 import igsn_lib.oai
@@ -19,55 +20,61 @@ _L = logging.getLogger("igsn_lib.models")
 
 Base = sqlalchemy.ext.declarative.declarative_base()
 
-def dtToJson(dt):
-    if dt is None:
-        return None
-    return dt.strftime(igsn_lib.time.JSON_TIME_FORMAT)
 
-class IGSN(Base):
+class Identifier(Base):
     """
     Defines a minimal IGSN record to capture information provided from an OAI-PMH endpoint.
     """
 
-    __tablename__ = "igsn"
+    __tablename__ = "identifier"
     id = sqlalchemy.Column(
         sqlalchemy.String,
         primary_key=True,
-        doc="id is the IGSN value, must be unique in the datastore",
+        doc="id is the identifier scheme:value, must be unique in the datastore",
     )
-    oai_id = sqlalchemy.Column(sqlalchemy.String, doc="The OAI-PMH record id.")
+    provider_id = sqlalchemy.Column(
+        sqlalchemy.String,
+        nullable=True,
+        doc="The provider internal id, e.g. OAI-PMH record id.",
+    )
     service_id = sqlalchemy.Column(
         sqlalchemy.Integer, sqlalchemy.ForeignKey("service.id")
     )
-    record = sqlalchemy.orm.relationship("Service", back_populates="records")
+    identifier = sqlalchemy.orm.relationship("Service", back_populates="identifiers")
     harvest_time = sqlalchemy.Column(
         sqlalchemy.DateTime(timezone=True),
         default=igsn_lib.time.dtnow,
         doc="When the record was harvested, UTC datetime",
     )
-    oai_time = sqlalchemy.Column(
+    provider_time = sqlalchemy.Column(
         sqlalchemy.DateTime(timezone=True),
         nullable=True,
-        doc="Timestamp reported for OAI-PMH record, UTC datetime",
+        doc="Timestamp reported for identifier provider entry if available, UTC datetime",
     )
-    igsn_time = sqlalchemy.Column(
+    id_time = sqlalchemy.Column(
         sqlalchemy.DateTime(timezone=True),
         nullable=True,
-        doc="time reported in the IGSN record submitted or registered log event,UTC datetime",
+        doc="Time reported in the record submitted or registered log event, UTC datetime",
     )
     registrant = sqlalchemy.Column(
         sqlalchemy.String,
         nullable=True,
-        doc="registrant name reported in the IGSN record",
+        doc="Registrant name reported in the source record",
     )
     related = sqlalchemy.Column(
         sqlalchemy.JSON,
         nullable=True,
         default=None,
-        doc="related identifiers in the IGSN record",
+        doc="Related identifiers reported in the source record",
     )
     log = sqlalchemy.Column(
-        sqlalchemy.JSON, nullable=True, default=None, doc="log entries in IGSN record"
+        sqlalchemy.JSON, nullable=True, default=None, doc="log entries in source record"
+    )
+    set_spec = sqlalchemy.Column(
+        sqlalchemy.JSON,
+        nullable=True,
+        default=None,
+        doc="Set labels, e.g. OAI-PMH set names",
     )
 
     def __repr__(self):
@@ -82,14 +89,15 @@ class IGSN(Base):
         """
         d = {
             "id": self.id,
-            "oai_id": self.oai_id,
+            "provider_id": self.provider_id,
             "service_id": self.service_id,
-            "harvest_time": dtToJson(self.harvest_time),
-            "oai_time": dtToJson(self.oai_time),
-            "igsn_time": dtToJson(self.igsn_time),
+            "harvest_time": igsn_lib.time.datetimeToJsonStr(self.harvest_time),
+            "provider_time": igsn_lib.time.datetimeToJsonStr(self.provider_time),
+            "id_time": igsn_lib.time.datetimeToJsonStr(self.id_time),
             "registrant": self.registrant,
             "related": self.related,
             "log": self.log,
+            "sets": self.set_spec,
         }
         return d
 
@@ -137,16 +145,20 @@ class IGSN(Base):
                print(record)
 
         '''
-        data = igsn_lib.oai.oaiRecordToDict(record)
+        data = record
+        if isinstance(record, str):
+            data = igsn_lib.oai.oaiRecordToDict(record)
         self.id = data["igsn_id"]
-        self.oai_id = data["oai_id"]
-        self.oai_time = data["oai_time"]
+        self.provider_id = data["oai_id"]
+        self.provider_time = data["oai_time"]
         self.registrant = data["registrant"]
-        self.igsn_time = data["igsn_time"]
+        self.id_time = data["igsn_time"]
         if len(data["related"]) > 0:
             self.related = data["related"]
         if len(data["log"]) > 0:
             self.log = data["log"]
+        if len(data["set_spec"]) > 0:
+            self.set_spec = data["set_spec"]
 
 
 class Job(Base):
@@ -207,14 +219,14 @@ class Job(Base):
         d = {
             "id": self.id,
             "service_id": self.service_id,
-            "tstart": dtToJson(self.tstart),
-            "tend": dtToJson(self.tend),
+            "tstart": igsn_lib.time.datetimeToJsonStr(self.tstart),
+            "tend": igsn_lib.time.datetimeToJsonStr(self.tend),
             "ignore_deleted": self.ignore_deleted,
             "metadata_prefix": self.metadata_prefix,
             "setspec": self.setspec,
-            "tfrom": dtToJson(self.tfrom),
-            "tuntil": dtToJson(self.tuntil),
-            "tlast_record": dtToJson(self.tlast_record),
+            "tfrom": igsn_lib.time.datetimeToJsonStr(self.tfrom),
+            "tuntil": igsn_lib.time.datetimeToJsonStr(self.tuntil),
+            "tlast_record": igsn_lib.time.datetimeToJsonStr(self.tlast_record),
         }
         return d
 
@@ -275,12 +287,12 @@ class Job(Base):
                 )
             total_count = int(records.resumption_token.complete_list_size)
             try:
-                igsn = IGSN(
+                igsn = Identifier(
                     service_id=self.service_id, harvest_time=igsn_lib.time.dtnow()
                 )
                 igsn.fromOAIRecord(record.raw)
                 _L.debug(igsn)
-                exists = session.query(IGSN).get(igsn.id)
+                exists = session.query(Identifier).get(igsn.id)
                 if not exists:
                     _L.debug("NEW")
                     if callback is not None:
@@ -288,7 +300,7 @@ class Job(Base):
                     new_count += 1
                     try:
                         session.add(igsn)
-                        self.tlast_record = igsn.oai_time
+                        self.tlast_record = igsn.provider_time
                         session.commit()
                     except sqlalchemy.exc.IntegrityError as e:
                         _L.warning("IGSN entry already exists: %s", str(igsn))
@@ -320,13 +332,13 @@ class Service(Base):
         d = {
             "id": self.id,
             "url": self.url,
-            "tearliest": dtToJson(self.tearliest),
+            "tearliest": igsn_lib.time.datetimeToJsonStr(self.tearliest),
             "name": self.name,
             "admin_email": self.admin_email,
         }
         return d
 
-    def populate(self, session=None, url=None):
+    def populateOAI(self, session=None, url=None):
         """
         Populate record from Identify service
 
@@ -354,17 +366,17 @@ class Service(Base):
         oai_svc = igsn_lib.oai.getSickle(self.url)
         return igsn_lib.oai.listSets(oai_svc, get_counts=get_counts)
 
-    def mostRecentRecordRetrieved(self, session):
+    def mostRecentIdentifierRetrieved(self, session):
         """
         Get the most recent harvested record for this service
 
         Returns: IGSN
         """
         rec = (
-            session.query(IGSN)
+            session.query(Identifier)
             .join(Service)
             .filter(Service.id == self.id)
-            .order_by(IGSN.oai_time.desc())
+            .order_by(Identifier.provider_time.desc())
             .first()
         )
         return rec
@@ -372,7 +384,7 @@ class Service(Base):
     def topupHarvestJob(
         self, session, ignore_deleted=True, metadata_prefix="igsn", setspec=None
     ):
-        last_rec = self.mostRecentRecordRetrieved(session)
+        last_rec = self.mostRecentIdentifierRetrieved(session)
         logging.debug("RECENT RECORD: %s", last_rec)
         job = self.createJob(
             session=session,
@@ -470,8 +482,8 @@ Service.jobs = sqlalchemy.orm.relationship(
     "Job", order_by=Job.id, back_populates="service"
 )
 
-Service.records = sqlalchemy.orm.relationship(
-    "IGSN", order_by=IGSN.id, back_populates="record"
+Service.identifiers = sqlalchemy.orm.relationship(
+    "Identifier", order_by=Identifier.id, back_populates="identifier"
 )
 
 
@@ -534,5 +546,5 @@ def addService(session, url):
     """
     svc, _ = getOrCreate(session, Service, url=url)
     if svc.tearliest is None:
-        svc.populate(session=session)
+        svc.populateOAI(session=session)
     return svc

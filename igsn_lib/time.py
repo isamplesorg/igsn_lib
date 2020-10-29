@@ -23,6 +23,10 @@ _BCE_JD0 = 1721060
 def _getLogger():
     return logging.getLogger("igsn_lib.time")
 
+def datetimeToJsonStr(dt):
+    if dt is None:
+        return None
+    return dt.strftime(JSON_TIME_FORMAT)
 
 def datetimeFromSomething(V):
     if V is None:
