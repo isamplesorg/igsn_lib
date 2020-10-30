@@ -220,7 +220,7 @@ def listRecords(
         )
     except:
         pass
-    return svc.Listrecords(ignore_deleted=ignore_deleted, **kwargs)
+    return svc.ListRecords(ignore_deleted=ignore_deleted, **kwargs)
 
 
 def oaiRecordToDict(xml_string):
