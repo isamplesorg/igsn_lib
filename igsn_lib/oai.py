@@ -194,6 +194,34 @@ def listSets(svc, get_counts=False):
             count_result.append(future.result())
     return count_result
 
+def listRecords(
+    svc,
+    metadata_prefix=DEFAULT_METADATA_PREFIX,
+    ignore_deleted=False,
+    set_spec=None,
+    tfrom=None,
+    tuntil=None):
+    L = _getLogger()
+    kwargs = {
+        "metadataPrefix": metadata_prefix,
+        "set": set_spec,
+        "from": None,
+        "until": None,
+    }
+    try:
+        kwargs["from"] = igsn_lib.time.datetimeFromSomething(tfrom).strftime(
+            igsn_lib.time.OAI_TIME_FORMAT
+        )
+    except:
+        pass
+    try:
+        kwargs["until"] = igsn_lib.time.datetimeFromSomething(tuntil).strftime(
+            igsn_lib.time.OAI_TIME_FORMAT
+        )
+    except:
+        pass
+    return svc.Listrecords(ignore_deleted=ignore_deleted, **kwargs)
+
 
 def oaiRecordToDict(xml_string):
     '''
