@@ -48,6 +48,7 @@
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -115,11 +116,6 @@
     </a>
    </li>
   </ul>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notes/igsn_counts.html">
-   2. Counting Registered IGSNs
-  </a>
  </li>
 </ul>
 
@@ -228,16 +224,19 @@
 <tr class="row-even"><td><p><a class="reference internal" href="#igsn_lib.oai.identify" title="igsn_lib.oai.identify"><code class="xref py py-obj docutils literal notranslate"><span class="pre">identify</span></code></a>(url)</p></td>
 <td><p>Call the OAI-PMH Identify operation on the provided service URL.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.oai.listSets" title="igsn_lib.oai.listSets"><code class="xref py py-obj docutils literal notranslate"><span class="pre">listSets</span></code></a>(svc[, get_counts])</p></td>
-<td><p>List the sets reported by an OAI-PMH service.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#igsn_lib.oai.oaiDictRecordToJson" title="igsn_lib.oai.oaiDictRecordToJson"><code class="xref py py-obj docutils literal notranslate"><span class="pre">oaiDictRecordToJson</span></code></a>(record[, indent, …])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.oai.listRecords" title="igsn_lib.oai.listRecords"><code class="xref py py-obj docutils literal notranslate"><span class="pre">listRecords</span></code></a>(svc[, metadata_prefix, …])</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.oai.oaiRecordToDict" title="igsn_lib.oai.oaiRecordToDict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">oaiRecordToDict</span></code></a>(xml_string)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#igsn_lib.oai.listSets" title="igsn_lib.oai.listSets"><code class="xref py py-obj docutils literal notranslate"><span class="pre">listSets</span></code></a>(svc[, get_counts])</p></td>
+<td><p>List the sets reported by an OAI-PMH service.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.oai.oaiDictRecordToJson" title="igsn_lib.oai.oaiDictRecordToJson"><code class="xref py py-obj docutils literal notranslate"><span class="pre">oaiDictRecordToJson</span></code></a>(record[, indent, …])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#igsn_lib.oai.oaiRecordToDict" title="igsn_lib.oai.oaiRecordToDict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">oaiRecordToDict</span></code></a>(xml_string)</p></td>
 <td><p>Converts an OAI-PMH IGSN metadata record to a dict</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#igsn_lib.oai.recordCount" title="igsn_lib.oai.recordCount"><code class="xref py py-obj docutils literal notranslate"><span class="pre">recordCount</span></code></a>(svc[, metadata_prefix, …])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.oai.recordCount" title="igsn_lib.oai.recordCount"><code class="xref py py-obj docutils literal notranslate"><span class="pre">recordCount</span></code></a>(svc[, metadata_prefix, …])</p></td>
 <td><p>Determine the number of records that match an OAI-PMH ListRecords request.</p></td>
 </tr>
 </tbody>
@@ -357,6 +356,11 @@ implement default like this:</p>
 </dd></dl>
 
 <dl class="py function">
+<dt id="igsn_lib.oai.listRecords">
+<code class="sig-prename descclassname">igsn_lib.oai.</code><code class="sig-name descname">listRecords</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">svc</span></em>, <em class="sig-param"><span class="n">metadata_prefix</span><span class="o">=</span><span class="default_value">'igsn'</span></em>, <em class="sig-param"><span class="n">ignore_deleted</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">set_spec</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">tfrom</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">tuntil</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/oai.html#listRecords"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.oai.listRecords" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
 <dt id="igsn_lib.oai.listSets">
 <code class="sig-prename descclassname">igsn_lib.oai.</code><code class="sig-name descname">listSets</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">svc</span></em>, <em class="sig-param"><span class="n">get_counts</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/oai.html#listSets"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.oai.listSets" title="Permalink to this definition">¶</a></dt>
 <dd><p>List the sets reported by an OAI-PMH service.</p>
@@ -388,45 +392,45 @@ implement default like this:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>         0 ANDS.AUSCOPE.REFQUALITY: AuScope (reference quality citations only)
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>         0 CNRS.REFQUALITY: Centre national de la recherche scientifique (reference quality citations only)
          0 ANDS.REFQUALITY: Australian National Data Service (reference quality citations only)
-         0 CNRS.REFQUALITY: Centre national de la recherche scientifique (reference quality citations only)
          0 REFQUALITY: Reference quality citations only.
          0 CNRS.CNRS.REFQUALITY: Centre national de la recherche scientifique (reference quality citations only)
+         0 ANDS.AUSCOPE.REFQUALITY: AuScope (reference quality citations only)
          0 CSIRO.REFQUALITY: CSIRO (reference quality citations only)
          0 GEOAUS.REFQUALITY: Geoscience Australia (reference quality citations only)
          0 CSIRO.CSIRO.REFQUALITY: CSIRO (reference quality citations only)
-         0 GEOAUS.AU.REFQUALITY: Geoscience Australia (reference quality citations only)
        886 CNRS.CNRS: Centre national de la recherche scientifique
-         0 GFZ.REFQUALITY: GFZ Allocator (reference quality citations only)
        886 CNRS: Centre national de la recherche scientifique
-      3202 ANDS.AUSCOPE: AuScope
-      3202 ANDS: Australian National Data Service
+         0 GEOAUS.AU.REFQUALITY: Geoscience Australia (reference quality citations only)
+         0 GFZ.REFQUALITY: GFZ Allocator (reference quality citations only)
          0 GFZ.GFZ.REFQUALITY: Deutsches GeoForschungsZentrum GFZ (reference quality citations only)
+      3202 ANDS: Australian National Data Service
          0 IEDA.REFQUALITY: Integrated Earth Data Applications (reference quality citations only)
          0 IEDA.SESAR.REFQUALITY: System for Earth Sample Registration (reference quality citations only)
+      3202 ANDS.AUSCOPE: AuScope
          0 IFREMER.REFQUALITY: Institut français de recherche pour l&#39;exploitation de la mer (reference quality citations only)
      33248 CSIRO.CSIRO: CSIRO
-     10381 GFZ: GFZ Allocator
      33248 CSIRO: CSIRO
          0 IFREMER.IGSN.REFQUALITY: Institut français de recherche pour l&#39;exploitation de la mer (reference quality citations only)
+     10381 GFZ: GFZ Allocator
          0 KIGAM.REFQUALITY: Korea Institute of Geoscience and Mineral Resources (reference quality citations only)
          0 KIGAM.DC.REFQUALITY: Korea Institute of Geoscience and Mineral Resources (reference quality citations only)
-     18624 IFREMER: Institut français de recherche pour l&#39;exploitation de la mer
      10381 GFZ.GFZ: Deutsches GeoForschungsZentrum GFZ
+     18624 IFREMER: Institut français de recherche pour l&#39;exploitation de la mer
          0 MARUM.REFQUALITY: MARUM Center for Marine Environmental Studies at University of Bremen (reference quality citations only)
          0 MARUM.HB.REFQUALITY: MARUM Center for Marine Environmental Sciences (reference quality citations only)
-   3610606 GEOAUS: Geoscience Australia
      18624 IFREMER.IGSN: Institut français de recherche pour l&#39;exploitation de la mer
+   3610606 GEOAUS: Geoscience Australia
          0 UKI.REFQUALITY: Universität Kiel (reference quality citations only)
-         0 UKI.RZ.REFQUALITY: Universität Kiel - Rechenzentrum (reference quality citations only)
       1397 KIGAM.DC: Korea Institute of Geoscience and Mineral Resources
-        60 UKI: Universität Kiel
     136587 MARUM: MARUM Center for Marine Environmental Studies at University of Bremen
+         0 UKI.RZ.REFQUALITY: Universität Kiel - Rechenzentrum (reference quality citations only)
       1397 KIGAM: Korea Institute of Geoscience and Mineral Resources
-        60 UKI.RZ: Universität Kiel - Rechenzentrum
    3610606 GEOAUS.AU: Geoscience Australia
     136587 MARUM.HB: MARUM Center for Marine Environmental Sciences
+        60 UKI.RZ: Universität Kiel - Rechenzentrum
+        60 UKI: Universität Kiel
    4529860 IEDA: Integrated Earth Data Applications
    4529860 IEDA.SESAR: System for Earth Sample Registration
 </pre></div>

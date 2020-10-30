@@ -48,6 +48,7 @@
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -85,11 +86,6 @@
  <li class="toctree-l1">
   <a class="reference internal" href="../../api/index.html">
    1. igsn_lib Package Documentation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../../notes/igsn_counts.html">
-   2. Counting Registered IGSNs
   </a>
  </li>
 </ul>
@@ -366,6 +362,34 @@
         <span class="k">for</span> <span class="n">future</span> <span class="ow">in</span> <span class="n">concurrent</span><span class="o">.</span><span class="n">futures</span><span class="o">.</span><span class="n">as_completed</span><span class="p">(</span><span class="n">futures</span><span class="p">):</span>
             <span class="n">count_result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">future</span><span class="o">.</span><span class="n">result</span><span class="p">())</span>
     <span class="k">return</span> <span class="n">count_result</span></div>
+
+<div class="viewcode-block" id="listRecords"><a class="viewcode-back" href="../../api/igsn_lib.oai.html#igsn_lib.oai.listRecords">[docs]</a><span class="k">def</span> <span class="nf">listRecords</span><span class="p">(</span>
+    <span class="n">svc</span><span class="p">,</span>
+    <span class="n">metadata_prefix</span><span class="o">=</span><span class="n">DEFAULT_METADATA_PREFIX</span><span class="p">,</span>
+    <span class="n">ignore_deleted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">set_spec</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">tfrom</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">tuntil</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="n">_getLogger</span><span class="p">()</span>
+    <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;metadataPrefix&quot;</span><span class="p">:</span> <span class="n">metadata_prefix</span><span class="p">,</span>
+        <span class="s2">&quot;set&quot;</span><span class="p">:</span> <span class="n">set_spec</span><span class="p">,</span>
+        <span class="s2">&quot;from&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s2">&quot;until&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;from&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">igsn_lib</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">datetimeFromSomething</span><span class="p">(</span><span class="n">tfrom</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span>
+            <span class="n">igsn_lib</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">OAI_TIME_FORMAT</span>
+        <span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;until&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">igsn_lib</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">datetimeFromSomething</span><span class="p">(</span><span class="n">tuntil</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span>
+            <span class="n">igsn_lib</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">OAI_TIME_FORMAT</span>
+        <span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">return</span> <span class="n">svc</span><span class="o">.</span><span class="n">Listrecords</span><span class="p">(</span><span class="n">ignore_deleted</span><span class="o">=</span><span class="n">ignore_deleted</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="oaiRecordToDict"><a class="viewcode-back" href="../../api/igsn_lib.oai.html#igsn_lib.oai.oaiRecordToDict">[docs]</a><span class="k">def</span> <span class="nf">oaiRecordToDict</span><span class="p">(</span><span class="n">xml_string</span><span class="p">):</span>
