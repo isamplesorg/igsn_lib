@@ -366,17 +366,20 @@ class Service(Base):
         oai_svc = igsn_lib.oai.getSickle(self.url)
         return igsn_lib.oai.listSets(oai_svc, get_counts=get_counts)
 
-    def mostRecentIdentifierRetrieved(self, session):
+    def mostRecentIdentifierRetrieved(self, session, set_spec=None):
         """
         Get the most recent harvested record for this service
 
         Returns: IGSN
         """
-        rec = (
-            session.query(Identifier)
+        results = (session.query(Identifier)
             .join(Service)
             .filter(Service.id == self.id)
-            .order_by(Identifier.provider_time.desc())
+        )
+        if not set_spec is None:
+            results = results.filter(Identifier.registrant.like(set_spec))
+        rec = (
+            results.order_by(Identifier.provider_time.desc())
             .first()
         )
         return rec
