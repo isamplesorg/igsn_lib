@@ -535,17 +535,20 @@
         <span class="n">oai_svc</span> <span class="o">=</span> <span class="n">igsn_lib</span><span class="o">.</span><span class="n">oai</span><span class="o">.</span><span class="n">getSickle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">igsn_lib</span><span class="o">.</span><span class="n">oai</span><span class="o">.</span><span class="n">listSets</span><span class="p">(</span><span class="n">oai_svc</span><span class="p">,</span> <span class="n">get_counts</span><span class="o">=</span><span class="n">get_counts</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Service.mostRecentIdentifierRetrieved"><a class="viewcode-back" href="../../api/igsn_lib.models.html#igsn_lib.models.Service.mostRecentIdentifierRetrieved">[docs]</a>    <span class="k">def</span> <span class="nf">mostRecentIdentifierRetrieved</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+<div class="viewcode-block" id="Service.mostRecentIdentifierRetrieved"><a class="viewcode-back" href="../../api/igsn_lib.models.html#igsn_lib.models.Service.mostRecentIdentifierRetrieved">[docs]</a>    <span class="k">def</span> <span class="nf">mostRecentIdentifierRetrieved</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">set_spec</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get the most recent harvested record for this service</span>
 
 <span class="sd">        Returns: IGSN</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">rec</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Identifier</span><span class="p">)</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="p">(</span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Identifier</span><span class="p">)</span>
             <span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">Service</span><span class="p">)</span>
             <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Service</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
-            <span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">Identifier</span><span class="o">.</span><span class="n">provider_time</span><span class="o">.</span><span class="n">desc</span><span class="p">())</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">set_spec</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">results</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Identifier</span><span class="o">.</span><span class="n">registrant</span><span class="o">.</span><span class="n">like</span><span class="p">(</span><span class="n">set_spec</span><span class="p">))</span>
+        <span class="n">rec</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">results</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">Identifier</span><span class="o">.</span><span class="n">provider_time</span><span class="o">.</span><span class="n">desc</span><span class="p">())</span>
             <span class="o">.</span><span class="n">first</span><span class="p">()</span>
         <span class="p">)</span>
         <span class="k">return</span> <span class="n">rec</span></div>
