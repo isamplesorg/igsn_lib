@@ -26,6 +26,46 @@ igsn_resolve_values = [
 ]
 
 
+link_header_values = [
+    (
+        '<meta.rdf>;rel="meta"',
+        [
+            {
+                'href': "meta.rdf",
+                'rel': 'meta',
+            },
+        ]
+    ),
+    (
+      '<http://example.com/TheBook,chapter2>; rel="prev;ious"; title="previous chapter"',
+      [
+          {
+              'href':'http://example.com/TheBook,chapter2',
+              'rel': 'prev;ious',
+              'title': 'previous chapter'
+          }
+      ]
+    ),
+    (
+        '<https://one.example.com>; rel="preconnect", <https://two.example.com>; rel="preconnect", <https://three.example.com>; rel="preconnect"',
+        [
+            {
+                'href':'https://one.example.com',
+                'rel': 'preconnect',
+            },
+            {
+                'href': 'https://two.example.com',
+                'rel': 'preconnect',
+            },
+            {
+                'href': 'https://three.example.com',
+                'rel': 'preconnect',
+            },
+        ]
+    )
+]
+
+
 @pytest.mark.parametrize("igsn_str,expected", igsn_testcases)
 def test_normalize(igsn_str, expected):
     result = igsn_lib.normalize(igsn_str)
@@ -37,3 +77,9 @@ def test_resolve(igsn_val, status_code):
     responses = igsn_lib.resolve(igsn_val)
     last_response = responses[-1]
     assert last_response.status_code == status_code
+
+@pytest.mark.parametrize("hv, expected", link_header_values)
+def test_parseLinkHeader(hv, expected):
+    parsed = igsn_lib.parseLinkHeader(hv)
+    print(parsed)
+    assert parsed == expected
