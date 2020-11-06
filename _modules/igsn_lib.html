@@ -173,6 +173,7 @@
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">urllib.parse</span>
 <span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">re</span>
 
 <span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;0.1.0&quot;</span>
 
@@ -195,6 +196,49 @@
 <span class="p">}</span>
 <span class="sd">&quot;&quot;&quot;Default headers for talking to the resolver</span>
 <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">HEADER_VALUE_SPLIT</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;(?:[</span><span class="se">\&quot;</span><span class="s2">&lt;].*?[</span><span class="se">\&quot;</span><span class="s2">&gt;]|[^,])+&quot;</span><span class="p">)</span>
+<span class="n">HEADER_PROPERTY_SPLIT</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;(?:[</span><span class="se">\&quot;</span><span class="s2">&lt;].*?[</span><span class="se">\&quot;</span><span class="s2">&gt;]|[^;])+&quot;</span><span class="p">)</span>
+
+<span class="c1"># Note: rel may contain multiple values: https://tools.ietf.org/html/rfc8288#section-3.3</span>
+<span class="k">def</span> <span class="nf">_uriValue</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;&lt;&#39;</span> <span class="ow">and</span> <span class="n">v</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;&gt;&#39;</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Not a URI: &#39;</span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">_propValue</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_uriValue</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="c1"># Not a URI so must be a quoted thing.</span>
+    <span class="k">if</span> <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;&quot;&#39;</span> <span class="ow">and</span> <span class="n">v</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;&quot;&#39;</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected quoted value: &#39;</span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="parseLinkHeader"><a class="viewcode-back" href="../api/igsn_lib.html#igsn_lib.parseLinkHeader">[docs]</a><span class="k">def</span> <span class="nf">parseLinkHeader</span><span class="p">(</span><span class="n">hv</span><span class="p">):</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># split by comma, but not within &lt;&gt; or &quot;&quot;</span>
+    <span class="n">vals</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">HEADER_VALUE_SPLIT</span><span class="p">,</span> <span class="n">hv</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">vals</span><span class="p">:</span>
+        <span class="n">entry</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Split by semi-colon</span>
+            <span class="n">props</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">HEADER_PROPERTY_SPLIT</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+            <span class="n">entry</span><span class="p">[</span><span class="s1">&#39;href&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_uriValue</span><span class="p">(</span><span class="n">props</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="k">for</span> <span class="n">prop</span> <span class="ow">in</span> <span class="n">props</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+                <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">prop</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="n">entry</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">_propValue</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+            <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="c1"># Invalid header value, ignore</span>
+            <span class="k">pass</span>
+    <span class="k">return</span> <span class="n">res</span></div>
+
 
 
 <div class="viewcode-block" id="normalize"><a class="viewcode-back" href="../api/igsn_lib.html#igsn_lib.normalize">[docs]</a><span class="k">def</span> <span class="nf">normalize</span><span class="p">(</span><span class="n">igsn_str</span><span class="p">):</span>

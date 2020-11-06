@@ -179,6 +179,7 @@
 <span class="kn">import</span> <span class="nn">sqlalchemy.orm</span>
 <span class="kn">import</span> <span class="nn">sqlalchemy.exc</span>
 <span class="kn">import</span> <span class="nn">sqlalchemy.schema</span>
+<span class="kn">import</span> <span class="nn">sqlalchemy.dialects.postgresql</span>
 <span class="kn">import</span> <span class="nn">sickle.oaiexceptions</span>
 <span class="kn">import</span> <span class="nn">igsn_lib</span>
 <span class="kn">import</span> <span class="nn">igsn_lib.oai</span>
@@ -231,16 +232,19 @@
         <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;Registrant name reported in the source record&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">related</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span>
-        <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">JSON</span><span class="p">,</span>
+        <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">dialects</span><span class="o">.</span><span class="n">postgresql</span><span class="o">.</span><span class="n">JSONB</span><span class="p">,</span>
         <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;Related identifiers reported in the source record&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">log</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span>
-        <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">JSON</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;log entries in source record&quot;</span>
+        <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">dialects</span><span class="o">.</span><span class="n">postgresql</span><span class="o">.</span><span class="n">JSONB</span><span class="p">,</span>
+        <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;log entries in source record&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">set_spec</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span>
-        <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">JSON</span><span class="p">,</span>
+        <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">dialects</span><span class="o">.</span><span class="n">postgresql</span><span class="o">.</span><span class="n">JSONB</span><span class="p">,</span>
         <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;Set labels, e.g. OAI-PMH set names&quot;</span><span class="p">,</span>
@@ -541,16 +545,10 @@
 
 <span class="sd">        Returns: IGSN</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">results</span> <span class="o">=</span> <span class="p">(</span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Identifier</span><span class="p">)</span>
-            <span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">Service</span><span class="p">)</span>
-            <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Service</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
-        <span class="p">)</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Identifier</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">Service</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Service</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">set_spec</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">results</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Identifier</span><span class="o">.</span><span class="n">registrant</span><span class="o">.</span><span class="n">like</span><span class="p">(</span><span class="n">set_spec</span><span class="p">))</span>
-        <span class="n">rec</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">results</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">Identifier</span><span class="o">.</span><span class="n">provider_time</span><span class="o">.</span><span class="n">desc</span><span class="p">())</span>
-            <span class="o">.</span><span class="n">first</span><span class="p">()</span>
-        <span class="p">)</span>
+            <span class="n">results</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Identifier</span><span class="o">.</span><span class="n">set_spec</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="n">set_spec</span><span class="p">))</span>
+        <span class="n">rec</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">Identifier</span><span class="o">.</span><span class="n">provider_time</span><span class="o">.</span><span class="n">desc</span><span class="p">())</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">rec</span></div>
 
 <div class="viewcode-block" id="Service.topupHarvestJob"><a class="viewcode-back" href="../../api/igsn_lib.models.html#igsn_lib.models.Service.topupHarvestJob">[docs]</a>    <span class="k">def</span> <span class="nf">topupHarvestJob</span><span class="p">(</span>
