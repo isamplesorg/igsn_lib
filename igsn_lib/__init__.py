@@ -4,6 +4,7 @@ Utility methods for working with IGSNs and dates.
 import logging
 import urllib.parse
 import requests
+import re
 
 __version__ = "0.1.0"
 
@@ -26,6 +27,49 @@ DEFAULT_RESOLVE_HEADERS = {
 }
 """Default headers for talking to the resolver
 """
+
+HEADER_VALUE_SPLIT = re.compile("(?:[\"<].*?[\">]|[^,])+")
+HEADER_PROPERTY_SPLIT = re.compile("(?:[\"<].*?[\">]|[^;])+")
+
+# Note: rel may contain multiple values: https://tools.ietf.org/html/rfc8288#section-3.3
+def _uriValue(v):
+    v = v.strip()
+    if v[0] != '<' and v[-1] != '>':
+        raise ValueError(f"Not a URI: '{v}'")
+    return v[1:-1]
+
+
+def _propValue(v):
+    v = v.strip()
+    try:
+        return _uriValue(v)
+    except:
+        pass
+    # Not a URI so must be a quoted thing.
+    if v[0] != '"' and v[-1] != '"':
+        raise ValueError(f"Expected quoted value: '{v}'")
+    return v[1:-1]
+
+
+def parseLinkHeader(hv):
+    res = []
+    # split by comma, but not within <> or ""
+    vals = re.findall(HEADER_VALUE_SPLIT, hv)
+    for val in vals:
+        entry = {}
+        try:
+            # Split by semi-colon
+            props = re.findall(HEADER_PROPERTY_SPLIT, val)
+            entry['href'] = _uriValue(props[0])
+            for prop in props[1:]:
+                k, v = prop.strip().split("=", 1)
+                entry[k] = _propValue(v)
+            res.append(entry)
+        except ValueError as e:
+            # Invalid header value, ignore
+            pass
+    return res
+
 
 
 def normalize(igsn_str):
