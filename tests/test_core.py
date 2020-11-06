@@ -1,6 +1,17 @@
 import pytest
 import igsn_lib
 
+'''
+pytest test
+
+Can run like:
+pytest
+pytest test_core.py
+pytest test_core.py::test_parseLinkHeader
+
+Add -s to output stdout
+'''
+
 igsn_testcases = [
     ["IGSN:A1234", "A1234"],
     ["IGSN:a1234", "A1234"],
@@ -37,10 +48,10 @@ link_header_values = [
         ]
     ),
     (
-      '<http://example.com/TheBook,chapter2>; rel="prev;ious"; title="previous chapter"',
+      '<http://example.com/TheBook,chapter2;a>; rel="prev;ious"; title="previous chapter"',
       [
           {
-              'href':'http://example.com/TheBook,chapter2',
+              'href':'http://example.com/TheBook,chapter2;a',
               'rel': 'prev;ious',
               'title': 'previous chapter'
           }

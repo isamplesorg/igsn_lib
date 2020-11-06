@@ -10,6 +10,7 @@ import sqlalchemy.ext.declarative
 import sqlalchemy.orm
 import sqlalchemy.exc
 import sqlalchemy.schema
+import sqlalchemy.dialects.postgresql
 import sickle.oaiexceptions
 import igsn_lib
 import igsn_lib.oai
@@ -62,16 +63,19 @@ class Identifier(Base):
         doc="Registrant name reported in the source record",
     )
     related = sqlalchemy.Column(
-        sqlalchemy.JSON,
+        sqlalchemy.dialects.postgresql.JSONB,
         nullable=True,
         default=None,
         doc="Related identifiers reported in the source record",
     )
     log = sqlalchemy.Column(
-        sqlalchemy.JSON, nullable=True, default=None, doc="log entries in source record"
+        sqlalchemy.dialects.postgresql.JSONB,
+        nullable=True,
+        default=None,
+        doc="log entries in source record",
     )
     set_spec = sqlalchemy.Column(
-        sqlalchemy.JSON,
+        sqlalchemy.dialects.postgresql.JSONB,
         nullable=True,
         default=None,
         doc="Set labels, e.g. OAI-PMH set names",
@@ -372,16 +376,10 @@ class Service(Base):
 
         Returns: IGSN
         """
-        results = (session.query(Identifier)
-            .join(Service)
-            .filter(Service.id == self.id)
-        )
+        results = session.query(Identifier).join(Service).filter(Service.id == self.id)
         if not set_spec is None:
-            results = results.filter(Identifier.registrant.like(set_spec))
-        rec = (
-            results.order_by(Identifier.provider_time.desc())
-            .first()
-        )
+            results = results.filter(Identifier.set_spec.has_key(set_spec))
+        rec = results.order_by(Identifier.provider_time.desc()).first()
         return rec
 
     def topupHarvestJob(
