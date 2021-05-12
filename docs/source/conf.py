@@ -34,7 +34,7 @@ extensions = [
     #"myst_nb",
     "sphinx_copybutton",
     "sphinx_togglebutton",
-    "sphinxcontrib.bibtex",
+    #"sphinxcontrib.bibtex",
     "jupyter_sphinx",
     #"sphinx_thebe",
     #"sphinx_automodapi.automodapi",

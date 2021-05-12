@@ -11,6 +11,7 @@ import sqlalchemy.orm
 import sqlalchemy.exc
 import sqlalchemy.schema
 import sqlalchemy.dialects.postgresql
+import sqlalchemy.ext.compiler
 import sickle.oaiexceptions
 import igsn_lib
 import igsn_lib.oai
@@ -21,6 +22,15 @@ _L = logging.getLogger("igsn_lib.models")
 
 Base = sqlalchemy.ext.declarative.declarative_base()
 
+# Use the JSONB type when connected to a postgres database
+@sqlalchemy.ext.compiler.compiles(sqlalchemy.types.JSON, "postgresql")
+def compile_binary_sqlite(type_, compiler, **kw):
+    return "JSONB"
+
+# Use STRING for storing UUIDs in sqlite
+@sqlalchemy.ext.compiler.compiles(sqlalchemy.dialects.postgresql.UUID, "sqlite")
+def compile_binary_sqlite(type_, compiler, **kw):
+    return "STRING"
 
 class Identifier(Base):
     """
@@ -63,19 +73,19 @@ class Identifier(Base):
         doc="Registrant name reported in the source record",
     )
     related = sqlalchemy.Column(
-        sqlalchemy.dialects.postgresql.JSONB,
+        sqlalchemy.JSON,
         nullable=True,
         default=None,
         doc="Related identifiers reported in the source record",
     )
     log = sqlalchemy.Column(
-        sqlalchemy.dialects.postgresql.JSONB,
+        sqlalchemy.JSON,
         nullable=True,
         default=None,
         doc="log entries in source record",
     )
     set_spec = sqlalchemy.Column(
-        sqlalchemy.dialects.postgresql.JSONB,
+        sqlalchemy.JSON,
         nullable=True,
         default=None,
         doc="Set labels, e.g. OAI-PMH set names",
@@ -499,6 +509,18 @@ def createAll(engine):
         nothing
     """
     Base.metadata.create_all(engine)
+
+def getEngine(db_connection):
+    engine = sqlalchemy.create_engine(db_connection)
+    createAll(engine)
+    return engine
+
+def getSession(engine):
+    session = sqlalchemy.orm.scoped_session(
+        sqlalchemy.orm.sessionmaker(autocommit=False, autoflush=False, bind=engine)
+    )
+    #session = Session()
+    return session
 
 
 def getOrCreate(session, model, create_method="", create_method_kwargs=None, **kwargs):

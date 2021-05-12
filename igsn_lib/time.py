@@ -41,6 +41,11 @@ def datetimeFromSomething(V):
         )
     return None
 
+def datetimeDeltaToSeconds(dtd):
+    v = dtd.days * 86400.0
+    v = v + dtd.seconds
+    v = v + (dtd.microseconds / 1000000.0)
+    return v
 
 def datetimeToJD(dt):
     """

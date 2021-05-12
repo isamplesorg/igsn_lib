@@ -17,12 +17,12 @@ class Thing(igsn_lib.models.Base):
         doc="identifier scheme:value, globally unique"
     )
     tstamp = sqlalchemy.Column(
-        sqlalchemy.DateTime(timezone=True),
-        default=igsn_lib.time.dtnow,
-        doc="When the entry was added to this database, UTC",
+        sqlalchemy.Float,
+        default=igsn_lib.time.jdnow(),
+        doc="When the entry was added to this database, JD",
     )
     tcreated = sqlalchemy.Column(
-        sqlalchemy.DateTime(timezone=True),
+        sqlalchemy.Float,
         default = None,
         nullable=True,
         doc = "When the record was created, if available",
@@ -43,7 +43,7 @@ class Thing(igsn_lib.models.Base):
         sqlalchemy.JSON,
         nullable=True,
         default=None,
-        doc="related things [{tstamp, predicate, object}]",
+        doc="related things [{tstamp, predicate, object}], tstamp is set to",
     )
     log = sqlalchemy.Column(
         sqlalchemy.JSON, nullable=True, default=None, doc="log entries in IGSN record"
@@ -61,10 +61,16 @@ class Thing(igsn_lib.models.Base):
         doc = "Status code of the resolve response"
     )
     tresolved = sqlalchemy.Column(
-        sqlalchemy.DateTime(timezone=True),
+        sqlalchemy.Float,
         default = None,
         nullable=True,
         doc = "When the record was resolved",
+    )
+    resolve_elapsed = sqlalchemy.Column(
+        sqlalchemy.Float,
+        default = None,
+        nullable=True,
+        doc= "Time in seconds to resolve record"
     )
     resolved_content = sqlalchemy.Column(
         sqlalchemy.JSON,
@@ -80,16 +86,17 @@ class Thing(igsn_lib.models.Base):
     def asJsonDict(self):
         res = {
             'id':self.id,
-            'tstamp': igsn_lib.models.dtToJson(self.tstamp),
-            'tcreated':igsn_lib.models.dtToJson(self.tcreated),
+            'tstamp': igsn_lib.time.datetimeToJsonStr(self.tstamp),
+            'tcreated':igsn_lib.time.datetimeToJsonStr(self.tcreated),
             'item_type': self.item_type,
             'authority_id': self.authority_id,
             'related': self.related,
             'log': self.log,
             'resolved_url': self.resolved_url,
             'resolved_status': self.resolved_status,
-            'tresolved': igsn_lib.models.dtToJson(self.tresolved),
+            'tresolved': igsn_lib.time.datetimeToJsonStr(self.tresolved),
             'resolved_content': self.resolved_content,
+            'resolved_elapsed': self.resolve_elapsed,
         }
         return res
 
