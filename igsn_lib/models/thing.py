@@ -78,7 +78,12 @@ class Thing(igsn_lib.models.Base):
         default=None,
         doc="Resolved content, {content_type:, content: }",
     )
-
+    resolved_media_type = sqlalchemy.Column(
+        sqlalchemy.String,
+        nullable=True,
+        default=None,
+        doc="Media type of resolved content",
+    )
 
     def __repr__(self):
         return json.dumps(self.asJsonDict(), indent=2)
@@ -97,6 +102,7 @@ class Thing(igsn_lib.models.Base):
             'tresolved': igsn_lib.time.datetimeToJsonStr(self.tresolved),
             'resolved_content': self.resolved_content,
             'resolved_elapsed': self.resolve_elapsed,
+            'resolved_media_type': self.resolved_media_type,
         }
         return res
 
