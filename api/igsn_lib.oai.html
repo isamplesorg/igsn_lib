@@ -4,10 +4,11 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>1.3. igsn_lib.oai &#8212; igsn_lib 0.1 documentation</title>
     
-  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
     
   <link rel="stylesheet"
@@ -26,7 +27,7 @@
 
     
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.2d2078699c18a0efb88233928e1cf6ed.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e7340bb3dbd8dde6db86f25597f54a1b.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/jupyter-sphinx.css" />
@@ -34,22 +35,21 @@
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
 
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script src="../_static/togglebutton.js"></script>
     <script src="../_static/thebelab-helper.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="../_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
+    <script src="../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="1.4. igsn_lib.models" href="igsn_lib.models.html" />
@@ -76,20 +76,17 @@
   <h1 class="site-logo" id="site-title">igsn_lib 0.1 documentation</h1>
   
 </a>
-</div>
-
-<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
 </form>
-
 <nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
-  <ul class="current nav sidenav_l1">
- <li class="toctree-l1 current active">
+    <ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active collapsible-parent">
   <a class="reference internal" href="index.html">
    1. igsn_lib Package Documentation
   </a>
-  <ul class="current">
+  <ul class="current collapse-ul">
    <li class="toctree-l2">
     <a class="reference internal" href="igsn_lib.html">
      1.1. igsn_lib Package
@@ -116,12 +113,12 @@
     </a>
    </li>
   </ul>
+  <i class="fas fa-chevron-down">
+  </i>
  </li>
 </ul>
 
-</nav>
-
- <!-- To handle the deprecated key -->
+</nav> <!-- To handle the deprecated key -->
 
 <div class="navbar_extra_footer">
   Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
@@ -136,25 +133,25 @@
           
 <main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
     
-    <div class="row topbar fixed-top container-xl">
-    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
-    </div>
-    <div class="col pl-2 topbar-main">
-        
-        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-            <i class="fas fa-bars"></i>
-            <i class="fas fa-arrow-left"></i>
-            <i class="fas fa-arrow-up"></i>
-        </button>
-        
-        <div class="dropdown-buttons-trigger">
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
             class="fas fa-download"></i></button>
 
-    
     <div class="dropdown-buttons">
         <!-- ipynb file if we had a myst markdown file -->
         
@@ -166,9 +163,9 @@
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
             onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
-    
 </div>
-        <!-- Source interaction buttons -->
+
+            <!-- Source interaction buttons -->
 
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
@@ -189,19 +186,20 @@
 </div>
 
 
-        <!-- Full screen (wrap in <a> to have style consistency -->
-        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-                title="Fullscreen mode"><i
-                    class="fas fa-expand"></i></button></a>
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
 
-        <!-- Launch buttons -->
+            <!-- Launch buttons -->
 
-    </div>
+        </div>
 
-    <!-- Table of contents -->
-    <div class="d-none d-md-block col-md-2 bd-toc show">
-        
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        </div>
     </div>
 </div>
     <div id="main-content" class="row">
@@ -209,7 +207,7 @@
         
               <div>
                 
-  <div class="section" id="igsn-lib-oai">
+  <section id="igsn-lib-oai">
 <h1><span class="section-number">1.3. </span>igsn_lib.oai<a class="headerlink" href="#igsn-lib-oai" title="Permalink to this headline">¶</a></h1>
 <p class="rubric">Methods</p>
 <table class="longtable table autosummary">
@@ -245,11 +243,11 @@
 <span class="target" id="module-igsn_lib.oai"></span><p>Methods in support of OAI-PMH harvesting of IGSN records.</p>
 <dl class="py class">
 <dt id="igsn_lib.oai.DatetimeEncoder">
-<em class="property">class </em><code class="sig-prename descclassname">igsn_lib.oai.</code><code class="sig-name descname">DatetimeEncoder</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">skipkeys</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">ensure_ascii</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">check_circular</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">allow_nan</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">sort_keys</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">indent</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">separators</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">default</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/oai.html#DatetimeEncoder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.oai.DatetimeEncoder" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">igsn_lib.oai.</span></code><code class="sig-name descname"><span class="pre">DatetimeEncoder</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skipkeys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ensure_ascii</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_circular</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allow_nan</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort_keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separators</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/oai.html#DatetimeEncoder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#igsn_lib.oai.DatetimeEncoder" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">json.encoder.JSONEncoder</span></code></p>
 <dl class="py method">
 <dt id="igsn_lib.oai.DatetimeEncoder.default">
-<code class="sig-name descname">default</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/oai.html#DatetimeEncoder.default"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.oai.DatetimeEncoder.default" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">default</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/oai.html#DatetimeEncoder.default"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#igsn_lib.oai.DatetimeEncoder.default" title="Permalink to this definition">¶</a></dt>
 <dd><p>Implement this method in a subclass such that it returns
 a serializable object for <code class="docutils literal notranslate"><span class="pre">o</span></code>, or calls the base implementation
 (to raise a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>).</p>
@@ -272,13 +270,13 @@ implement default like this:</p>
 
 <dl class="py data">
 <dt id="igsn_lib.oai.IGSN_OAI_NAMESPACES_INV">
-<code class="sig-prename descclassname">igsn_lib.oai.</code><code class="sig-name descname">IGSN_OAI_NAMESPACES_INV</code><em class="property"> = {'dc': 'http://purl.org/dc/elements/1.1/', 'igsn': 'http://igsn.org/schema/kernel-v.1.0', 'igsn_desc': 'http://schema.igsn.org/description/1.0', 'oai': 'http://www.openarchives.org/OAI/2.0/', 'oai_dc': 'http://www.openarchives.org/OAI/2.0/oai_dc/', 'oai_identifier': 'http://www.openarchives.org/OAI/2.0/oai-identifier', 'xsi': 'http://www.w3.org/2001/XMLSchema-instance'}</em><a class="headerlink" href="#igsn_lib.oai.IGSN_OAI_NAMESPACES_INV" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">igsn_lib.oai.</span></code><code class="sig-name descname"><span class="pre">IGSN_OAI_NAMESPACES_INV</span></code><em class="property"> <span class="pre">=</span> <span class="pre">{'dc':</span> <span class="pre">'http://purl.org/dc/elements/1.1/',</span> <span class="pre">'igsn':</span> <span class="pre">'http://igsn.org/schema/kernel-v.1.0',</span> <span class="pre">'igsn_desc':</span> <span class="pre">'http://schema.igsn.org/description/1.0',</span> <span class="pre">'oai':</span> <span class="pre">'http://www.openarchives.org/OAI/2.0/',</span> <span class="pre">'oai_dc':</span> <span class="pre">'http://www.openarchives.org/OAI/2.0/oai_dc/',</span> <span class="pre">'oai_identifier':</span> <span class="pre">'http://www.openarchives.org/OAI/2.0/oai-identifier',</span> <span class="pre">'xsi':</span> <span class="pre">'http://www.w3.org/2001/XMLSchema-instance'}</span></em><a class="headerlink" href="#igsn_lib.oai.IGSN_OAI_NAMESPACES_INV" title="Permalink to this definition">¶</a></dt>
 <dd><p>Metadata namespaces commonly seen in IGSN OAI-PMH responses</p>
 </dd></dl>
 
 <dl class="py function">
 <dt id="igsn_lib.oai.getSickle">
-<code class="sig-prename descclassname">igsn_lib.oai.</code><code class="sig-name descname">getSickle</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">url</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/oai.html#getSickle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.oai.getSickle" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">igsn_lib.oai.</span></code><code class="sig-name descname"><span class="pre">getSickle</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/oai.html#getSickle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#igsn_lib.oai.getSickle" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a Sickle instance</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -292,7 +290,7 @@ implement default like this:</p>
 
 <dl class="py function">
 <dt id="igsn_lib.oai.identify">
-<code class="sig-prename descclassname">igsn_lib.oai.</code><code class="sig-name descname">identify</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">url</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/oai.html#identify"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.oai.identify" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">igsn_lib.oai.</span></code><code class="sig-name descname"><span class="pre">identify</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/oai.html#identify"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#igsn_lib.oai.identify" title="Permalink to this definition">¶</a></dt>
 <dd><p>Call the OAI-PMH Identify operation on the provided service URL.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -357,12 +355,12 @@ implement default like this:</p>
 
 <dl class="py function">
 <dt id="igsn_lib.oai.listRecords">
-<code class="sig-prename descclassname">igsn_lib.oai.</code><code class="sig-name descname">listRecords</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">svc</span></em>, <em class="sig-param"><span class="n">metadata_prefix</span><span class="o">=</span><span class="default_value">'igsn'</span></em>, <em class="sig-param"><span class="n">ignore_deleted</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">set_spec</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">tfrom</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">tuntil</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/oai.html#listRecords"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.oai.listRecords" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">igsn_lib.oai.</span></code><code class="sig-name descname"><span class="pre">listRecords</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">svc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'igsn'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_deleted</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_spec</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tfrom</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tuntil</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/oai.html#listRecords"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#igsn_lib.oai.listRecords" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt id="igsn_lib.oai.listSets">
-<code class="sig-prename descclassname">igsn_lib.oai.</code><code class="sig-name descname">listSets</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">svc</span></em>, <em class="sig-param"><span class="n">get_counts</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/oai.html#listSets"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.oai.listSets" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">igsn_lib.oai.</span></code><code class="sig-name descname"><span class="pre">listSets</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">svc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">get_counts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/oai.html#listSets"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#igsn_lib.oai.listSets" title="Permalink to this definition">¶</a></dt>
 <dd><p>List the sets reported by an OAI-PMH service.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -392,47 +390,51 @@ implement default like this:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>         0 CNRS.REFQUALITY: Centre national de la recherche scientifique (reference quality citations only)
-         0 CNRS.CNRS.REFQUALITY: Centre national de la recherche scientifique (reference quality citations only)
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>         0 REFQUALITY: Reference quality citations only.
+         0 CNRS.REFQUALITY: Centre national de la recherche scientifique (reference quality citations only)
          0 ANDS.REFQUALITY: Australian National Data Service (reference quality citations only)
-         0 CSIRO.REFQUALITY: CSIRO (reference quality citations only)
-         0 REFQUALITY: Reference quality citations only.
          0 ANDS.AUSCOPE.REFQUALITY: AuScope (reference quality citations only)
-         0 CSIRO.CSIRO.REFQUALITY: CSIRO (reference quality citations only)
-       886 CNRS.CNRS: Centre national de la recherche scientifique
-       886 CNRS: Centre national de la recherche scientifique
-         0 GEOAUS.AU.REFQUALITY: Geoscience Australia (reference quality citations only)
+         0 CNRS.CNRS.REFQUALITY: Centre national de la recherche scientifique (reference quality citations only)
          0 GEOAUS.REFQUALITY: Geoscience Australia (reference quality citations only)
+         0 CSIRO.REFQUALITY: CSIRO (reference quality citations only)
+         0 CSIRO.CSIRO.REFQUALITY: CSIRO (reference quality citations only)
+         0 GEOAUS.AU.REFQUALITY: Geoscience Australia (reference quality citations only)
          0 GFZ.REFQUALITY: GFZ Allocator (reference quality citations only)
-      3202 ANDS: Australian National Data Service
-         0 GFZ.GFZ.REFQUALITY: Deutsches GeoForschungsZentrum GFZ (reference quality citations only)
       3202 ANDS.AUSCOPE: AuScope
-     33248 CSIRO: CSIRO
-         0 IEDA.REFQUALITY: Integrated Earth Data Applications (reference quality citations only)
-         0 IEDA.SESAR.REFQUALITY: System for Earth Sample Registration (reference quality citations only)
+       886 CNRS: Centre national de la recherche scientifique
+         0 GFZ.GFZ.REFQUALITY: Deutsches GeoForschungsZentrum GFZ (reference quality citations only)
+      3202 ANDS: Australian National Data Service
      33248 CSIRO.CSIRO: CSIRO
+         0 IEDA.REFQUALITY: Integrated Earth Data Applications (reference quality citations only)
+       886 CNRS.CNRS: Centre national de la recherche scientifique
+         0 IEDA.SESAR.REFQUALITY: System for Earth Sample Registration (reference quality citations only)
+     33248 CSIRO: CSIRO
          0 IFREMER.REFQUALITY: Institut français de recherche pour l&#39;exploitation de la mer (reference quality citations only)
          0 IFREMER.IGSN.REFQUALITY: Institut français de recherche pour l&#39;exploitation de la mer (reference quality citations only)
+     10521 GFZ: GFZ Allocator
+   4973763 GEOAUS: Geoscience Australia
          0 KIGAM.REFQUALITY: Korea Institute of Geoscience and Mineral Resources (reference quality citations only)
-     10461 GFZ: GFZ Allocator
+         1 LITHODAT: Lithodat Pty Ltd.
          0 KIGAM.DC.REFQUALITY: Korea Institute of Geoscience and Mineral Resources (reference quality citations only)
-     10461 GFZ.GFZ: Deutsches GeoForschungsZentrum GFZ
-     25571 IFREMER: Institut français de recherche pour l&#39;exploitation de la mer
-     25571 IFREMER.IGSN: Institut français de recherche pour l&#39;exploitation de la mer
+         0 LITHODAT.REFQUALITY: Lithodat Pty Ltd. (reference quality citations only)
+         1 LITHODAT.LD: LITHODAT PTY LTD
+     10521 GFZ.GFZ: Deutsches GeoForschungsZentrum GFZ
+         0 LITHODAT.LD.REFQUALITY: LITHODAT PTY LTD (reference quality citations only)
          0 MARUM.REFQUALITY: MARUM Center for Marine Environmental Studies at University of Bremen (reference quality citations only)
+   4973763 GEOAUS.AU: Geoscience Australia
          0 MARUM.HB.REFQUALITY: MARUM Center for Marine Environmental Sciences (reference quality citations only)
-      2578 KIGAM: Korea Institute of Geoscience and Mineral Resources
          0 UKI.REFQUALITY: Universität Kiel (reference quality citations only)
-   4935885 GEOAUS: Geoscience Australia
+     25571 IFREMER: Institut français de recherche pour l&#39;exploitation de la mer
          0 UKI.RZ.REFQUALITY: Universität Kiel - Rechenzentrum (reference quality citations only)
-        60 UKI: Universität Kiel
-      2578 KIGAM.DC: Korea Institute of Geoscience and Mineral Resources
+     25571 IFREMER.IGSN: Institut français de recherche pour l&#39;exploitation de la mer
+      2762 KIGAM: Korea Institute of Geoscience and Mineral Resources
+   4605589 IEDA: Integrated Earth Data Applications
+      2762 KIGAM.DC: Korea Institute of Geoscience and Mineral Resources
+   4605589 IEDA.SESAR: System for Earth Sample Registration
     136587 MARUM: MARUM Center for Marine Environmental Studies at University of Bremen
-   4935885 GEOAUS.AU: Geoscience Australia
-        60 UKI.RZ: Universität Kiel - Rechenzentrum
     136587 MARUM.HB: MARUM Center for Marine Environmental Sciences
-   4604890 IEDA: Integrated Earth Data Applications
-   4604890 IEDA.SESAR: System for Earth Sample Registration
+        60 UKI: Universität Kiel
+        60 UKI.RZ: Universität Kiel - Rechenzentrum
 </pre></div>
 </div>
 </div>
@@ -441,12 +443,12 @@ implement default like this:</p>
 
 <dl class="py function">
 <dt id="igsn_lib.oai.oaiDictRecordToJson">
-<code class="sig-prename descclassname">igsn_lib.oai.</code><code class="sig-name descname">oaiDictRecordToJson</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">record</span></em>, <em class="sig-param"><span class="n">indent</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">include_source</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/oai.html#oaiDictRecordToJson"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.oai.oaiDictRecordToJson" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">igsn_lib.oai.</span></code><code class="sig-name descname"><span class="pre">oaiDictRecordToJson</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">record</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_source</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/oai.html#oaiDictRecordToJson"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#igsn_lib.oai.oaiDictRecordToJson" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt id="igsn_lib.oai.oaiRecordToDict">
-<code class="sig-prename descclassname">igsn_lib.oai.</code><code class="sig-name descname">oaiRecordToDict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">xml_string</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/oai.html#oaiRecordToDict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.oai.oaiRecordToDict" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">igsn_lib.oai.</span></code><code class="sig-name descname"><span class="pre">oaiRecordToDict</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xml_string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/oai.html#oaiRecordToDict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#igsn_lib.oai.oaiRecordToDict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts an OAI-PMH IGSN metadata record to a dict</p>
 <p>The IGSN schema is at <a class="reference external" href="https://doidb.wdc-terra.org/igsn/schemas/igsn.org/schema/1.0/igsn.xsd">https://doidb.wdc-terra.org/igsn/schemas/igsn.org/schema/1.0/igsn.xsd</a></p>
 <p>Times are returned as timezone aware python datetime, TZ=UTC.</p>
@@ -543,7 +545,7 @@ implement default like this:</p>
 
 <dl class="py function">
 <dt id="igsn_lib.oai.recordCount">
-<code class="sig-prename descclassname">igsn_lib.oai.</code><code class="sig-name descname">recordCount</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">svc</span></em>, <em class="sig-param"><span class="n">metadata_prefix</span><span class="o">=</span><span class="default_value">'igsn'</span></em>, <em class="sig-param"><span class="n">ignore_deleted</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">set_spec</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">tfrom</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">tuntil</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/oai.html#recordCount"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.oai.recordCount" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">igsn_lib.oai.</span></code><code class="sig-name descname"><span class="pre">recordCount</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">svc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'igsn'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_deleted</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_spec</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tfrom</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tuntil</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/oai.html#recordCount"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#igsn_lib.oai.recordCount" title="Permalink to this definition">¶</a></dt>
 <dd><p>Determine the number of records that match an OAI-PMH ListRecords request.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -588,20 +590,20 @@ implement default like this:</p>
 </div>
 </dd></dl>
 
-</div>
+</section>
 
 
               </div>
               
-        </div>
-    </div>
-    
-    
-    <div class='prev-next-bottom'>
         
+        <div class='prev-next-bottom'>
+            
     <a class='left-prev' id="prev-link" href="igsn_lib.time.html" title="previous page"><span class="section-number">1.2. </span>igsn_lib.time</a>
     <a class='right-next' id="next-link" href="igsn_lib.models.html" title="next page"><span class="section-number">1.4. </span>igsn_lib.models</a>
 
+        </div>
+        
+        </div>
     </div>
     <footer class="footer mt-5 mt-md-0">
     <div class="container">
@@ -629,7 +631,7 @@ and <a href='https://nsf.gov/awardsearch/showAward?AWD_ID=2004815'>2004815</a>. 
     </div>
 
     
-  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
 
 
     

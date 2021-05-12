@@ -4,10 +4,11 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>1.2. igsn_lib.time &#8212; igsn_lib 0.1 documentation</title>
     
-  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
     
   <link rel="stylesheet"
@@ -26,7 +27,7 @@
 
     
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.2d2078699c18a0efb88233928e1cf6ed.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e7340bb3dbd8dde6db86f25597f54a1b.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/jupyter-sphinx.css" />
@@ -34,22 +35,21 @@
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
 
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script src="../_static/togglebutton.js"></script>
     <script src="../_static/thebelab-helper.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="../_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
+    <script src="../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="1.3. igsn_lib.oai" href="igsn_lib.oai.html" />
@@ -76,20 +76,17 @@
   <h1 class="site-logo" id="site-title">igsn_lib 0.1 documentation</h1>
   
 </a>
-</div>
-
-<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
 </form>
-
 <nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
-  <ul class="current nav sidenav_l1">
- <li class="toctree-l1 current active">
+    <ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active collapsible-parent">
   <a class="reference internal" href="index.html">
    1. igsn_lib Package Documentation
   </a>
-  <ul class="current">
+  <ul class="current collapse-ul">
    <li class="toctree-l2">
     <a class="reference internal" href="igsn_lib.html">
      1.1. igsn_lib Package
@@ -116,12 +113,12 @@
     </a>
    </li>
   </ul>
+  <i class="fas fa-chevron-down">
+  </i>
  </li>
 </ul>
 
-</nav>
-
- <!-- To handle the deprecated key -->
+</nav> <!-- To handle the deprecated key -->
 
 <div class="navbar_extra_footer">
   Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
@@ -136,25 +133,25 @@
           
 <main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
     
-    <div class="row topbar fixed-top container-xl">
-    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
-    </div>
-    <div class="col pl-2 topbar-main">
-        
-        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-            <i class="fas fa-bars"></i>
-            <i class="fas fa-arrow-left"></i>
-            <i class="fas fa-arrow-up"></i>
-        </button>
-        
-        <div class="dropdown-buttons-trigger">
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
             class="fas fa-download"></i></button>
 
-    
     <div class="dropdown-buttons">
         <!-- ipynb file if we had a myst markdown file -->
         
@@ -166,9 +163,9 @@
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
             onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
-    
 </div>
-        <!-- Source interaction buttons -->
+
+            <!-- Source interaction buttons -->
 
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
@@ -189,19 +186,20 @@
 </div>
 
 
-        <!-- Full screen (wrap in <a> to have style consistency -->
-        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-                title="Fullscreen mode"><i
-                    class="fas fa-expand"></i></button></a>
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
 
-        <!-- Launch buttons -->
+            <!-- Launch buttons -->
 
-    </div>
+        </div>
 
-    <!-- Table of contents -->
-    <div class="d-none d-md-block col-md-2 bd-toc show">
-        
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        </div>
     </div>
 </div>
     <div id="main-content" class="row">
@@ -209,7 +207,7 @@
         
               <div>
                 
-  <div class="section" id="igsn-lib-time">
+  <section id="igsn-lib-time">
 <h1><span class="section-number">1.2. </span>igsn_lib.time<a class="headerlink" href="#igsn-lib-time" title="Permalink to this headline">¶</a></h1>
 <p>This libary provides some convenience methods for working with Julian dates.</p>
 <p>A Julian Date is a floating point value that identifies the number of days before
@@ -267,7 +265,7 @@ this page was last edited:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>It is now: 2459326.3669153377
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>It is now: 2459346.5954329097
 </pre></div>
 </div>
 </div>
@@ -337,43 +335,46 @@ determined to be 66.038 +- 0.025/0.049 Ma <a class="footnote-reference brackets"
 <tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.time.bceToJd" title="igsn_lib.time.bceToJd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bceToJd</span></code></a>(bce)</p></td>
 <td><p>Convert BCE date to Julian date, where 1 BCE = year 0000.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#igsn_lib.time.datetimeFromSomething" title="igsn_lib.time.datetimeFromSomething"><code class="xref py py-obj docutils literal notranslate"><span class="pre">datetimeFromSomething</span></code></a>(V)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#igsn_lib.time.datetimeDeltaToSeconds" title="igsn_lib.time.datetimeDeltaToSeconds"><code class="xref py py-obj docutils literal notranslate"><span class="pre">datetimeDeltaToSeconds</span></code></a>(dtd)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.time.datetimeToJD" title="igsn_lib.time.datetimeToJD"><code class="xref py py-obj docutils literal notranslate"><span class="pre">datetimeToJD</span></code></a>(dt)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.time.datetimeFromSomething" title="igsn_lib.time.datetimeFromSomething"><code class="xref py py-obj docutils literal notranslate"><span class="pre">datetimeFromSomething</span></code></a>(V)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#igsn_lib.time.datetimeToJD" title="igsn_lib.time.datetimeToJD"><code class="xref py py-obj docutils literal notranslate"><span class="pre">datetimeToJD</span></code></a>(dt)</p></td>
 <td><p>Convert a python datetime to Julian date.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#igsn_lib.time.datetimeToJsonStr" title="igsn_lib.time.datetimeToJsonStr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">datetimeToJsonStr</span></code></a>(dt)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.time.datetimeToJsonStr" title="igsn_lib.time.datetimeToJsonStr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">datetimeToJsonStr</span></code></a>(dt)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.time.dtnow" title="igsn_lib.time.dtnow"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dtnow</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#igsn_lib.time.dtnow" title="igsn_lib.time.dtnow"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dtnow</span></code></a>()</p></td>
 <td><p>Get datetime for now in UTC timezone.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#igsn_lib.time.jdFromString" title="igsn_lib.time.jdFromString"><code class="xref py py-obj docutils literal notranslate"><span class="pre">jdFromString</span></code></a>(tstr)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.time.jdFromString" title="igsn_lib.time.jdFromString"><code class="xref py py-obj docutils literal notranslate"><span class="pre">jdFromString</span></code></a>(tstr)</p></td>
 <td><p>Julian date from string representation of time.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.time.jdToBCE" title="igsn_lib.time.jdToBCE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">jdToBCE</span></code></a>(jd)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#igsn_lib.time.jdToBCE" title="igsn_lib.time.jdToBCE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">jdToBCE</span></code></a>(jd)</p></td>
 <td><p>Convert Julian date to BCE, where 1 BCE = year 0000.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#igsn_lib.time.jdToDateTime" title="igsn_lib.time.jdToDateTime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">jdToDateTime</span></code></a>(jd)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.time.jdToDateTime" title="igsn_lib.time.jdToDateTime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">jdToDateTime</span></code></a>(jd)</p></td>
 <td><p>Convert Julian date to datetime.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.time.jdToJsonString" title="igsn_lib.time.jdToJsonString"><code class="xref py py-obj docutils literal notranslate"><span class="pre">jdToJsonString</span></code></a>(jd)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#igsn_lib.time.jdToJsonString" title="igsn_lib.time.jdToJsonString"><code class="xref py py-obj docutils literal notranslate"><span class="pre">jdToJsonString</span></code></a>(jd)</p></td>
 <td><p>Convert Julian date to a JSON datetime string.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#igsn_lib.time.jdToMa" title="igsn_lib.time.jdToMa"><code class="xref py py-obj docutils literal notranslate"><span class="pre">jdToMa</span></code></a>(jd)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.time.jdToMa" title="igsn_lib.time.jdToMa"><code class="xref py py-obj docutils literal notranslate"><span class="pre">jdToMa</span></code></a>(jd)</p></td>
 <td><p>Convert Julian date to Ma (millions of years ago).</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.time.jdToOAIPMHString" title="igsn_lib.time.jdToOAIPMHString"><code class="xref py py-obj docutils literal notranslate"><span class="pre">jdToOAIPMHString</span></code></a>(jd)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#igsn_lib.time.jdToOAIPMHString" title="igsn_lib.time.jdToOAIPMHString"><code class="xref py py-obj docutils literal notranslate"><span class="pre">jdToOAIPMHString</span></code></a>(jd)</p></td>
 <td><p>Convert Julian date to an OAI-PMH acceptable datetime string.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#igsn_lib.time.jdToString" title="igsn_lib.time.jdToString"><code class="xref py py-obj docutils literal notranslate"><span class="pre">jdToString</span></code></a>(jd, format_str)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.time.jdToString" title="igsn_lib.time.jdToString"><code class="xref py py-obj docutils literal notranslate"><span class="pre">jdToString</span></code></a>(jd, format_str)</p></td>
 <td><p>Convert Julian date to a string representation</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.time.jdnow" title="igsn_lib.time.jdnow"><code class="xref py py-obj docutils literal notranslate"><span class="pre">jdnow</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#igsn_lib.time.jdnow" title="igsn_lib.time.jdnow"><code class="xref py py-obj docutils literal notranslate"><span class="pre">jdnow</span></code></a>()</p></td>
 <td><p>Current Julian date.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#igsn_lib.time.maToJd" title="igsn_lib.time.maToJd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">maToJd</span></code></a>(Ma)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.time.maToJd" title="igsn_lib.time.maToJd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">maToJd</span></code></a>(Ma)</p></td>
 <td><p>Convert Ma (millions of years ago) to Julian date.</p></td>
 </tr>
 </tbody>
@@ -382,19 +383,19 @@ determined to be 66.038 +- 0.025/0.049 Ma <a class="footnote-reference brackets"
 <span class="target" id="module-igsn_lib.time"></span><p>Time handling routines for igsn_lib.</p>
 <dl class="py data">
 <dt id="igsn_lib.time.JSON_TIME_FORMAT">
-<code class="sig-prename descclassname">igsn_lib.time.</code><code class="sig-name descname">JSON_TIME_FORMAT</code><em class="property"> = '%Y-%m-%dT%H:%M:%S%z'</em><a class="headerlink" href="#igsn_lib.time.JSON_TIME_FORMAT" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">igsn_lib.time.</span></code><code class="sig-name descname"><span class="pre">JSON_TIME_FORMAT</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'%Y-%m-%dT%H:%M:%S%z'</span></em><a class="headerlink" href="#igsn_lib.time.JSON_TIME_FORMAT" title="Permalink to this definition">¶</a></dt>
 <dd><p>datetime format string for generating JSON content</p>
 </dd></dl>
 
 <dl class="py data">
 <dt id="igsn_lib.time.OAI_TIME_FORMAT">
-<code class="sig-prename descclassname">igsn_lib.time.</code><code class="sig-name descname">OAI_TIME_FORMAT</code><em class="property"> = '%Y-%m-%dT%H:%M:%SZ'</em><a class="headerlink" href="#igsn_lib.time.OAI_TIME_FORMAT" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">igsn_lib.time.</span></code><code class="sig-name descname"><span class="pre">OAI_TIME_FORMAT</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'%Y-%m-%dT%H:%M:%SZ'</span></em><a class="headerlink" href="#igsn_lib.time.OAI_TIME_FORMAT" title="Permalink to this definition">¶</a></dt>
 <dd><p>datetime format string for generating OAI-PMH requests</p>
 </dd></dl>
 
 <dl class="py function">
 <dt id="igsn_lib.time.bceToJd">
-<code class="sig-prename descclassname">igsn_lib.time.</code><code class="sig-name descname">bceToJd</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">bce</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/time.html#bceToJd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.time.bceToJd" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">igsn_lib.time.</span></code><code class="sig-name descname"><span class="pre">bceToJd</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bce</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/time.html#bceToJd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#igsn_lib.time.bceToJd" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert BCE date to Julian date, where 1 BCE = year 0000.</p>
 <p>Positive BCE years are older than year 0000.</p>
 <dl class="field-list simple">
@@ -422,13 +423,18 @@ determined to be 66.038 +- 0.025/0.049 Ma <a class="footnote-reference brackets"
 </dd></dl>
 
 <dl class="py function">
+<dt id="igsn_lib.time.datetimeDeltaToSeconds">
+<code class="sig-prename descclassname"><span class="pre">igsn_lib.time.</span></code><code class="sig-name descname"><span class="pre">datetimeDeltaToSeconds</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dtd</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/time.html#datetimeDeltaToSeconds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#igsn_lib.time.datetimeDeltaToSeconds" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
 <dt id="igsn_lib.time.datetimeFromSomething">
-<code class="sig-prename descclassname">igsn_lib.time.</code><code class="sig-name descname">datetimeFromSomething</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">V</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/time.html#datetimeFromSomething"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.time.datetimeFromSomething" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">igsn_lib.time.</span></code><code class="sig-name descname"><span class="pre">datetimeFromSomething</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">V</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/time.html#datetimeFromSomething"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#igsn_lib.time.datetimeFromSomething" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt id="igsn_lib.time.datetimeToJD">
-<code class="sig-prename descclassname">igsn_lib.time.</code><code class="sig-name descname">datetimeToJD</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dt</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/time.html#datetimeToJD"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.time.datetimeToJD" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">igsn_lib.time.</span></code><code class="sig-name descname"><span class="pre">datetimeToJD</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/time.html#datetimeToJD"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#igsn_lib.time.datetimeToJD" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a python datetime to Julian date.</p>
 <p>Naive datetime is assumed to be UTC.</p>
 <dl class="field-list simple">
@@ -452,8 +458,8 @@ determined to be 66.038 +- 0.025/0.049 Ma <a class="footnote-reference brackets"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2021-04-21 20:48:21.864180+00:00
-2459326.3669197243
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2021-05-12 02:17:25.800499+00:00
+2459346.5954375057
 </pre></div>
 </div>
 </div>
@@ -462,12 +468,12 @@ determined to be 66.038 +- 0.025/0.049 Ma <a class="footnote-reference brackets"
 
 <dl class="py function">
 <dt id="igsn_lib.time.datetimeToJsonStr">
-<code class="sig-prename descclassname">igsn_lib.time.</code><code class="sig-name descname">datetimeToJsonStr</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dt</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/time.html#datetimeToJsonStr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.time.datetimeToJsonStr" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">igsn_lib.time.</span></code><code class="sig-name descname"><span class="pre">datetimeToJsonStr</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/time.html#datetimeToJsonStr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#igsn_lib.time.datetimeToJsonStr" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt id="igsn_lib.time.dtnow">
-<code class="sig-prename descclassname">igsn_lib.time.</code><code class="sig-name descname">dtnow</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/time.html#dtnow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.time.dtnow" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">igsn_lib.time.</span></code><code class="sig-name descname"><span class="pre">dtnow</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/time.html#dtnow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#igsn_lib.time.dtnow" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get datetime for now in UTC timezone.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -483,7 +489,7 @@ determined to be 66.038 +- 0.025/0.049 Ma <a class="footnote-reference brackets"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2021-04-21 20:48:21.871856+00:00
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2021-05-12 02:17:25.808506+00:00
 </pre></div>
 </div>
 </div>
@@ -492,7 +498,7 @@ determined to be 66.038 +- 0.025/0.049 Ma <a class="footnote-reference brackets"
 
 <dl class="py function">
 <dt id="igsn_lib.time.jdFromString">
-<code class="sig-prename descclassname">igsn_lib.time.</code><code class="sig-name descname">jdFromString</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tstr</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/time.html#jdFromString"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.time.jdFromString" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">igsn_lib.time.</span></code><code class="sig-name descname"><span class="pre">jdFromString</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tstr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/time.html#jdFromString"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#igsn_lib.time.jdFromString" title="Permalink to this definition">¶</a></dt>
 <dd><p>Julian date from string representation of time.</p>
 <p>Uses dateparser.parse to get date time from the string.</p>
 <p>See <a class="reference external" href="https://dateparser.readthedocs.io/en/latest/">https://dateparser.readthedocs.io/en/latest/</a></p>
@@ -516,8 +522,8 @@ determined to be 66.038 +- 0.025/0.049 Ma <a class="footnote-reference brackets"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2459326.3669202295
-2422801.3669202784
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2459346.595438039
+2422821.5954380883
 2459077.3958333335
 </pre></div>
 </div>
@@ -527,7 +533,7 @@ determined to be 66.038 +- 0.025/0.049 Ma <a class="footnote-reference brackets"
 
 <dl class="py function">
 <dt id="igsn_lib.time.jdToBCE">
-<code class="sig-prename descclassname">igsn_lib.time.</code><code class="sig-name descname">jdToBCE</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">jd</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/time.html#jdToBCE"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.time.jdToBCE" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">igsn_lib.time.</span></code><code class="sig-name descname"><span class="pre">jdToBCE</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jd</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/time.html#jdToBCE"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#igsn_lib.time.jdToBCE" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert Julian date to BCE, where 1 BCE = year 0000.</p>
 <p>Positive BCE years are older than year 0000.</p>
 <dl class="field-list simple">
@@ -556,7 +562,7 @@ determined to be 66.038 +- 0.025/0.049 Ma <a class="footnote-reference brackets"
 
 <dl class="py function">
 <dt id="igsn_lib.time.jdToDateTime">
-<code class="sig-prename descclassname">igsn_lib.time.</code><code class="sig-name descname">jdToDateTime</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">jd</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/time.html#jdToDateTime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.time.jdToDateTime" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">igsn_lib.time.</span></code><code class="sig-name descname"><span class="pre">jdToDateTime</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jd</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/time.html#jdToDateTime"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#igsn_lib.time.jdToDateTime" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert Julian date to datetime.</p>
 <p>Note that Julian date values can exceed the range supported by
 python datetime, in which case astropy or datetime will raise
@@ -587,7 +593,7 @@ an exception, and this method will return None.</p>
 
 <dl class="py function">
 <dt id="igsn_lib.time.jdToJsonString">
-<code class="sig-prename descclassname">igsn_lib.time.</code><code class="sig-name descname">jdToJsonString</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">jd</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/time.html#jdToJsonString"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.time.jdToJsonString" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">igsn_lib.time.</span></code><code class="sig-name descname"><span class="pre">jdToJsonString</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jd</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/time.html#jdToJsonString"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#igsn_lib.time.jdToJsonString" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert Julian date to a JSON datetime string.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -615,7 +621,7 @@ an exception, and this method will return None.</p>
 
 <dl class="py function">
 <dt id="igsn_lib.time.jdToMa">
-<code class="sig-prename descclassname">igsn_lib.time.</code><code class="sig-name descname">jdToMa</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">jd</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/time.html#jdToMa"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.time.jdToMa" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">igsn_lib.time.</span></code><code class="sig-name descname"><span class="pre">jdToMa</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jd</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/time.html#jdToMa"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#igsn_lib.time.jdToMa" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert Julian date to Ma (millions of years ago).</p>
 <p>Note that positive Ma values are in the past.</p>
 <p>By convention, 0Ma = 1950 present time..</p>
@@ -645,7 +651,7 @@ an exception, and this method will return None.</p>
 
 <dl class="py function">
 <dt id="igsn_lib.time.jdToOAIPMHString">
-<code class="sig-prename descclassname">igsn_lib.time.</code><code class="sig-name descname">jdToOAIPMHString</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">jd</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/time.html#jdToOAIPMHString"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.time.jdToOAIPMHString" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">igsn_lib.time.</span></code><code class="sig-name descname"><span class="pre">jdToOAIPMHString</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jd</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/time.html#jdToOAIPMHString"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#igsn_lib.time.jdToOAIPMHString" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert Julian date to an OAI-PMH acceptable datetime string.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -673,7 +679,7 @@ an exception, and this method will return None.</p>
 
 <dl class="py function">
 <dt id="igsn_lib.time.jdToString">
-<code class="sig-prename descclassname">igsn_lib.time.</code><code class="sig-name descname">jdToString</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">jd</span></em>, <em class="sig-param"><span class="n">format_str</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/time.html#jdToString"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.time.jdToString" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">igsn_lib.time.</span></code><code class="sig-name descname"><span class="pre">jdToString</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format_str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/time.html#jdToString"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#igsn_lib.time.jdToString" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert Julian date to a string representation</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -704,7 +710,7 @@ an exception, and this method will return None.</p>
 
 <dl class="py function">
 <dt id="igsn_lib.time.jdnow">
-<code class="sig-prename descclassname">igsn_lib.time.</code><code class="sig-name descname">jdnow</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/time.html#jdnow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.time.jdnow" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">igsn_lib.time.</span></code><code class="sig-name descname"><span class="pre">jdnow</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/time.html#jdnow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#igsn_lib.time.jdnow" title="Permalink to this definition">¶</a></dt>
 <dd><p>Current Julian date.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -720,7 +726,7 @@ an exception, and this method will return None.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2459326.3669210477
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2459346.5954388706
 </pre></div>
 </div>
 </div>
@@ -729,7 +735,7 @@ an exception, and this method will return None.</p>
 
 <dl class="py function">
 <dt id="igsn_lib.time.maToJd">
-<code class="sig-prename descclassname">igsn_lib.time.</code><code class="sig-name descname">maToJd</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Ma</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/time.html#maToJd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#igsn_lib.time.maToJd" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">igsn_lib.time.</span></code><code class="sig-name descname"><span class="pre">maToJd</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Ma</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/time.html#maToJd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#igsn_lib.time.maToJd" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert Ma (millions of years ago) to Julian date.</p>
 <p>Note that positive Ma values are in the past.</p>
 <dl class="field-list simple">
@@ -756,20 +762,20 @@ an exception, and this method will return None.</p>
 </div>
 </dd></dl>
 
-</div>
+</section>
 
 
               </div>
               
-        </div>
-    </div>
-    
-    
-    <div class='prev-next-bottom'>
         
+        <div class='prev-next-bottom'>
+            
     <a class='left-prev' id="prev-link" href="igsn_lib.html" title="previous page"><span class="section-number">1.1. </span>igsn_lib Package</a>
     <a class='right-next' id="next-link" href="igsn_lib.oai.html" title="next page"><span class="section-number">1.3. </span>igsn_lib.oai</a>
 
+        </div>
+        
+        </div>
     </div>
     <footer class="footer mt-5 mt-md-0">
     <div class="container">
@@ -797,7 +803,7 @@ and <a href='https://nsf.gov/awardsearch/showAward?AWD_ID=2004815'>2004815</a>. 
     </div>
 
     
-  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
 
 
     

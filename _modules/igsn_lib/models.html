@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>igsn_lib.models &#8212; igsn_lib 0.1 documentation</title>
     
-  <link rel="stylesheet" href="../../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
     
   <link rel="stylesheet"
@@ -26,7 +26,7 @@
 
     
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/sphinx-book-theme.2d2078699c18a0efb88233928e1cf6ed.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e7340bb3dbd8dde6db86f25597f54a1b.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
@@ -34,22 +34,21 @@
     <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.3da636dd464baa7582d2.js">
+  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
 
     <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/language_data.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
     <script src="../../_static/togglebutton.js"></script>
     <script src="../../_static/thebelab-helper.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="../../_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
+    <script src="../../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
 
@@ -74,25 +73,49 @@
   <h1 class="site-logo" id="site-title">igsn_lib 0.1 documentation</h1>
   
 </a>
-</div>
-
-<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
 </form>
-
 <nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
-  <ul class="nav sidenav_l1">
- <li class="toctree-l1">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
   <a class="reference internal" href="../../api/index.html">
    1. igsn_lib Package Documentation
   </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../api/igsn_lib.html">
+     1.1. igsn_lib Package
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../api/igsn_lib.time.html">
+     1.2. igsn_lib.time
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../api/igsn_lib.oai.html">
+     1.3. igsn_lib.oai
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../api/igsn_lib.models.html">
+     1.4. igsn_lib.models
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../api/igsn_lib.util.html">
+     1.5. igsn_lib.util
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
  </li>
 </ul>
 
-</nav>
-
- <!-- To handle the deprecated key -->
+</nav> <!-- To handle the deprecated key -->
 
 <div class="navbar_extra_footer">
   Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
@@ -107,27 +130,22 @@
           
 <main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
     
-    <div class="row topbar fixed-top container-xl">
-    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
-    </div>
-    <div class="col pl-2 topbar-main">
-        
-        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-            <i class="fas fa-bars"></i>
-            <i class="fas fa-arrow-left"></i>
-            <i class="fas fa-arrow-up"></i>
-        </button>
-        
-        <div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    
-</div>
-        <!-- Source interaction buttons -->
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+            <!-- Source interaction buttons -->
 
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
@@ -146,19 +164,20 @@
 </div>
 
 
-        <!-- Full screen (wrap in <a> to have style consistency -->
-        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-                title="Fullscreen mode"><i
-                    class="fas fa-expand"></i></button></a>
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
 
-        <!-- Launch buttons -->
+            <!-- Launch buttons -->
 
-    </div>
+        </div>
 
-    <!-- Table of contents -->
-    <div class="d-none d-md-block col-md-2 bd-toc show">
-        
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        </div>
     </div>
 </div>
     <div id="main-content" class="row">
@@ -180,6 +199,7 @@
 <span class="kn">import</span> <span class="nn">sqlalchemy.exc</span>
 <span class="kn">import</span> <span class="nn">sqlalchemy.schema</span>
 <span class="kn">import</span> <span class="nn">sqlalchemy.dialects.postgresql</span>
+<span class="kn">import</span> <span class="nn">sqlalchemy.ext.compiler</span>
 <span class="kn">import</span> <span class="nn">sickle.oaiexceptions</span>
 <span class="kn">import</span> <span class="nn">igsn_lib</span>
 <span class="kn">import</span> <span class="nn">igsn_lib.oai</span>
@@ -190,6 +210,15 @@
 
 <span class="n">Base</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">declarative</span><span class="o">.</span><span class="n">declarative_base</span><span class="p">()</span>
 
+<span class="c1"># Use the JSONB type when connected to a postgres database</span>
+<span class="nd">@sqlalchemy</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">compiler</span><span class="o">.</span><span class="n">compiles</span><span class="p">(</span><span class="n">sqlalchemy</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">JSON</span><span class="p">,</span> <span class="s2">&quot;postgresql&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">compile_binary_sqlite</span><span class="p">(</span><span class="n">type_</span><span class="p">,</span> <span class="n">compiler</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s2">&quot;JSONB&quot;</span>
+
+<span class="c1"># Use STRING for storing UUIDs in sqlite</span>
+<div class="viewcode-block" id="compile_binary_sqlite"><a class="viewcode-back" href="../../api/igsn_lib.models.html#igsn_lib.models.compile_binary_sqlite">[docs]</a><span class="nd">@sqlalchemy</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">compiler</span><span class="o">.</span><span class="n">compiles</span><span class="p">(</span><span class="n">sqlalchemy</span><span class="o">.</span><span class="n">dialects</span><span class="o">.</span><span class="n">postgresql</span><span class="o">.</span><span class="n">UUID</span><span class="p">,</span> <span class="s2">&quot;sqlite&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">compile_binary_sqlite</span><span class="p">(</span><span class="n">type_</span><span class="p">,</span> <span class="n">compiler</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s2">&quot;STRING&quot;</span></div>
 
 <div class="viewcode-block" id="Identifier"><a class="viewcode-back" href="../../api/igsn_lib.models.html#igsn_lib.models.Identifier">[docs]</a><span class="k">class</span> <span class="nc">Identifier</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -232,19 +261,19 @@
         <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;Registrant name reported in the source record&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">related</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span>
-        <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">dialects</span><span class="o">.</span><span class="n">postgresql</span><span class="o">.</span><span class="n">JSONB</span><span class="p">,</span>
+        <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">JSON</span><span class="p">,</span>
         <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;Related identifiers reported in the source record&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">log</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span>
-        <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">dialects</span><span class="o">.</span><span class="n">postgresql</span><span class="o">.</span><span class="n">JSONB</span><span class="p">,</span>
+        <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">JSON</span><span class="p">,</span>
         <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;log entries in source record&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">set_spec</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span>
-        <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">dialects</span><span class="o">.</span><span class="n">postgresql</span><span class="o">.</span><span class="n">JSONB</span><span class="p">,</span>
+        <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">JSON</span><span class="p">,</span>
         <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;Set labels, e.g. OAI-PMH set names&quot;</span><span class="p">,</span>
@@ -669,6 +698,18 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">Base</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">create_all</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span></div>
 
+<div class="viewcode-block" id="getEngine"><a class="viewcode-back" href="../../api/igsn_lib.models.html#igsn_lib.models.getEngine">[docs]</a><span class="k">def</span> <span class="nf">getEngine</span><span class="p">(</span><span class="n">db_connection</span><span class="p">):</span>
+    <span class="n">engine</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">create_engine</span><span class="p">(</span><span class="n">db_connection</span><span class="p">)</span>
+    <span class="n">createAll</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">engine</span></div>
+
+<div class="viewcode-block" id="getSession"><a class="viewcode-back" href="../../api/igsn_lib.models.html#igsn_lib.models.getSession">[docs]</a><span class="k">def</span> <span class="nf">getSession</span><span class="p">(</span><span class="n">engine</span><span class="p">):</span>
+    <span class="n">session</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">orm</span><span class="o">.</span><span class="n">scoped_session</span><span class="p">(</span>
+        <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">orm</span><span class="o">.</span><span class="n">sessionmaker</span><span class="p">(</span><span class="n">autocommit</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">autoflush</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">bind</span><span class="o">=</span><span class="n">engine</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="c1">#session = Session()</span>
+    <span class="k">return</span> <span class="n">session</span></div>
+
 
 <div class="viewcode-block" id="getOrCreate"><a class="viewcode-back" href="../../api/igsn_lib.models.html#igsn_lib.models.getOrCreate">[docs]</a><span class="k">def</span> <span class="nf">getOrCreate</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">create_method</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">create_method_kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -722,13 +763,13 @@
 
               </div>
               
-        </div>
-    </div>
-    
-    
-    <div class='prev-next-bottom'>
         
+        <div class='prev-next-bottom'>
+            
 
+        </div>
+        
+        </div>
     </div>
     <footer class="footer mt-5 mt-md-0">
     <div class="container">
@@ -756,7 +797,7 @@ and <a href='https://nsf.gov/awardsearch/showAward?AWD_ID=2004815'>2004815</a>. 
     </div>
 
     
-  <script src="../../_static/js/index.3da636dd464baa7582d2.js"></script>
+  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
 
 
     
