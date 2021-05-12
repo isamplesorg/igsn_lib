@@ -17,12 +17,12 @@ class Thing(igsn_lib.models.Base):
         doc="identifier scheme:value, globally unique"
     )
     tstamp = sqlalchemy.Column(
-        sqlalchemy.Float,
-        default=igsn_lib.time.jdnow(),
+        sqlalchemy.DateTime(timezone=True),
+        default=igsn_lib.time.dtnow(),
         doc="When the entry was added to this database, JD",
     )
     tcreated = sqlalchemy.Column(
-        sqlalchemy.Float,
+        sqlalchemy.DateTime(timezone=True),
         default = None,
         nullable=True,
         doc = "When the record was created, if available",
@@ -61,7 +61,7 @@ class Thing(igsn_lib.models.Base):
         doc = "Status code of the resolve response"
     )
     tresolved = sqlalchemy.Column(
-        sqlalchemy.Float,
+        sqlalchemy.DateTime(timezone=True),
         default = None,
         nullable=True,
         doc = "When the record was resolved",
