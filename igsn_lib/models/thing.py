@@ -94,7 +94,7 @@ class Thing(igsn_lib.models.Base):
         doc="Media type of resolved content",
     )
     __table_args__ = sqlalchemy.Index(
-        "item_type_status_idx", "item_type", "resolved_status"
+        ("item_type_status_idx", "item_type", "resolved_status"),
     )
 
     def __repr__(self):
