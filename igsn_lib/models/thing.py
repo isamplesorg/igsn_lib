@@ -77,7 +77,7 @@ class Thing(igsn_lib.models.Base):
     )
     resolve_elapsed = sqlalchemy.Column(
         sqlalchemy.Float,
-        default=None,
+        default=0.0,
         nullable=True,
         doc="Time in seconds to resolve record",
     )
