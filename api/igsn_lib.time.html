@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>1.2. igsn_lib.time &#8212; igsn_lib 0.1 documentation</title>
     
@@ -212,7 +212,7 @@
 <p>This libary provides some convenience methods for working with Julian dates.</p>
 <p>A Julian Date is a floating point value that identifies the number of days before
 or after <code class="docutils literal notranslate"><span class="pre">-4713-11-24</span> <span class="pre">12:00:00.000</span></code> UTC. The range is unlimited, for example
-the estimated age of the universe is about 13.787 billion years <a class="footnote-reference brackets" href="#universe" id="id1">1</a>, and
+the estimated age of the universe is about 13.787 billion years <a class="footnote-reference brackets" href="#universe" id="footnote-reference-1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>, and
 that date is far outside of the common operating parameters for databases
 and many programmatic representations of time.</p>
 <p>In JD, the start of the universe can be reliably expressed as approximately:</p>
@@ -265,14 +265,14 @@ this page was last edited:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>It is now: 2459363.42439334
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>It is now: 2459626.400176718
 </pre></div>
 </div>
 </div>
 </div>
 <p>Julian dates can be used to provide a consistent representation of geological time boundaries,
 albeit at a higher resolution than the actual boundaries can be determined. For example the
-Cenozoic <a class="footnote-reference brackets" href="#cenozoic" id="id2">2</a> period ranges from 66 million years ago to modern time. This can be
+Cenozoic <a class="footnote-reference brackets" href="#cenozoic" id="footnote-reference-2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> period ranges from 66 million years ago to modern time. This can be
 expressed in JD as:</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -293,8 +293,8 @@ expressed in JD as:</p>
 <p>Positions in archeologic and ‘recent’ geologic time are conventionally denoted
 in years, measured backwards from the present, which is fixed to 1950 when the
 precision requires it.</p>
-<p>The start of the cenozoic is the Cretaceous-Paleogene Boundary (KBP, <a class="footnote-reference brackets" href="#kbp" id="id3">3</a>)
-determined to be 66.038 +- 0.025/0.049 Ma <a class="footnote-reference brackets" href="#kbpage" id="id4">4</a>. That translates to JD:</p>
+<p>The start of the cenozoic is the Cretaceous-Paleogene Boundary (KBP, <a class="footnote-reference brackets" href="#kbp" id="footnote-reference-3" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a>)
+determined to be 66.038 +- 0.025/0.049 Ma <a class="footnote-reference brackets" href="#kbpage" id="footnote-reference-4" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a>. That translates to JD:</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">c0</span> <span class="o">=</span> <span class="n">astropy</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">Time</span><span class="p">(</span><span class="o">-</span><span class="mf">66.038E6</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;jyear&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">jd</span>
@@ -310,27 +310,25 @@ determined to be 66.038 +- 0.025/0.049 Ma <a class="footnote-reference brackets"
 </div>
 </div>
 </div>
-<dl class="footnote brackets">
-<dt class="label" id="universe"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
-<dd><p><a class="reference external" href="https://en.wikipedia.org/wiki/Age_of_the_universe">https://en.wikipedia.org/wiki/Age_of_the_universe</a></p>
-</dd>
-<dt class="label" id="cenozoic"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
-<dd><p><a class="reference external" href="https://en.wikipedia.org/wiki/Cenozoic">https://en.wikipedia.org/wiki/Cenozoic</a></p>
-</dd>
-<dt class="label" id="kbp"><span class="brackets"><a class="fn-backref" href="#id3">3</a></span></dt>
-<dd><p><a class="reference external" href="https://en.wikipedia.org/wiki/Cretaceous%E2%80%93Paleogene_extinction_event">https://en.wikipedia.org/wiki/Cretaceous%E2%80%93Paleogene_extinction_event</a></p>
-</dd>
-<dt class="label" id="kbpage"><span class="brackets"><a class="fn-backref" href="#id4">4</a></span></dt>
-<dd><p><a class="reference external" href="https://www.cugb.edu.cn/uploadCms/file/20600/20131028144132060.pdf">https://www.cugb.edu.cn/uploadCms/file/20600/20131028144132060.pdf</a></p>
-</dd>
-</dl>
+<aside class="footnote brackets" id="universe" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#footnote-reference-1">1</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Age_of_the_universe">https://en.wikipedia.org/wiki/Age_of_the_universe</a></p>
+</aside>
+<aside class="footnote brackets" id="cenozoic" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#footnote-reference-2">2</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Cenozoic">https://en.wikipedia.org/wiki/Cenozoic</a></p>
+</aside>
+<aside class="footnote brackets" id="kbp" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#footnote-reference-3">3</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Cretaceous%E2%80%93Paleogene_extinction_event">https://en.wikipedia.org/wiki/Cretaceous%E2%80%93Paleogene_extinction_event</a></p>
+</aside>
+<aside class="footnote brackets" id="kbpage" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#footnote-reference-4">4</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://www.cugb.edu.cn/uploadCms/file/20600/20131028144132060.pdf">https://www.cugb.edu.cn/uploadCms/file/20600/20131028144132060.pdf</a></p>
+</aside>
 <p class="rubric">Methods</p>
 <p>The following methods are provided in the <code class="docutils literal notranslate"><span class="pre">igsn_lib.time</span></code> module:</p>
 <table class="longtable table autosummary">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.time.bceToJd" title="igsn_lib.time.bceToJd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bceToJd</span></code></a>(bce)</p></td>
 <td><p>Convert BCE date to Julian date, where 1 BCE = year 0000.</p></td>
@@ -399,10 +397,10 @@ determined to be 66.038 +- 0.025/0.049 Ma <a class="footnote-reference brackets"
 <dd><p>Convert BCE date to Julian date, where 1 BCE = year 0000.</p>
 <p>Positive BCE years are older than year 0000.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>bce</strong> – float, years BCE</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>float, Julian date</p>
 </dd>
 </dl>
@@ -438,10 +436,10 @@ determined to be 66.038 +- 0.025/0.049 Ma <a class="footnote-reference brackets"
 <dd><p>Convert a python datetime to Julian date.</p>
 <p>Naive datetime is assumed to be UTC.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>dt</strong> – datetime.datetime</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>float, Julian date</p>
 </dd>
 </dl>
@@ -458,8 +456,8 @@ determined to be 66.038 +- 0.025/0.049 Ma <a class="footnote-reference brackets"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2021-05-28 22:11:08.000279+00:00
-2459363.424398151
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2022-02-15 21:36:15.734862+00:00
+2459626.4001821163
 </pre></div>
 </div>
 </div>
@@ -476,7 +474,7 @@ determined to be 66.038 +- 0.025/0.049 Ma <a class="footnote-reference brackets"
 <code class="sig-prename descclassname"><span class="pre">igsn_lib.time.</span></code><code class="sig-name descname"><span class="pre">dtnow</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/time.html#dtnow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#igsn_lib.time.dtnow" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get datetime for now in UTC timezone.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>datetime.datetime with UTC timezone</p>
 </dd>
 </dl>
@@ -489,7 +487,7 @@ determined to be 66.038 +- 0.025/0.049 Ma <a class="footnote-reference brackets"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2021-05-28 22:11:08.008426+00:00
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2022-02-15 21:36:15.742878+00:00
 </pre></div>
 </div>
 </div>
@@ -503,10 +501,10 @@ determined to be 66.038 +- 0.025/0.049 Ma <a class="footnote-reference brackets"
 <p>Uses dateparser.parse to get date time from the string.</p>
 <p>See <a class="reference external" href="https://dateparser.readthedocs.io/en/latest/">https://dateparser.readthedocs.io/en/latest/</a></p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>tstr</strong> – string, time in text.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>float, Julian date</p>
 </dd>
 </dl>
@@ -522,8 +520,8 @@ determined to be 66.038 +- 0.025/0.049 Ma <a class="footnote-reference brackets"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2459363.424398705
-2422838.4243987463
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2459626.40018275
+2423101.400182816
 2459077.3958333335
 </pre></div>
 </div>
@@ -537,10 +535,10 @@ determined to be 66.038 +- 0.025/0.049 Ma <a class="footnote-reference brackets"
 <dd><p>Convert Julian date to BCE, where 1 BCE = year 0000.</p>
 <p>Positive BCE years are older than year 0000.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>jd</strong> – Julian Date</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>float, BCE year</p>
 </dd>
 </dl>
@@ -568,10 +566,10 @@ determined to be 66.038 +- 0.025/0.049 Ma <a class="footnote-reference brackets"
 python datetime, in which case astropy or datetime will raise
 an exception, and this method will return None.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>jd</strong> – float, Julian date/</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>datetime with UTC timezone or None</p>
 </dd>
 </dl>
@@ -596,10 +594,10 @@ an exception, and this method will return None.</p>
 <code class="sig-prename descclassname"><span class="pre">igsn_lib.time.</span></code><code class="sig-name descname"><span class="pre">jdToJsonString</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jd</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/time.html#jdToJsonString"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#igsn_lib.time.jdToJsonString" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert Julian date to a JSON datetime string.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>jd</strong> – float, Julian date</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>string or None on error</p>
 </dd>
 </dl>
@@ -626,10 +624,10 @@ an exception, and this method will return None.</p>
 <p>Note that positive Ma values are in the past.</p>
 <p>By convention, 0Ma = 1950 present time..</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>jd</strong> – float, Julian date</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>float, Ma</p>
 </dd>
 </dl>
@@ -654,10 +652,10 @@ an exception, and this method will return None.</p>
 <code class="sig-prename descclassname"><span class="pre">igsn_lib.time.</span></code><code class="sig-name descname"><span class="pre">jdToOAIPMHString</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jd</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/time.html#jdToOAIPMHString"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#igsn_lib.time.jdToOAIPMHString" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert Julian date to an OAI-PMH acceptable datetime string.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>jd</strong> – float, Julian date</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>string or None on error</p>
 </dd>
 </dl>
@@ -682,13 +680,13 @@ an exception, and this method will return None.</p>
 <code class="sig-prename descclassname"><span class="pre">igsn_lib.time.</span></code><code class="sig-name descname"><span class="pre">jdToString</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format_str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/time.html#jdToString"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#igsn_lib.time.jdToString" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert Julian date to a string representation</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>jd</strong> – float, Julian date</p></li>
 <li><p><strong>format_str</strong> – python strftime format string</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>string</p>
 </dd>
 </dl>
@@ -713,7 +711,7 @@ an exception, and this method will return None.</p>
 <code class="sig-prename descclassname"><span class="pre">igsn_lib.time.</span></code><code class="sig-name descname"><span class="pre">jdnow</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/time.html#jdnow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#igsn_lib.time.jdnow" title="Permalink to this definition">¶</a></dt>
 <dd><p>Current Julian date.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float, Julian date</p>
 </dd>
 </dl>
@@ -726,7 +724,7 @@ an exception, and this method will return None.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2459363.4243995086
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2459626.4001837736
 </pre></div>
 </div>
 </div>
@@ -739,10 +737,10 @@ an exception, and this method will return None.</p>
 <dd><p>Convert Ma (millions of years ago) to Julian date.</p>
 <p>Note that positive Ma values are in the past.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>Ma</strong> – float, millions of years ago</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>float, Julian date</p>
 </dd>
 </dl>

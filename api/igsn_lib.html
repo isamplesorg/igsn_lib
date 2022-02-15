@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>1.1. igsn_lib Package &#8212; igsn_lib 0.1 documentation</title>
     
@@ -211,10 +211,6 @@
 <h1><span class="section-number">1.1. </span>igsn_lib Package<a class="headerlink" href="#igsn-lib-package" title="Permalink to this headline">¶</a></h1>
 <p class="rubric">Methods</p>
 <table class="longtable table autosummary">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.normalize" title="igsn_lib.normalize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">normalize</span></code></a>(igsn_str)</p></td>
 <td><p>Return the value part of an IGSN.</p></td>
@@ -265,10 +261,10 @@
 <p>Note this method does not verify the prefix. The returned
 value may or may not be an actual IGSN.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>igsn_str</strong> – IGSN string</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>string, value part of IGSN.</p>
 </dd>
 </dl>
@@ -314,14 +310,14 @@ None
 <dd><p>Resolve an IGSN value</p>
 <p>#TODO: add support for link headers</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>igsn_value</strong> – pre-normalized IGSN string</p></li>
 <li><p><strong>include_body</strong> – (bool) If True then return response body, otherwise only HEAD request is made</p></li>
 <li><p><strong>headers</strong> – (dict) Optional headers to send in request</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>list of requests.Response objects</p>
 </dd>
 </dl>
@@ -373,7 +369,7 @@ None
 <code class="sig-prename descclassname"><span class="pre">igsn_lib.</span></code><code class="sig-name descname"><span class="pre">resolveN2T</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">identifier</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_body</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib.html#resolveN2T"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#igsn_lib.resolveN2T" title="Permalink to this definition">¶</a></dt>
 <dd><p>Use N2T to resolve the identifier</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>identifier</strong> – pre-normalized IGSN string</p></li>
 <li><p><strong>include_body</strong> – (bool) If True then return response body, otherwise only HEAD request is made</p></li>

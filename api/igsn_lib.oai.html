@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>1.3. igsn_lib.oai &#8212; igsn_lib 0.1 documentation</title>
     
@@ -211,10 +211,6 @@
 <h1><span class="section-number">1.3. </span>igsn_lib.oai<a class="headerlink" href="#igsn-lib-oai" title="Permalink to this headline">¶</a></h1>
 <p class="rubric">Methods</p>
 <table class="longtable table autosummary">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#igsn_lib.oai.getSickle" title="igsn_lib.oai.getSickle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getSickle</span></code></a>(url)</p></td>
 <td><p>Create a Sickle instance</p></td>
@@ -279,10 +275,10 @@ implement default like this:</p>
 <code class="sig-prename descclassname"><span class="pre">igsn_lib.oai.</span></code><code class="sig-name descname"><span class="pre">getSickle</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/oai.html#getSickle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#igsn_lib.oai.getSickle" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a Sickle instance</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>url</strong> – OAI-PMH service URL</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>sickle.Sickle instance</p>
 </dd>
 </dl>
@@ -293,10 +289,10 @@ implement default like this:</p>
 <code class="sig-prename descclassname"><span class="pre">igsn_lib.oai.</span></code><code class="sig-name descname"><span class="pre">identify</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/oai.html#identify"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#igsn_lib.oai.identify" title="Permalink to this definition">¶</a></dt>
 <dd><p>Call the OAI-PMH Identify operation on the provided service URL.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>url</strong> (<em>str</em>) – OAI-PMH service URL</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>sickle.Identify object</p>
 </dd>
 </dl>
@@ -363,16 +359,16 @@ implement default like this:</p>
 <code class="sig-prename descclassname"><span class="pre">igsn_lib.oai.</span></code><code class="sig-name descname"><span class="pre">listSets</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">svc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">get_counts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/oai.html#listSets"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#igsn_lib.oai.listSets" title="Permalink to this definition">¶</a></dt>
 <dd><p>List the sets reported by an OAI-PMH service.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>svc</strong> (<em>Sickle</em>) – Initialized instance of Sickle</p></li>
 <li><p><strong>get_counts</strong> (<em>boolean</em>) – Return record counts with set</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>list of <code class="docutils literal notranslate"><span class="pre">{setSpec:,</span> <span class="pre">setName:,</span> <span class="pre">count:}</span></code></p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>list</p>
 </dd>
 </dl>
@@ -390,53 +386,57 @@ implement default like this:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>         0 ANDS.REFQUALITY: Australian National Data Service (reference quality citations only)
-         0 CNRS.CNRS.REFQUALITY: Centre national de la recherche scientifique (reference quality citations only)
-         0 REFQUALITY: Reference quality citations only.
-         0 CNRS.REFQUALITY: Centre national de la recherche scientifique (reference quality citations only)
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>         0 REFQUALITY: Reference quality citations only.
+         0 ANDS.REFQUALITY: Australian National Data Service (reference quality citations only)
          0 ANDS.AUSCOPE.REFQUALITY: AuScope (reference quality citations only)
+         0 CNRS.CNRS.REFQUALITY: Centre national de la recherche scientifique (reference quality citations only)
          0 CSIRO.REFQUALITY: CSIRO (reference quality citations only)
-         0 GEOAUS.REFQUALITY: Geoscience Australia (reference quality citations only)
+         0 CNRS.REFQUALITY: Centre national de la recherche scientifique (reference quality citations only)
          0 CSIRO.CSIRO.REFQUALITY: CSIRO (reference quality citations only)
          0 GEOAUS.AU.REFQUALITY: Geoscience Australia (reference quality citations only)
+         0 GEOAUS.REFQUALITY: Geoscience Australia (reference quality citations only)
          0 GFZ.REFQUALITY: GFZ Allocator (reference quality citations only)
-      3202 ANDS.AUSCOPE: AuScope
-         0 GFZ.GFZ.REFQUALITY: Deutsches GeoForschungsZentrum GFZ (reference quality citations only)
-       886 CNRS.CNRS: Centre national de la recherche scientifique
+     33248 CSIRO.CSIRO: CSIRO
      33248 CSIRO: CSIRO
+         0 GFZ.GFZ.REFQUALITY: Deutsches GeoForschungsZentrum GFZ (reference quality citations only)
+      4124 CNRS.CNRS: Centre national de la recherche scientifique
+      4124 CNRS: Centre national de la recherche scientifique
+      3202 ANDS.AUSCOPE: AuScope
       3202 ANDS: Australian National Data Service
          0 IEDA.REFQUALITY: Integrated Earth Data Applications (reference quality citations only)
-       886 CNRS: Centre national de la recherche scientifique
+   5264862 GEOAUS: Geoscience Australia
          0 IEDA.SESAR.REFQUALITY: System for Earth Sample Registration (reference quality citations only)
-     33248 CSIRO.CSIRO: CSIRO
          0 IFREMER.REFQUALITY: Institut français de recherche pour l&#39;exploitation de la mer (reference quality citations only)
          0 IFREMER.IGSN.REFQUALITY: Institut français de recherche pour l&#39;exploitation de la mer (reference quality citations only)
-     10573 GFZ: GFZ Allocator
+     11304 GFZ: GFZ Allocator
          0 KIGAM.REFQUALITY: Korea Institute of Geoscience and Mineral Resources (reference quality citations only)
-     10573 GFZ.GFZ: Deutsches GeoForschungsZentrum GFZ
-   4980896 GEOAUS: Geoscience Australia
          0 KIGAM.DC.REFQUALITY: Korea Institute of Geoscience and Mineral Resources (reference quality citations only)
-         3 LITHODAT: Lithodat Pty Ltd.
+     11304 GFZ.GFZ: Deutsches GeoForschungsZentrum GFZ
+   5264862 GEOAUS.AU: Geoscience Australia
+        42 LITHODAT: Lithodat Pty Ltd.
          0 LITHODAT.REFQUALITY: Lithodat Pty Ltd. (reference quality citations only)
-   4980896 GEOAUS.AU: Geoscience Australia
-         2 LITHODAT.AG: AuScope Geochemistry Network
-         1 LITHODAT.LD: LITHODAT PTY LTD
          0 LITHODAT.AG.REFQUALITY: AuScope Geochemistry Network (reference quality citations only)
+        37 LITHODAT.AG: AuScope Geochemistry Network
+         5 LITHODAT.LD: LITHODAT PTY LTD
          0 LITHODAT.LD.REFQUALITY: LITHODAT PTY LTD (reference quality citations only)
          0 MARUM.REFQUALITY: MARUM Center for Marine Environmental Studies at University of Bremen (reference quality citations only)
          0 MARUM.HB.REFQUALITY: MARUM Center for Marine Environmental Sciences (reference quality citations only)
          0 UKI.REFQUALITY: Universität Kiel (reference quality citations only)
-     25571 IFREMER: Institut français de recherche pour l&#39;exploitation de la mer
-     25571 IFREMER.IGSN: Institut français de recherche pour l&#39;exploitation de la mer
+         1 UKI.BOT: Botanisches Institut
+         0 UKI.BOT.REFQUALITY: Botanisches Institut (reference quality citations only)
+       411 UKI.GEOMAR: GEOMAR
+         0 UKI.GEOMAR.REFQUALITY: GEOMAR (reference quality citations only)
+     37480 IFREMER: Institut français de recherche pour l&#39;exploitation de la mer
+      2884 KIGAM.DC: Korea Institute of Geoscience and Mineral Resources
          0 UKI.RZ.REFQUALITY: Universität Kiel - Rechenzentrum (reference quality citations only)
-      2880 KIGAM: Korea Institute of Geoscience and Mineral Resources
-   4624015 IEDA: Integrated Earth Data Applications
-   4624015 IEDA.SESAR: System for Earth Sample Registration
-      2880 KIGAM.DC: Korea Institute of Geoscience and Mineral Resources
-        92 UKI: Universität Kiel
+      2884 KIGAM: Korea Institute of Geoscience and Mineral Resources
+     37480 IFREMER.IGSN: Institut français de recherche pour l&#39;exploitation de la mer
+   4709054 IEDA: Integrated Earth Data Applications
+   4709054 IEDA.SESAR: System for Earth Sample Registration
     136587 MARUM: MARUM Center for Marine Environmental Studies at University of Bremen
-        92 UKI.RZ: Universität Kiel - Rechenzentrum
     136587 MARUM.HB: MARUM Center for Marine Environmental Sciences
+       412 UKI: Universität Kiel
+         0 UKI.RZ: Universität Kiel - Rechenzentrum
 </pre></div>
 </div>
 </div>
@@ -455,10 +455,10 @@ implement default like this:</p>
 <p>The IGSN schema is at <a class="reference external" href="https://doidb.wdc-terra.org/igsn/schemas/igsn.org/schema/1.0/igsn.xsd">https://doidb.wdc-terra.org/igsn/schemas/igsn.org/schema/1.0/igsn.xsd</a></p>
 <p>Times are returned as timezone aware python datetime, TZ=UTC.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>raw_record</strong> – OAI-PMH record XML in IGSN format</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>dict or None on failure</p>
 </dd>
 </dl>
@@ -550,7 +550,7 @@ implement default like this:</p>
 <code class="sig-prename descclassname"><span class="pre">igsn_lib.oai.</span></code><code class="sig-name descname"><span class="pre">recordCount</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">svc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'igsn'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_deleted</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_spec</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tfrom</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tuntil</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/igsn_lib/oai.html#recordCount"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#igsn_lib.oai.recordCount" title="Permalink to this definition">¶</a></dt>
 <dd><p>Determine the number of records that match an OAI-PMH ListRecords request.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>svc</strong> (<em>Sickle</em>) – Initialized instance of Sickle</p></li>
 <li><p><strong>metadata_prefix</strong> (<em>str</em>) – Metadata prefix to use (igsn)</p></li>
@@ -560,10 +560,10 @@ implement default like this:</p>
 <li><p><strong>tuntil</strong> (<em>str</em><em> or </em><em>datetime</em>) – Optional representation of time for the latest record (inclusive)</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Number of records matching the specified subset.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
