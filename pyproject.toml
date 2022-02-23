@@ -11,7 +11,7 @@ requests = "^2.25.1"
 dateparser = "^1.0.0"
 xmltodict = "^0.12.0"
 psycopg2-binary = "^2.8.6"
-astropy = "^4.2.1"
+astropy = "^5.0"
 Sickle = "^0.7.0"
 
 [tool.poetry.dev-dependencies]
